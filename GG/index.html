@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+	<meta charset="utf-8" />
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+   
+  
+    <link href="Content/default.css" rel="stylesheet" />
+  
+    <link href="Content/nl.css" rel="stylesheet" />
+</head>
+<body class="nl-blurred">
+
+    <div class="container demo-1">
+    <header>
+        <h2>Girls' Guide <span>New Orleans</span></h2>
+    </header>
+        <br /><br />
+    <div ng-app="ggModule">
+        <div ng-controller="ggController as gg">
+            <!--<p ng-repeat="time in times">{{time.timeText}}</p>
+            <p ng-repeat="price in prices">{{price.priceText}}</p>
+            <p ng-repeat="tag in tags">{{tag.tagText}}</p>
+            <p ng-repeat="type in types">{{type.typeText}}</p>-->
+
+            <div class="presentation">
+
+
+                I'm looking for
+
+                <i class="fa fa-coffee"></i>
+                <div class="nl-field" ng-class="{'nl-field-open': nlTagOpen}">
+                    <a class="nl-field-toggle" ng-click="nlTagOpenToggle()">{{ currentTag }}</a>
+                    <ul>
+                        <li ng-repeat="tag in tags" ng-click="nlTagOpenToggle(tag.id)" ng-class="{ checked: currentTag == tag.tagText}">{{ tag.tagText }}</li>
+                    </ul>
+                </div>
+                <div class="nl-overlay"></div>
+
+
+
+                at a
+
+                <i class="fa fa-coffee"></i>
+                <div class="nl-field" ng-class="{'nl-field-open': nlTypeOpen}">
+                    <a class="nl-field-toggle" ng-click="nlTypeOpenToggle()">{{ currentType }}</a>
+                    <ul>
+                        <li ng-repeat="type in types" ng-click="nlTypeOpenToggle(type.id)" ng-class="{ checked: currentType == type.typeText }">{{ type.typeText }}</li>
+                    </ul>
+                </div>
+                <div class="nl-overlay"></div>
+
+
+                at
+
+                    <i class="fa fa-coffee"></i>
+                    <div class="nl-field" ng-class="{'nl-field-open': nlTimeOpen}">
+                        <a class="nl-field-toggle" ng-click="nlTimeOpenToggle()">{{ currentTime }}</a>
+                        <ul>
+                            <li ng-repeat="time in times" ng-click="nlTimeOpenToggle(time.id)" ng-class="{ checked: currentTime == time.timeText }">{{ time.timeText }}</li>
+                        </ul>
+                    </div>
+                    <div class="nl-overlay"></div>
+
+
+
+
+
+                    costing
+
+                <div class="nl-field" ng-class="{'nl-field-open': nlPriceOpen}">
+
+                    <a class="nl-field-toggle" ng-click="nlPriceOpenToggle()">{{ currentPrice }}</a>
+                    <ul>
+                        <li ng-repeat="price in prices" ng-click="nlPriceOpenToggle(time.id)" ng-class="{ checked: currentPrice == price.priceText }">{{ price.priceText }}</li>
+                    </ul>
+                </div>
+                <div class="nl-overlay"></div>
+
+
+                </div>
+        </div>
+    </div>
+    </div>
+
+
+    <nav class="navbar-fixed-bottom" style="background-color:#BD4932">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3">
+
+                    <button type="button" class="btn btn-block btn-link white">
+
+                        <span   style="font-size:25px;padding: 10px;  color:white"class="glyphicon glyphicon-th-list"></span>
+
+                    </button>
+                </div>
+
+                <div class="col-xs-3">
+
+                    <button type="button" class="btn btn-block btn-link white">
+
+                        <span style="font-size:25px;padding: 10px;  color:white" class="glyphicon glyphicon-user"></span>
+
+                    </button>
+                </div>
+
+                <div class="col-xs-3">
+
+                    <button type="button" class="btn btn-block btn-link white">
+
+                        <span style="font-size:25px;padding: 10px;  color:white" class="glyphicon glyphicon-info-sign"></span>
+
+
+                    </button>
+                </div>
+
+
+                <div class="col-xs-3">
+                                          <button type="button" class="btn btn-block btn-link  white">
+
+                                              <span style="font-size:25px;padding: 10px;  color:white" class="glyphicon glyphicon-book"></span>
+
+                                          </button>
+                   
+                   
+
+                </div>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/loading-bar.js"></script>
+    <script src="Scripts/module.js"></script>
+    <script src="Scripts/service.js"></script>
+    <script src="Scripts/controller.js"></script>
+</body>
+</html>

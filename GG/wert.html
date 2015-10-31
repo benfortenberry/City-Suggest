@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html ng-app="ggModule" ng-cloak>
+<head>
+    <title>Girl's Guide New Orleans</title>
+	<meta charset="utf-8" />
+
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/default.css" rel="stylesheet" />
+    <link href="Content/component.css" rel="stylesheet" />
+    <link href="Content/custom.css" rel="stylesheet" />
+    <link href="Content/test.css" rel="stylesheet" />
+</head>
+<body class="nl-blurred" ng-controller="ggController as gg">
+ 
+
+    <div class="container demo-1" ng-show="appMode == '#'">
+
+        <header>
+            <h1>Girls' Guide <span>New Orleans</span></h1>
+        </header>
+        <div class="main clearfix">
+            <form id="nl-form" class="nl-form">
+                I'm looking for
+                <select>
+                    <option value="1" selected>anything</option>
+                    <option value="2">history</option>
+                    <option value="3">fun</option>
+                    <option value="4">local-flavor</option>
+                    <option value="2">quiet</option>
+                </select>
+                <br />at a
+                <select>
+                    <option value="1" selected>random place</option>
+                    <option value="2">restaurant</option>
+                    <option value="3">bar</option>
+                    <option value="4">museum</option>
+                    <option value="2">store</option>
+                </select>
+
+                at
+                <div class="presentation">
+
+                    <i class="fa fa-coffee"></i> Order me a
+                    <div class="nl-field" ng-class="{'nl-field-open': nlFieldOpen}">
+                        <a class="nl-field-toggle" ng-click="nlFieldOpenToggle()">{{ currentItem }}</a>
+                        <ul>
+                            <li ng-repeat="time in times" ng-click="nlFieldOpenToggle(key)" ng-class="{ checked: currentItem == value }">{{ time.timeText }}</li>
+                        </ul>
+                    </div>
+                    <div class="nl-overlay"></div>
+
+                    Coffee
+
+                </div>
+                <!--<p ng-repeat="time in times">{{time.timeText}}</p>-->
+
+                <select>
+                    <option value="1" selected>anytime</option>
+                    <option ng-repeat="time in times" value="1">morning</option>
+                    <option value="2">lunch</option>
+                    <option value="3">dinner</option>
+                    <option value="3">late night</option>
+                </select>
+                costing <select>
+                    <option value="1" selected>whatever</option>
+                    <option value="1">practically nothing</option>
+                    <option value="2">around thirty bucks</option>
+                    <option value="3">around fifty bucks</option>
+                    <option value="3">money no option</option>
+                </select>
+                <div class="nl-submit-wrap">
+                    <button class="nl-submit" type="submit">Find a venue</button>
+                </div>
+                <div class="nl-overlay"></div>
+            </form>
+        </div>
+    </div><!-- /container -->
+
+    <gg-admin ng-show="appMode=='admin'"></gg-admin>
+
+
+    <div ng-show="appMode=='info'">
+        <h1>Info</h1>
+    </div>
+
+    <div ng-show="appMode=='user'">
+        <h1>Info</h1>
+    </div>
+
+    <nav class="navbar-fixed-bottom" style="background-color:#BD4932">
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-3">
+
+                    <button type="button"  class="btn btn-block btn-link white">
+                    
+                   <span class="glyphicon glyphicon-th-list"></span>
+                    
+                    </button>
+                </div>
+
+                <div class="col-xs-3">
+
+                    <button type="button" class="btn btn-block btn-link white">
+                    
+                   <span class="glyphicon glyphicon-user"></span>
+                    
+                    </button>
+                </div>
+
+                <div class="col-xs-3">
+
+                    <button type="button" class="btn btn-block btn-link white">
+                    
+                    <span class="glyphicon glyphicon-info-sign"></span>
+                    
+                    
+                    </button>
+                </div>
+
+
+                <div class="col-xs-3">
+                    <button type="button" class="btn btn-block btn-link white">
+                    
+                    <span class="glyphicon glyphicon-book"></span>
+                    
+                    </button>
+
+                </div>
+
+            </div>
+           
+        </div>
+    </nav>
+
+    <script src="Scripts/modernizr.custom.js"></script>
+    <script src="Scripts/nlform.js"></script>
+    <script src="Scripts/angular.js"></script>
+    <script src="Scripts/angular-animate.js"></script>
+    <script src="Scripts/module.js"></script>
+    <script src="Scripts/service.js"></script>
+    <script src="Scripts/controller.js"></script>
+    <script src="Directives/admin/admin.js"></script>
+    <script src="Directives/mixer/mixer.js"></script>
+
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
+    <script src="Scripts/loading-bar.js"></script>
+    <!--<script>
+			var nlform = new NLForm( document.getElementById( 'nl-form' ) );
+    </script>-->
+
+</body>
+</html>
