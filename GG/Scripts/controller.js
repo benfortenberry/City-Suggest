@@ -59,6 +59,26 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
     //    lg: "Venti",
     //    xl: "Trenta"
     //}
+
+    $scope.findVenue = function()
+    {
+
+        $scope.results = true;
+
+        var venueSearch = [{ "time": $scope.currentTime, "price": $scope.currentPrice, "tag": $scope.currentTag, "type": $scope.currentType }]
+        alert(JSON.stringify(venueSearch));
+        //ggService.getVenue(venueSearch).then(function (result) {
+        //    //  alert(result.data);
+        //      alert(JSON.stringify(result.data));
+        //    $scope.venues = result.data;
+
+        //});
+
+
+
+    }
+
+
     $scope.currentTime = "anytime";
     $scope.currentPrice = "whatever";
     $scope.currentType = "random place";
@@ -109,158 +129,158 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
         }
         $scope.nlTagOpen = !$scope.nlTagOpen;
     };
-    $scope.changeView = function (view) {
+    //$scope.changeView = function (view) {
 
-    }
+    //}
 
-    $scope.$watch(function () {
-        return ggService.joinOrgID;
-    },
-        function (value) {
-            if (ggService.joinOrgID != null) {
-                ggService.appMode = 'sign-up';
-            }
-        }
-    )
+    //$scope.$watch(function () {
+    //    return ggService.joinOrgID;
+    //},
+    //    function (value) {
+    //        if (ggService.joinOrgID != null) {
+    //            ggService.appMode = 'sign-up';
+    //        }
+    //    }
+    //)
 
 
 
 
-    if (ggService.debugAdmin == true) {
-        $scope.inputEmail = "admin@sororityrecommendations.com";
-        $scope.inputPassword = "rushrecs2015!";
+    //if (ggService.debugAdmin == true) {
+    //    $scope.inputEmail = "admin@sororityrecommendations.com";
+    //    $scope.inputPassword = "rushrecs2015!";
 
 
-    }
+    //}
 
-    if (ggService.debugREC == true) {
-        $scope.inputEmail = "ben@benfortenberry.com";
-        $scope.inputPassword = "purplefink";
+    //if (ggService.debugREC == true) {
+    //    $scope.inputEmail = "ben@benfortenberry.com";
+    //    $scope.inputPassword = "purplefink";
 
-    }
+    //}
 
-    if (ggService.debugAlumna == true) {
-        $scope.inputEmail = "benfortenberry@outlook.com";
-        $scope.inputPassword = "purplefink";
+    //if (ggService.debugAlumna == true) {
+    //    $scope.inputEmail = "benfortenberry@outlook.com";
+    //    $scope.inputPassword = "purplefink";
 
-    }
+    //}
 
 
-    $scope.$watch(function () {
-        return $location.path();
-    }, function (value) {
+    //$scope.$watch(function () {
+    //    return $location.path();
+    //}, function (value) {
 
-        // value = value.replace("/", "");
-        //// console.log(value);
-        // if (value == "#" || value == "" || value == "/" || value == "home")
+    //    // value = value.replace("/", "");
+    //    //// console.log(value);
+    //    // if (value == "#" || value == "" || value == "/" || value == "home")
 
-        //   //  $scope.updateAppMode('#');
+    //    //   //  $scope.updateAppMode('#');
 
-        // else {
-        //     if (value != '~') {
+    //    // else {
+    //    //     if (value != '~') {
 
-        //         $scope.updateAppMode(value);
-        //     }
-        // }
+    //    //         $scope.updateAppMode(value);
+    //    //     }
+    //    // }
 
 
-    }
-    );
+    //}
+    //);
 
 
 
 
 
 
-    $location.path('');
+    //$location.path('');
 
 
 
 
 
-    $scope.IsLoggedIn = false;
+    //$scope.IsLoggedIn = false;
 
 
-    $scope.Logout = function () {
-        ggService.user = 0;
-        $scope.isLoggedIn = false;
-        $scope.user = null;
-        $scope.updateAppMode('#');
-        ggService.appMode = '#';
-        ggService.user = null;
+    //$scope.Logout = function () {
+    //    ggService.user = 0;
+    //    $scope.isLoggedIn = false;
+    //    $scope.user = null;
+    //    $scope.updateAppMode('#');
+    //    ggService.appMode = '#';
+    //    ggService.user = null;
 
-        var modalInstance = $modal.open({
-            templateUrl: 'LogoutModal.html',
-            controller: 'LogoutInstanceCtrl',
+    //    var modalInstance = $modal.open({
+    //        templateUrl: 'LogoutModal.html',
+    //        controller: 'LogoutInstanceCtrl',
 
-            backdrop: 'static',
-            resolve: {
+    //        backdrop: 'static',
+    //        resolve: {
 
 
-                //selectedFormType: function () {
-                //    return $scope.selectedFormType;
-                //}
-            }
-        });
+    //            //selectedFormType: function () {
+    //            //    return $scope.selectedFormType;
+    //            //}
+    //        }
+    //    });
 
 
-    }
+    //}
 
 
-    $scope.contactus = function () {
-        ggService.emailType = 'c';
+    //$scope.contactus = function () {
+    //    ggService.emailType = 'c';
 
-    }
+    //}
 
-    $scope.Login = function (inputEmail, inputPassword) {
+    //$scope.Login = function (inputEmail, inputPassword) {
 
 
-        //  alert(inputEmail + ' ' + inputPassword);
+    //    //  alert(inputEmail + ' ' + inputPassword);
 
-        if ($scope.loginForm.$valid) {
+    //    if ($scope.loginForm.$valid) {
 
-            var user = {
+    //        var user = {
 
-                EmailAddress: inputEmail,
+    //            EmailAddress: inputEmail,
 
-                Password: inputPassword
+    //            Password: inputPassword
 
-            };
+    //        };
 
-            var result = ggService.login(user)
-                .then(function (result) {
+    //        var result = ggService.login(user)
+    //            .then(function (result) {
 
-                    // alert(result.data);
+    //                // alert(result.data);
 
-                    if (result.data.UserID == 0) {
-                        $scope.loginError = true;
-                        $scope.inputEmail = "";
-                        $scope.inputPassword = "";
+    //                if (result.data.UserID == 0) {
+    //                    $scope.loginError = true;
+    //                    $scope.inputEmail = "";
+    //                    $scope.inputPassword = "";
 
-                    }
-                    else {
-                        $scope.inputEmail = "";
-                        $scope.inputPassword = "";
+    //                }
+    //                else {
+    //                    $scope.inputEmail = "";
+    //                    $scope.inputPassword = "";
 
-                        $scope.isLoggedIn = true;
-                        $scope.loginError = false;
+    //                    $scope.isLoggedIn = true;
+    //                    $scope.loginError = false;
 
-                        $scope.user = result.data;
-                        ggService.user = result.data;
+    //                    $scope.user = result.data;
+    //                    ggService.user = result.data;
 
 
 
-                    }
+    //                }
 
 
 
 
-                }
+    //            }
 
-        )
-        }
+    //    )
+    //    }
 
-    };
+    //};
 
     //$scope.$watch('location.url()', function (url) {
 
@@ -275,54 +295,54 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
 
 
 
-    $scope.appMode = '#';
-    ggService.appMode = '#';
+    //$scope.appMode = '#';
+    //ggService.appMode = '#';
 
-    $scope.$watch(function () {
-        return ggService.user;
-    }, function (newVal, oldVal) {
-        $scope.user = ggService.user;
-        if ($scope.user != null) {
-            $scope.isLoggedIn = true;
-            $scope.loginError = false;
-        }
+    //$scope.$watch(function () {
+    //    return ggService.user;
+    //}, function (newVal, oldVal) {
+    //    $scope.user = ggService.user;
+    //    if ($scope.user != null) {
+    //        $scope.isLoggedIn = true;
+    //        $scope.loginError = false;
+    //    }
 
-    });
-
-
-    $scope.$watch(function () {
-        return ggService.appMode;
-    }, function (newVal, oldVal) {
-        $scope.appMode = ggService.appMode;
-
-    });
+    //});
 
 
-    $scope.updateAppMode = function (mode) {
+    //$scope.$watch(function () {
+    //    return ggService.appMode;
+    //}, function (newVal, oldVal) {
+    //    $scope.appMode = ggService.appMode;
 
-        $location.path(mode); // path not hash
-        ggService.appMode = mode;
-
-        // Set Mode
-        $scope.appMode = mode;
+    //});
 
 
-    }
+    //$scope.updateAppMode = function (mode) {
+
+    //    $location.path(mode); // path not hash
+    //    ggService.appMode = mode;
+
+    //    // Set Mode
+    //    $scope.appMode = mode;
+
+
+    //}
 
 
 });
 
 
 
-app.controller('LogoutInstanceCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance) {
+//app.controller('LogoutInstanceCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance) {
 
 
-    $scope.ok = function () {
-        $modalInstance.close();
-    };
+//    $scope.ok = function () {
+//        $modalInstance.close();
+//    };
 
 
-    $scope.Cancel = function () {
-        $modalInstance.dismiss();
-    };
-}]);
+//    $scope.Cancel = function () {
+//        $modalInstance.dismiss();
+//    };
+//}]);

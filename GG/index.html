@@ -1,14 +1,15 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title></title>
+    <title>Girls' Guide New Orleans</title>
 	<meta charset="utf-8" />
     <link href="Content/bootstrap.css" rel="stylesheet" />
    
-  
-    <link href="Content/default.css" rel="stylesheet" />
-  
+    <link href="Content/custom.css" rel="stylesheet" />
     <link href="Content/nl.css" rel="stylesheet" />
+    <link href="Content/loading-bar.css" rel="stylesheet" />
+    <link href="Content/default.css" rel="stylesheet" />
+    <link href="Content/component.css" rel="stylesheet" />
 </head>
 <body class="nl-blurred">
 
@@ -17,12 +18,22 @@
         <h2>Girls' Guide <span>New Orleans</span></h2>
     </header>
         <br /><br />
-    <div ng-app="ggModule">
+    <div ng-app="ggModule" ng-cloak>
         <div ng-controller="ggController as gg">
             <!--<p ng-repeat="time in times">{{time.timeText}}</p>
             <p ng-repeat="price in prices">{{price.priceText}}</p>
             <p ng-repeat="tag in tags">{{tag.tagText}}</p>
             <p ng-repeat="type in types">{{type.typeText}}</p>-->
+
+
+            <p>Your list of suggested venues:</p>
+            <ul>
+            <li ng-repeat="venue in venues">{{venue.Name}}</li>
+            </ul>
+
+            <form ng-submit="findVenue()" ng-show="!results">
+
+
 
             <div class="presentation">
 
@@ -73,13 +84,20 @@
 
                     <a class="nl-field-toggle" ng-click="nlPriceOpenToggle()">{{ currentPrice }}</a>
                     <ul>
-                        <li ng-repeat="price in prices" ng-click="nlPriceOpenToggle(time.id)" ng-class="{ checked: currentPrice == price.priceText }">{{ price.priceText }}</li>
+                        <li ng-repeat="price in prices" ng-click="nlPriceOpenToggle(price.id)" ng-class="{ checked: currentPrice == price.priceText }">{{ price.priceText }}</li>
                     </ul>
                 </div>
                 <div class="nl-overlay"></div>
 
 
+                <div class="nl-submit-wrap">
+                    <button class="nl-submit btn  btn-default btn-lg" style="border-radius:0; background-color:#BD4932; color:white; font-size:x-large; border:none"   type="submit">Find a venue</button>
                 </div>
+                </div>
+
+
+</form>
+
         </div>
     </div>
     </div>

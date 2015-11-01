@@ -24,6 +24,22 @@ app.service('ggService', function ($http) {
         return $http.get("api/allTimes");
     }
 
+    this.searchVenues = function (searchVal) {
+        return $http.get('API/searchVenues/' + searchVal, {
+            params: {
+
+            }
+        }).then(function (response) {
+            // alert(JSON.stringify(response));
+            return response.data.map(function (item) {
+                return item
+            });
+        });
+
+
+
+    };
+
     this.getAllTags = function () {
         return $http.get("api/allTags");
     }
