@@ -996,6 +996,8 @@
       <DependentUpon>GGModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\TagDTO.cs" />
+    <Compile Include="Models\VenueSearchDTO.cs" />
+    <Compile Include="Models\VenueDTO.cs" />
     <Compile Include="Models\TypeDTO.cs" />
     <Compile Include="Models\PriceDTO.cs" />
     <Compile Include="Models\TimeDTO.cs" />

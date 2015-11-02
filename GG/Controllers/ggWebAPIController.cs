@@ -159,6 +159,48 @@ namespace GG.Controllers
 
         }
 
+        [HttpPost]
+        [Route("API/searchVenue")]
+        [System.Web.Http.ActionName("searchVenue")]
+
+        public List<VenueDTO> searchVenue(VenueSearchDTO v)
+        {
+
+            List<VenueDTO> response = new List<VenueDTO>();
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                var l = db.Venues
+                   
+       .Where(p => p.Times.Any(ti => ti.Text == v.time) )
+       .Where(p => p.Types.Any(ty => ty.Text == v.type))
+       .Where(p => p.Prices.Any(pr => pr.Text == v.price))
+       .Where(p => p.Tags.Any(ta => ta.Text == v.tag))
+       .Select(b => new  VenueDTO
+       {
+           id = b.Id,
+           city = b.City,
+           address = b.Address,
+           hours = b.Hours,
+           name = b.Name,
+           state = b.State,
+           website = b.Website
+       })
+       .ToList();
+
+              
+
+                response = l;
+
+
+            }
+
+            return response;
+
+
+        }
 
     }
 }

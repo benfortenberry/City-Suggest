@@ -24,20 +24,30 @@ app.service('ggService', function ($http) {
         return $http.get("api/allTimes");
     }
 
-    this.searchVenues = function (searchVal) {
-        return $http.get('API/searchVenues/' + searchVal, {
-            params: {
+    //this.searchVenues = function (searchVal) {
+    //    return $http.get('API/searchVenue/' + searchVal, {
+    //        params: {
 
-            }
-        }).then(function (response) {
-            // alert(JSON.stringify(response));
-            return response.data.map(function (item) {
-                return item
-            });
+    //        }
+    //    }).then(function (response) {
+    //        // alert(JSON.stringify(response));
+    //        return response.data.map(function (item) {
+    //            return item
+    //        });
+    //    });
+
+
+
+    //};
+
+    this.searchVenue = function (searchVenue) {
+       //  console.log(JSON.stringify(searchVenue));
+        var request = $http({
+            method: "post",
+            url: "API/searchVenue",
+            data: searchVenue
         });
-
-
-
+        return request;
     };
 
     this.getAllTags = function () {

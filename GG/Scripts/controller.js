@@ -65,14 +65,14 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
 
         $scope.results = true;
 
-        var venueSearch = [{ "time": $scope.currentTime, "price": $scope.currentPrice, "tag": $scope.currentTag, "type": $scope.currentType }]
-        alert(JSON.stringify(venueSearch));
-        //ggService.getVenue(venueSearch).then(function (result) {
-        //    //  alert(result.data);
-        //      alert(JSON.stringify(result.data));
-        //    $scope.venues = result.data;
+        var venueSearch = { "time": $scope.currentTime, "tag": $scope.currentTag, "price": $scope.currentPrice, "type": $scope.currentType }
+     //   alert(JSON.stringify(venueSearch));
+        ggService.searchVenue(venueSearch).then(function (result) {
+            //  alert(result.data);
+         //     alert(JSON.stringify(result.data));
+            $scope.venues = result.data;
 
-        //});
+        });
 
 
 
