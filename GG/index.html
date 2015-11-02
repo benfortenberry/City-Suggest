@@ -25,11 +25,14 @@
             <p ng-repeat="tag in tags">{{tag.tagText}}</p>
             <p ng-repeat="type in types">{{type.typeText}}</p>-->
 
+            <div ng-show="results">
 
-            <p>Your list of suggested venues:</p>
-            <ul>
-            <li ng-repeat="venue in venues">{{venue.name}}</li>
-            </ul>
+
+                <p>Your list of suggested venues:</p>
+                <ul>
+                    <li ng-repeat="venue in venues">{{venue.name}}</li>
+                </ul>
+            </div>
 
             <form ng-submit="findVenue()" ng-show="!results">
 
