@@ -22,17 +22,18 @@ app.run(function ($rootScope, $location, ggService) {
 
 app.controller('ggController', function ($scope, $location, ggService, $filter) {
 
-    
+  
+
     ggService.getAllTimes().then(function (result) {
-      //  alert(result.data);
-     //  alert(JSON.stringify(result.data));
+        //  alert(result.data);
+        //  alert(JSON.stringify(result.data));
         $scope.times = result.data;
 
     });
 
     ggService.getAllPrices().then(function (result) {
         //  alert(result.data);
-       //  alert(JSON.stringify(result.data));
+        //  alert(JSON.stringify(result.data));
         $scope.prices = result.data;
 
     });
@@ -51,6 +52,32 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
 
     });
 
+    $scope.getMoreTags = function () {
+
+        ggService.getAllTags().then(function (result) {
+            //  alert(result.data);
+            //  alert(JSON.stringify(result.data));
+            $scope.tags = result.data;
+
+        });
+
+    }
+
+
+    $scope.getMoreTimess = function () {
+
+        ggService.getAllTimes().then(function (result) {
+            //  alert(result.data);
+            //  alert(JSON.stringify(result.data));
+            $scope.times = result.data;
+
+        });
+
+    }
+
+
+
+
     // List data and initial item
     //$scope.listItems = {
     //    xs: "Short",
@@ -60,16 +87,16 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
     //    xl: "Trenta"
     //}
 
-    $scope.findVenue = function()
-    {
+    $scope.findVenue = function () {
 
-        $scope.results = true;
 
         var venueSearch = { "time": $scope.currentTime, "tag": $scope.currentTag, "price": $scope.currentPrice, "type": $scope.currentType }
-     //   alert(JSON.stringify(venueSearch));
+        //   alert(JSON.stringify(venueSearch));
         ggService.searchVenue(venueSearch).then(function (result) {
             //  alert(result.data);
-         //     alert(JSON.stringify(result.data));
+            //     alert(JSON.stringify(result.data));
+
+            $scope.results = true;
             $scope.venues = result.data;
 
         });
@@ -87,35 +114,59 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
     // Natural Language Form control
     $scope.nlTimeOpen = false;
     $scope.nlTimeOpenToggle = function (index) {
-       
-      
-        if (index) {
-         
+
+
+        if (index && index != 'anytime') {
+
             $scope.currentTime = $filter('getById')($scope.times, index).timeText;
         }
+        else
+            $scope.currentTime = 'anytime';
+
         $scope.nlTimeOpen = !$scope.nlTimeOpen;
     };
+
+
+    $scope.tryAgain = function()
+    {
+
+        $scope.results = 0;
+        $scope.currentTime = 'anytime';
+        $scope.currentPrice = 'whatever';
+        $scope.currentTag = 'anything';
+        $scope.currentType = 'random place';
+
+    }
+
+
+  
 
 
     $scope.nlPriceOpen = false;
     $scope.nlPriceOpenToggle = function (index) {
 
 
-        if (index) {
+        if (index && index != 'whatever') {
 
             $scope.currentPrice = $filter('getById')($scope.prices, index).priceText;
         }
+        else 
+            $scope.currentPrice = 'whatever';
+
         $scope.nlPriceOpen = !$scope.nlPriceOpen;
     };
 
     $scope.nlTypeOpen = false;
     $scope.nlTypeOpenToggle = function (index) {
 
+        if (index && index != 'random place') {
 
-        if (index) {
 
             $scope.currentType = $filter('getById')($scope.types, index).typeText;
         }
+        else 
+            $scope.currentType = 'random place';
+
         $scope.nlTypeOpen = !$scope.nlTypeOpen;
     };
 
@@ -123,10 +174,14 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
     $scope.nlTagOpenToggle = function (index) {
 
 
-        if (index) {
+        if (index && index != 'anything') {
 
             $scope.currentTag = $filter('getById')($scope.tags, index).tagText;
+            console.log($scope.currentTag);
         }
+        else
+            $scope.currentTag = 'anything';
+
         $scope.nlTagOpen = !$scope.nlTagOpen;
     };
     //$scope.changeView = function (view) {

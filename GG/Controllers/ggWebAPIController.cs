@@ -31,8 +31,8 @@ namespace GG.Controllers
                          .Select(b => new TimeDTO
                          {
 
-                            id =  b.Id,
-                              timeText = b.Text
+                             id = b.Id,
+                             timeText = b.Text
 
 
                          })
@@ -67,13 +67,13 @@ namespace GG.Controllers
                          .Select(b => new TagDTO
                          {
 
-                               id = b.Id,
-                               tagText = b.Text
+                             id = b.Id,
+                             tagText = b.Text
 
 
                          })
 
-                         select x).ToList();
+                         select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
 
 
                 response = l;
@@ -105,7 +105,7 @@ namespace GG.Controllers
                          {
 
                              id = b.Id,
-                              priceText = b.Text
+                             priceText = b.Text
 
 
                          })
@@ -140,13 +140,13 @@ namespace GG.Controllers
                          .Select(b => new TypeDTO
                          {
 
-                           id= b.Id,
+                             id = b.Id,
                              typeText = b.Text
 
 
                          })
 
-                         select x).ToList();
+                         select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
 
 
                 response = l;
@@ -171,28 +171,88 @@ namespace GG.Controllers
             using (var db = new GG.Models.GGModelContainer())
             {
 
+                var query = (from oData in db.Venues select oData);
+                if (v.price != "whatever")
+                    query = query.Where(m => m.Prices.Any(pr => pr.Text == v.price));
+                if (v.tag != "anything")
+                    query = query.Where(m => m.Tags.Any(ta => ta.Text == v.tag));
+                if (v.time != "anytime")
+                    query = query.Where(m => m.Times.Any(ti => ti.Text == v.time));
+                if (v.type != "random place")
+                    query = query.Where(m => m.Types.Any(ty => ty.Text == v.type));
 
-                var l = db.Venues
-                   
-       .Where(p => p.Times.Any(ti => ti.Text == v.time) )
-       .Where(p => p.Types.Any(ty => ty.Text == v.type))
-       .Where(p => p.Prices.Any(pr => pr.Text == v.price))
-       .Where(p => p.Tags.Any(ta => ta.Text == v.tag))
-       .Select(b => new  VenueDTO
-       {
-           id = b.Id,
-           city = b.City,
-           address = b.Address,
-           hours = b.Hours,
-           name = b.Name,
-           state = b.State,
-           website = b.Website
-       })
-       .ToList();
 
-              
+                var l = query
+
+
+                                    .Select(b => new VenueDTO
+                                    {
+                                        id = b.Id,
+                                        city = b.City,
+                                        address = b.Address,
+                                        hours = b.Hours,
+                                        name = b.Name,
+                                        state = b.State,
+                                        website = b.Website
+                                    }).OrderBy(x => Guid.NewGuid())
+                                    .Take(10).ToList();
 
                 response = l;
+
+
+                //            if (v.price == "whatever" && v.tag=="anything" && v.time=="anytime" && v.type=="random place")
+                //            {
+                //                var l = db.Venues
+
+
+                //                    .Select(b => new VenueDTO
+                //                    {
+                //                        id = b.Id,
+                //                        city = b.City,
+                //                        address = b.Address,
+                //                        hours = b.Hours,
+                //                        name = b.Name,
+                //                        state = b.State,
+                //                        website = b.Website
+                //                    }).OrderBy(x => Guid.NewGuid())
+                //                    .Take(10).ToList();
+
+
+                //                response = l;
+                //            }
+                //            else 
+                //            {
+                //                var l = db.Venues
+
+                //.Where(  p => p.Times.Any(ti => ti.Text == v.time)   || p.Types.Any(ty => ty.Text == v.type  || p.Prices.Any(pr => pr.Text == v.price)  || p.Tags.Any(ta => ta.Text == v.tag)
+
+
+
+                //                    )   
+
+
+
+                //                    )
+                //.Select(b => new VenueDTO
+                //{
+                //    id = b.Id,
+                //    city = b.City,
+                //    address = b.Address,
+                //    hours = b.Hours,
+                //    name = b.Name,
+                //    state = b.State,
+                //    website = b.Website
+                //}).Take(10).ToList()
+                //.ToList();
+
+                //                response = l;
+
+                //            }
+
+
+
+
+
 
 
             }

@@ -253,3 +253,15 @@ input:focus::-ms-input-placeholder {
         font-size: 2em;
     }
 }
+
+.well{
+
+    background-color:#333;
+     border-color:#333;
+}
+
+.list-group-item{
+
+    background-color:#333;
+     border-color:#333;
+}
