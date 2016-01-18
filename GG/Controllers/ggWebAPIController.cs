@@ -159,6 +159,77 @@ namespace GG.Controllers
 
         }
 
+
+        [HttpGet]
+        [Route("API/allVenues")]
+        [System.Web.Http.ActionName("allVenues")]
+
+        public List<VenueDTO> allVenues()
+        {
+
+            List<VenueDTO> response = new List<VenueDTO>();
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                var l = (from x in db.Venues
+                         .Select(b => new VenueDTO
+                         {
+
+                             id = b.Id,
+                             address= b.Address,
+                              city = b.City,
+                               hours = b.Hours,
+                                name = b.Name,
+                             prices = b.Prices.Select(m => new PriceDTO
+                             {
+                                id = m.Id,
+                                 priceText = m.Text
+
+
+                             }).ToList(),
+                             state = b.State,
+                             tags = b.Tags.Select(m => new TagDTO
+                             {
+                                 id = m.Id,
+                                 tagText = m.Text
+
+
+                             }).ToList(),
+                             times = b.Times.Select(m => new TimeDTO
+                             {
+                                 id = m.Id,
+                                 timeText = m.Text
+
+
+                             }).ToList(),
+                             types = b.Types.Select(m => new TypeDTO
+                             {
+                                 id = m.Id,
+                                 typeText = m.Text
+
+
+                             }).ToList(),
+                             website = b.Website
+
+
+
+                         })
+
+                         select x).OrderBy(x => x.name).ToList();
+
+
+                response = l;
+
+
+            }
+
+            return response;
+
+
+        }
+
         [HttpPost]
         [Route("API/searchVenue")]
         [System.Web.Http.ActionName("searchVenue")]
@@ -200,57 +271,7 @@ namespace GG.Controllers
                 response = l;
 
 
-                //            if (v.price == "whatever" && v.tag=="anything" && v.time=="anytime" && v.type=="random place")
-                //            {
-                //                var l = db.Venues
-
-
-                //                    .Select(b => new VenueDTO
-                //                    {
-                //                        id = b.Id,
-                //                        city = b.City,
-                //                        address = b.Address,
-                //                        hours = b.Hours,
-                //                        name = b.Name,
-                //                        state = b.State,
-                //                        website = b.Website
-                //                    }).OrderBy(x => Guid.NewGuid())
-                //                    .Take(10).ToList();
-
-
-                //                response = l;
-                //            }
-                //            else 
-                //            {
-                //                var l = db.Venues
-
-                //.Where(  p => p.Times.Any(ti => ti.Text == v.time)   || p.Types.Any(ty => ty.Text == v.type  || p.Prices.Any(pr => pr.Text == v.price)  || p.Tags.Any(ta => ta.Text == v.tag)
-
-
-
-                //                    )   
-
-
-
-                //                    )
-                //.Select(b => new VenueDTO
-                //{
-                //    id = b.Id,
-                //    city = b.City,
-                //    address = b.Address,
-                //    hours = b.Hours,
-                //    name = b.Name,
-                //    state = b.State,
-                //    website = b.Website
-                //}).Take(10).ToList()
-                //.ToList();
-
-                //                response = l;
-
-                //            }
-
-
-
+   
 
 
 

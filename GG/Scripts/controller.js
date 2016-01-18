@@ -23,6 +23,14 @@ app.run(function ($rootScope, $location, ggService) {
 app.controller('ggController', function ($scope, $location, ggService, $filter) {
 
   
+    $scope.appMode = 'mixer';
+
+    var adminValue = $location.search().admin;
+    if (adminValue == 'true')
+        $scope.appMode = 'admin';
+
+    console.log(adminValue);
+   
 
     ggService.getAllTimes().then(function (result) {
         //  alert(result.data);
@@ -96,7 +104,7 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
             //  alert(result.data);
             //     alert(JSON.stringify(result.data));
 
-            $scope.results = true;
+            $scope.appMode= "results";
             $scope.venues = result.data;
 
         });
@@ -131,6 +139,7 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
     {
 
         $scope.results = 0;
+        $scope.appMode= 'mixer';
         $scope.currentTime = 'anytime';
         $scope.currentPrice = 'whatever';
         $scope.currentTag = 'anything';

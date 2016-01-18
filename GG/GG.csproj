@@ -130,6 +130,7 @@
     <Content Include="fonts\nlicons\nlicons.dev.svg" />
     <Content Include="fonts\nlicons\nlicons.svg" />
     <Content Include="Global.asax" />
+    <Content Include="img\2b36ad_ed8059fb3f0f4d3d968b001be9af5d93.png" />
     <Content Include="img\iphone.png" />
     <Content Include="img\logo.png" />
     <Content Include="img\map.PNG" />
@@ -220,7 +221,7 @@
     <Content Include="Scripts\nlForm.select.js" />
     <Content Include="Scripts\nlForm.text.js" />
     <Content Include="Scripts\ripples.min.js" />
-    <Content Include="Scripts\service.js" />
+    <Content Include="Service\service.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -305,7 +306,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Module\" />
-    <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

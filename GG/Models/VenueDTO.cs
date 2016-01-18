@@ -19,5 +19,13 @@ namespace GG.Models
 
         public string hours { get; set; }
 
+        public List<TypeDTO> types {get; set;}
+
+        public List<TimeDTO> times { get; set; }
+
+        public List<PriceDTO> prices { get; set; }
+
+        public List<TagDTO> tags { get; set; }
+
     }
 }

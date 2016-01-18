@@ -2,9 +2,9 @@
 <html>
 <head>
     <title>Girls' Guide New Orleans</title>
-	<meta charset="utf-8" />
+    <meta charset="utf-8" />
     <link href="Content/bootstrap.css" rel="stylesheet" />
-   
+
     <link href="Content/custom.css" rel="stylesheet" />
     <link href="Content/nl.css" rel="stylesheet" />
     <link href="Content/loading-bar.css" rel="stylesheet" />
@@ -15,7 +15,8 @@
 
     <div class="container demo-1">
         <header>
-            <h2>Girls' Guide <span>New Orleans</span></h2>
+            <!--<h2>Girls' Guide <span>New Orleans</span></h2>-->
+            <img src="img/2b36ad_ed8059fb3f0f4d3d968b001be9af5d93.png" style="margin:10px" />
         </header>
 
         <div ng-app="ggModule" ng-cloak>
@@ -23,11 +24,13 @@
 
                 <gg-menu></gg-menu>
 
+                <gg-admin ng-if="appMode=='admin'"></gg-admin>
+
                 <!--<p ng-repeat="time in times">{{time.timeText}}</p>
                 <p ng-repeat="price in prices">{{price.priceText}}</p>
                 <p ng-repeat="tag in tags">{{tag.tagText}}</p>
                 <p ng-repeat="type in types">{{type.typeText}}</p>-->
-                <div ng-show="results" ng-cloak>
+                <div ng-show="appMode=='results'" ng-cloak>
                     <div class="well">
 
 
@@ -79,7 +82,7 @@
                     <br /><br /><br />
                 </div>
 
-                <div class="row">
+                <div class="row" ng-show="appMode=='mixer'">
 
                     <div class=" col-sm-6 " style="padding:10px">
 
@@ -121,12 +124,12 @@
                                 <span class="sr-only">Next</span>
                             </a>
                         </div>
-                        
+
                     </div>
 
                     <div class="col-sm-6">
 
-                        <form ng-submit="findVenue()" ng-show="!results">
+                        <form ng-submit="findVenue()">
                             <br />
 
 
@@ -207,7 +210,7 @@
                 </div>
 
 
-             
+
 
             </div>
         </div>
@@ -269,12 +272,13 @@
     <script src="//code.angularjs.org/1.2.13/angular.js"></script>
     <script src="Scripts/loading-bar.js"></script>
 
-   
+
     <script src="Scripts/angular-masonry.min.js"></script>
     <script src="Scripts/module.js"></script>
-    <script src="Scripts/service.js"></script>
+   
+    <script src="Service/service.js"></script>
     <script src="Scripts/controller.js"></script>
     <script src="Directives/Menu/menu.js"></script>
-
+    <script src="Directives/admin/admin.js"></script>
 </body>
 </html>

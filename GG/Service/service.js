@@ -24,21 +24,11 @@ app.service('ggService', function ($http) {
         return $http.get("api/allTimes");
     }
 
-    //this.searchVenues = function (searchVal) {
-    //    return $http.get('API/searchVenue/' + searchVal, {
-    //        params: {
+    // Get All bidders
+    this.getAllVenues = function () {
+        return $http.get("api/allVenues");
+    }
 
-    //        }
-    //    }).then(function (response) {
-    //        // alert(JSON.stringify(response));
-    //        return response.data.map(function (item) {
-    //            return item
-    //        });
-    //    });
-
-
-
-    //};
 
     this.searchVenue = function (searchVenue) {
        //  console.log(JSON.stringify(searchVenue));

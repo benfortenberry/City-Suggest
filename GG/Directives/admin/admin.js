@@ -10,6 +10,14 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', function (ggServ
     controller = function ($scope) {
 
 
+
+        ggService.getAllVenues().then(function (result) {
+            //  alert(result.data);
+            //  alert(JSON.stringify(result.data));
+            $scope.venues = result.data;
+
+        });
+
         //$scope.updateContent = function (con) {
 
         //    rushService.updateContent(con);
