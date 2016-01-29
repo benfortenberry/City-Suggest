@@ -29,6 +29,18 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
     if (adminValue == 'true')
         $scope.appMode = 'admin';
 
+
+    if (window.location.href.indexOf("admin") > -1) {
+        $scope.appMode = 'admin';
+    }
+
+    $(document).ready(function () {
+        if (window.location.href.indexOf("admin") > -1) {
+            $scope.appMode = 'admin';
+            ggService.appMode = 'admin'
+        }
+    });
+
     console.log(adminValue);
    
 
@@ -178,6 +190,16 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
 
         $scope.nlTypeOpen = !$scope.nlTypeOpen;
     };
+
+    $scope.$watch(function () {
+        return ggService.appMode;
+    },
+         function (value) {
+             if (ggService.appMode)
+             $scope.appMode = ggService.appMode;
+
+         }
+     );
 
     $scope.nlTagOpen = false;
     $scope.nlTagOpenToggle = function (index) {

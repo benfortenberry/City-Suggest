@@ -1,7 +1,7 @@
 ﻿/// <reference path="../angular.js" />
 var app;
 (function () {
-    app = angular.module("ggModule", [ 'angular-loading-bar', 'wu.masonry']);
+    app = angular.module("ggModule", [ 'angular-loading-bar', 'wu.masonry', 'ui.bootstrap']);
 
     app.filter('getById', function() {
         return function(input, id) {

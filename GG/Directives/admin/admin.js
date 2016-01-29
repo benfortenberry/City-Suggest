@@ -15,6 +15,38 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', function (ggServ
             //  alert(result.data);
             //  alert(JSON.stringify(result.data));
             $scope.venues = result.data;
+            
+        });
+
+        ggService.getAllPrices().then(function (result) {
+            //  alert(result.data);
+            //  alert(JSON.stringify(result.data));
+            $scope.prices = result.data;
+            console.log($scope.prices);
+
+        });
+
+        ggService.getAllTypes().then(function (result) {
+            //  alert(result.data);
+            //  alert(JSON.stringify(result.data));
+            $scope.types = result.data;
+            console.log($scope.prices);
+
+        });
+
+        ggService.getAllTags().then(function (result) {
+            //  alert(result.data);
+            //  alert(JSON.stringify(result.data));
+            $scope.tags = result.data;
+            console.log($scope.prices);
+
+        });
+
+        ggService.getAllTimes().then(function (result) {
+            //  alert(result.data);
+            //  alert(JSON.stringify(result.data));
+            $scope.times = result.data;
+            console.log($scope.prices);
 
         });
 

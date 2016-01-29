@@ -16,20 +16,27 @@
     <div class="container demo-1">
         <header>
             <!--<h2>Girls' Guide <span>New Orleans</span></h2>-->
-            <img src="img/2b36ad_ed8059fb3f0f4d3d968b001be9af5d93.png" style="margin:10px" />
+          
         </header>
 
         <div ng-app="ggModule" ng-cloak>
             <div ng-controller="ggController as gg">
-
+                <!--{{appMode}}-->
                 <gg-menu></gg-menu>
 
+                <gg-about ng-if="appMode=='about'"></gg-about>
+
+                <gg-contact ng-if="appMode=='contact'"></gg-contact>
+                <!--admin-->
                 <gg-admin ng-if="appMode=='admin'"></gg-admin>
 
                 <!--<p ng-repeat="time in times">{{time.timeText}}</p>
                 <p ng-repeat="price in prices">{{price.priceText}}</p>
                 <p ng-repeat="tag in tags">{{tag.tagText}}</p>
                 <p ng-repeat="type in types">{{type.typeText}}</p>-->
+
+                <!--results-->
+
                 <div ng-show="appMode=='results'" ng-cloak>
                     <div class="well">
 
@@ -82,7 +89,8 @@
                     <br /><br /><br />
                 </div>
 
-                <div class="row" ng-show="appMode=='mixer'">
+                <!--mixer-->
+                <div class="row" ng-show="appMode=='mixer' || appMode == undefined">
 
                     <div class=" col-sm-6 " style="padding:10px">
 
@@ -151,22 +159,24 @@
 
 
 
+                                <div >
 
 
-                                with
 
-                                <i class="fa fa-coffee"></i>
-                                <div class="nl-field" ng-class="{'nl-field-open': nlTagOpen}">
-                                    <a class="nl-field-toggle" ng-click="nlTagOpenToggle()">{{ currentTag }}</a>
-                                    <ul>
-                                        <li ng-click="nlTagOpenToggle('anything')" ng-class="{ checked: currentTag == 'anything'}">Anything</li>
-                                        <li ng-repeat="tag in tags" ng-click="nlTagOpenToggle(tag.id)" ng-class="{ checked: currentTag == tag.tagText}">{{ tag.tagText }}</li>
-                                        <li ng-click="getMoreTags()" class="text-right">...more</li>
-                                    </ul>
+                                    with
+
+                                    <i class="fa fa-coffee"></i>
+                                    <div class="nl-field" ng-class="{'nl-field-open': nlTagOpen}">
+                                        <a class="nl-field-toggle" ng-click="nlTagOpenToggle()">{{ currentTag }}</a>
+                                        <ul>
+                                            <li ng-click="nlTagOpenToggle('anything')" ng-class="{ checked: currentTag == 'anything'}">Anything</li>
+                                            <li ng-repeat="tag in tags" ng-click="nlTagOpenToggle(tag.id)" ng-class="{ checked: currentTag == tag.tagText}">{{ tag.tagText }}</li>
+                                            <li ng-click="getMoreTags()" class="text-right">...more</li>
+                                        </ul>
+                                    </div>
+                                    <div class="nl-overlay"></div>
+
                                 </div>
-                                <div class="nl-overlay"></div>
-
-
 
 
                                 around
@@ -269,16 +279,18 @@
     <script src="Scripts/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/masonry/3.1.2/masonry.pkgd.min.js"></script>
     <script src="//desandro.github.io/imagesloaded/imagesloaded.pkgd.min.js"></script>
-    <script src="//code.angularjs.org/1.2.13/angular.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.js"></script>
     <script src="Scripts/loading-bar.js"></script>
 
-
+    <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
     <script src="Scripts/angular-masonry.min.js"></script>
     <script src="Scripts/module.js"></script>
-   
+
     <script src="Service/service.js"></script>
     <script src="Scripts/controller.js"></script>
     <script src="Directives/Menu/menu.js"></script>
     <script src="Directives/admin/admin.js"></script>
+    <script src="Directives/about/about.js"></script>
+    <script src="Directives/contact/contact.js"></script>
 </body>
 </html>

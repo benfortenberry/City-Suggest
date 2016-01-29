@@ -114,9 +114,12 @@
     <Content Include="Content\skeleton.css" />
     <Content Include="Content\nl.css" />
     <Content Include="Content\ui-bootstrap-csp.css" />
-    <Content Include="Directives\about\JavaScript.js" />
+    <Content Include="Directives\about\about.html" />
+    <Content Include="Directives\about\about.js" />
     <Content Include="Directives\admin\admin.html" />
     <Content Include="Directives\admin\admin.js" />
+    <Content Include="Directives\contact\contact.html" />
+    <Content Include="Directives\contact\contact.js" />
     <Content Include="Directives\Menu\menu.html" />
     <Content Include="Directives\Menu\menu.js" />
     <Content Include="Directives\mixer\mixer.html" />
@@ -131,6 +134,7 @@
     <Content Include="fonts\nlicons\nlicons.svg" />
     <Content Include="Global.asax" />
     <Content Include="img\2b36ad_ed8059fb3f0f4d3d968b001be9af5d93.png" />
+    <Content Include="img\founders.jpg" />
     <Content Include="img\iphone.png" />
     <Content Include="img\logo.png" />
     <Content Include="img\map.PNG" />

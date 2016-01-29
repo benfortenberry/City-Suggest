@@ -1,6 +1,6 @@
 ﻿var ggModule = angular.module('ggModule');
 
-ggModule.directive('ggMenu', ['ggService', '$window', '$http', function (ggService, $window, $http) {
+ggModule.directive('ggAbout', ['ggService', '$window', '$http', function (ggService, $window, $http) {
     // Link Function - DOM Manipulation
     link = function ($scope, $element, $attrs) {
 
@@ -11,14 +11,6 @@ ggModule.directive('ggMenu', ['ggService', '$window', '$http', function (ggServi
 
 
 
-        $scope.$watch(function () {
-            return $scope.appMode;
-        },
-            function (value) {
-                ggService.appMode = $scope.appMode;
-
-            }
-        );
 
 
     }
@@ -30,7 +22,7 @@ ggModule.directive('ggMenu', ['ggService', '$window', '$http', function (ggServi
         scope: {
             onAppModeUpdate: '&',
         },
-        templateUrl: 'directives/Menu/Menu.html',
+        templateUrl: 'directives/about/about.html',
         link: link,
         controller: controller
     };

@@ -2,6 +2,29 @@
 
 <form ng-repeat="venue in venues">
 
+    <div class="row">
+
+       
+        <div class="col-sm-9">
+            <h4>{{venue.name}}</h4>
+        </div>
+        <div class="col-sm-3">
+            <button class="btn btn-default btn-sm" ng-show="!venue.edit" ng-click="venue.edit=true">
+                <span class="glyphicon glyphicon-pencil">
+
+                </span>  &nbsp; Edit
+            </button>
+
+            <button class="btn btn-default btn-sm" ng-show="venue.edit" ng-click="venue.edit=false">
+                <span class="glyphicon glyphicon-remove-circle">
+
+                </span>    &nbsp; Cancel
+            </button>
+        </div>
+    </div>
+
+    <div ng-show="venue.edit"  style="background-color:#222; padding:10px">
+
     <div class="row" >
 
         <div class="col-sm-4">
@@ -62,14 +85,37 @@
 
     <div class="row">
 
-        <div class="col-sm-6">
+        <div class="col-sm-6" >
             <label>Prices</label>
 
+
+            <p ng-if="venue.prices.length==0">No Prices yet</p>
             <div class="row" ng-repeat="price in venue.prices">
 
-                <div class="col-sm-10">
+                <div class="col-sm-8">
 
-                    <input class="form-control" ng-model="price.priceText" />
+                    <p>{{price.priceText}}</p>
+
+
+                </div>
+
+                <div class="col-sm-2">
+
+                    <button class="btn btn-danger btn-sm" style="margin-top:5px">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+
+                    </button>
+
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-sm-8">
+
+
+                    <input type="text" ng-model="selectedPrice"
+                           uib-typeahead="e as e.priceText for e in  prices | filter:{priceText:$viewValue}" class="form-control">
 
 
                 </div>
@@ -77,35 +123,7 @@
                 <div class="col-sm-2">
 
                     <button class="btn btn-success btn-sm" style="margin-top:5px">
-                        Save
-
-
-                    </button>
-
-                </div>
-            </div>
-
-         
-        </div>
-
-
-        <div class="col-sm-6">
-            <label>Types</label>
-
-            <div class="row" ng-repeat="type in venue.types">
-
-                <div class="col-sm-10">
-
-                    <input class="form-control" ng-model="type.typeText" />
-
-
-                </div>
-
-                <div class="col-sm-2">
-
-                    <button class="btn btn-success btn-sm" style="margin-top:5px">
-                        Save
-
+                        <span class="glyphicon glyphicon-plus"></span> Add
 
                     </button>
 
@@ -113,43 +131,114 @@
             </div>
 
 
-        </div>
-
-       
-
-
-    </div>
-
-    <br />
-
-
-    <div class="row">
-
-        <div class="col-sm-6">
-            <label>Times</label>
-
-            <div class="row" ng-repeat="time in venue.times">
-
-                <div class="col-sm-10">
-
-                    <input class="form-control" ng-model="time.timeText" />
-
-
-                </div>
-
-                <div class="col-sm-2">
-
-                    <button class="btn btn-success btn-sm" style="margin-top:5px">
-                        Save
-
-
-                    </button>
-
-                </div>
             </div>
 
 
+            <div class="col-sm-6" >
+                <label>Types</label>
+
+                <div class="row" ng-repeat="type in venue.types">
+
+                    <div class="col-sm-8">
+
+                        <p>{{type.typeText}}</p>
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+                        <button class="btn btn-danger btn-sm" style="margin-top:5px">
+                            <span class="glyphicon glyphicon-minus"></span> Delete
+
+                        </button>
+
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-8">
+
+
+                        <input type="text" ng-model="selectedType"
+                               uib-typeahead="e as e.typeText for e in  types | filter:{typeText:$viewValue}" class="form-control">
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+                        <button class="btn btn-success btn-sm" style="margin-top:5px">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+
+                        </button>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
         </div>
+
+        <br />
+
+
+        <div class="row">
+
+            <div class="col-sm-6" >
+                <label>Times</label>
+
+                <div class="row" ng-repeat="time in venue.times">
+
+                    <div class="col-sm-8">
+
+                        <p>{{time.timeText}} </p>
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+                        <button class="btn btn-danger btn-sm" style="margin-top:5px">
+                            <span class="glyphicon glyphicon-minus"></span> Delete
+
+                        </button>
+
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-8">
+
+
+                        <input type="text" ng-model="selectedType"
+                               uib-typeahead="e as e.timeText for e in  times | filter:{timeText:$viewValue}" class="form-control">
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+                        <button class="btn btn-success btn-sm" style="margin-top:5px">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+
+                        </button>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+      
 
 
         <div class="col-sm-6">
@@ -157,9 +246,30 @@
 
             <div class="row" ng-repeat="tag in venue.tags">
 
-                <div class="col-sm-10">
+                <div class="col-sm-8">
 
-                    <input class="form-control" ng-model="tag.tagText" />
+                    <p>{{tag.tagText}} </p>
+
+
+                </div>
+
+                <div class="col-sm-2">
+
+                    <button class="btn btn-danger btn-sm" style="margin-top:5px">
+                        <span class="glyphicon glyphicon-minus"></span> Delete
+
+                    </button>
+
+                </div>
+
+            </div>
+            <div class="row">
+
+                <div class="col-sm-8">
+
+
+                    <input type="text" ng-model="selectedType"
+                           uib-typeahead="e as e.tagText for e in  tags | filter:{tagText:$viewValue}" class="form-control">
 
 
                 </div>
@@ -167,8 +277,7 @@
                 <div class="col-sm-2">
 
                     <button class="btn btn-success btn-sm" style="margin-top:5px">
-                        Save
-
+                        <span class="glyphicon glyphicon-plus"></span> Add
 
                     </button>
 
@@ -177,6 +286,10 @@
 
 
         </div>
+
+
+
+    </div>
 
 
 
