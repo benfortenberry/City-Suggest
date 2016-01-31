@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e233ba7f33bd4027be62429d90770114" Name="Diagram1" >
+      <Diagram DiagramId="e233ba7f33bd4027be62429d90770114" Name="Diagram1" ZoomLevel="90" >
         <EntityTypeShape EntityType="GGModel.Venue" Width="1.5" PointX="3.125" PointY="0.5" FillColor="Fuchsia" />
         <EntityTypeShape EntityType="GGModel.Tag" Width="1.5" PointX="5.75" PointY="0.5" FillColor="Lime" />
         <EntityTypeShape EntityType="GGModel.Price" Width="1.5" PointX="5" PointY="3.75" FillColor="Yellow" />

@@ -21,7 +21,9 @@
 
         <div ng-app="ggModule" ng-cloak>
             <div ng-controller="ggController as gg">
-                <!--{{appMode}}-->
+
+
+                {{appMode}}
                 <gg-menu></gg-menu>
 
                 <gg-about ng-if="appMode=='about'"></gg-about>
@@ -90,7 +92,7 @@
                 </div>
 
                 <!--mixer-->
-                <div class="row" ng-show="appMode=='mixer' || appMode == undefined">
+                <div class="row" ng-show="appMode=='mixer'">
 
                     <div class=" col-sm-6 " style="padding:10px">
 

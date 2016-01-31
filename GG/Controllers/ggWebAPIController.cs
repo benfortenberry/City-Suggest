@@ -283,5 +283,89 @@ namespace GG.Controllers
 
         }
 
+
+        [HttpPut]
+        [Route("API/updateVenue")]
+        [System.Web.Http.ActionName("searchVenue")]
+
+        public Boolean updateVenue(VenueDTO v)
+        {
+
+            Boolean response;
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+                 
+
+               
+
+                if(v.id == null)
+                {
+
+                    Venue VenueTbl = new Venue();
+
+
+                    VenueTbl = new Venue
+                    {
+                        
+                        Address =  v.address,
+                        City = v.city,
+                        Hours = v.hours,
+                        Name = v.name,
+                        State = v.state,
+                        Website = v.website
+                         
+
+                    };
+
+                    db.Venues.Add(VenueTbl);
+
+
+                    db.SaveChanges();
+
+                    response = true;
+                    return response;
+
+
+                }
+                else
+                {
+                    Venue VenueTbl = new Venue();
+
+                    var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+                    existingVenue.Address = v.address;
+                    existingVenue.City = v.city;
+                    existingVenue.Hours = v.hours;
+                    existingVenue.Name = v.name;
+                    existingVenue.State = v.state;
+                    existingVenue.Website = v.website;
+
+
+
+
+                    db.SaveChanges();
+
+                    return true;
+                }
+
+
+             
+
+                
+
+
+
+
+
+
+
+            }
+
+            return response;
+
+
+        }
+
     }
 }

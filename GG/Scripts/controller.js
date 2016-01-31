@@ -195,8 +195,9 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
         return ggService.appMode;
     },
          function (value) {
-             if (ggService.appMode)
-             $scope.appMode = ggService.appMode;
+             if (ggService.appMode != undefined)
+                 $scope.appMode = ggService.appMode;
+            
 
          }
      );

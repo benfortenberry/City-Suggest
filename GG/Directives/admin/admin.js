@@ -22,7 +22,7 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', function (ggServ
             //  alert(result.data);
             //  alert(JSON.stringify(result.data));
             $scope.prices = result.data;
-            console.log($scope.prices);
+          //  console.log($scope.prices);
 
         });
 
@@ -30,15 +30,53 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', function (ggServ
             //  alert(result.data);
             //  alert(JSON.stringify(result.data));
             $scope.types = result.data;
-            console.log($scope.prices);
+         //   console.log($scope.prices);
 
         });
+
+
+        $scope.updateVenue = function(venue)
+        {
+            ggService.updateVenue(venue).then(function (result) {
+               //  alert(result.data);
+               
+
+                ggService.getAllVenues().then(function (result) {
+                    // alert(result.data);
+                    // console.log(result.data);
+                    $scope.venues = {};
+                    $scope.venues = result.data;
+
+                });
+
+                console.log(venue);
+                if (venue.add == true) {
+                    venue = null;
+                    $scope.addVenue = {}
+                }
+
+
+
+
+
+                alert('venue added!');
+
+                //  console.log($scope.prices);
+
+            });
+
+
+         
+
+           
+        }
+       
 
         ggService.getAllTags().then(function (result) {
             //  alert(result.data);
             //  alert(JSON.stringify(result.data));
             $scope.tags = result.data;
-            console.log($scope.prices);
+          //  console.log($scope.prices);
 
         });
 

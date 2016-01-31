@@ -7,7 +7,7 @@ namespace GG.Models
 {
     public class VenueDTO
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public string city { get; set; }
 
         public string name { get; set; }

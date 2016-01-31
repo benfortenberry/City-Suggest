@@ -3,7 +3,7 @@
 
 app.service('ggService', function ($http) {
 
-    this.appMode = '#';
+   
     //this.debugAdmin = true;
     //this.debugREC = false;
     //this.debugAlumna = false;
@@ -105,14 +105,14 @@ app.service('ggService', function ($http) {
 
     //};
 
-    //this.updateUser = function (user) {
-    //    var request = $http({
-    //        method: "put",
-    //        url: "API/updateUser",
-    //        data: user
-    //    });
-    //    return request;
-    //};
+    this.updateVenue = function (venue) {
+        var request = $http({
+            method: "put",
+            url: "API/updateVenue",
+            data:venue
+        });
+        return request;
+    };
 
     //this.removeUser = function (user) {
     //    var request = $http({

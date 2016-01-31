@@ -15,6 +15,7 @@ ggModule.directive('ggMenu', ['ggService', '$window', '$http', function (ggServi
             return $scope.appMode;
         },
             function (value) {
+                if($scope.appMode != undefined)
                 ggService.appMode = $scope.appMode;
 
             }
