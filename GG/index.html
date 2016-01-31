@@ -4,12 +4,14 @@
     <title>Girls' Guide New Orleans</title>
     <meta charset="utf-8" />
     <link href="Content/bootstrap.css" rel="stylesheet" />
-
+    
+   
     <link href="Content/custom.css" rel="stylesheet" />
     <link href="Content/nl.css" rel="stylesheet" />
     <link href="Content/loading-bar.css" rel="stylesheet" />
     <link href="Content/default.css" rel="stylesheet" />
     <link href="Content/component.css" rel="stylesheet" />
+    <link href="Content/ngToast.css" rel="stylesheet" />
 </head>
 <body class="nl-blurred">
 
@@ -21,9 +23,9 @@
 
         <div ng-app="ggModule" ng-cloak>
             <div ng-controller="ggController as gg">
+                <toast></toast>
 
-
-                {{appMode}}
+                <!--{{appMode}}-->
                 <gg-menu></gg-menu>
 
                 <gg-about ng-if="appMode=='about'"></gg-about>
@@ -189,6 +191,7 @@
                                     <ul>
                                         <li ng-click="nlTimeOpenToggle('anytime')" ng-class="{ checked: currentTime == 'anytime'}">anytime</li>
                                         <li ng-repeat="time in times" ng-click="nlTimeOpenToggle(time.id)" ng-class="{ checked: currentTime == time.timeText }">{{ time.timeText }}</li>
+                                        <li ng-click="getMoreTimes()" class="text-right">...more</li>
                                     </ul>
                                 </div>
                                 <div class="nl-overlay"></div>
@@ -205,6 +208,7 @@
                                     <ul>
                                         <li ng-click="nlPriceOpenToggle('whatever')" ng-class="{ checked: currentPrice == 'whatever'}">Whatever</li>
                                         <li ng-repeat="price in prices" ng-click="nlPriceOpenToggle(price.id)" ng-class="{ checked: currentPrice == price.priceText }">{{ price.priceText }}</li>
+                                        <li ng-click="getMorePrices()" class="text-right">...more</li>
                                     </ul>
                                 </div>
                                 <div class="nl-overlay"></div>
@@ -283,7 +287,9 @@
     <script src="//desandro.github.io/imagesloaded/imagesloaded.pkgd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.9/angular.js"></script>
     <script src="Scripts/loading-bar.js"></script>
-
+    <script src="Scripts/angular-sanitize.min.js"></script>
+    <script src="Scripts/angular-animate.min.js"></script>
+    <script src="Scripts/ngToast.min.js"></script>
     <script src="Scripts/angular-ui/ui-bootstrap-tpls.js"></script>
     <script src="Scripts/angular-masonry.min.js"></script>
     <script src="Scripts/module.js"></script>

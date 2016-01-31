@@ -37,7 +37,7 @@ namespace GG.Controllers
 
                          })
 
-                         select x).ToList();
+                         select x).OrderBy(x => x.timeText).ToList();
 
 
                 response = l;
@@ -73,7 +73,7 @@ namespace GG.Controllers
 
                          })
 
-                         select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+                         select x).OrderBy(x => x.tagText).ToList();
 
 
                 response = l;
@@ -110,7 +110,7 @@ namespace GG.Controllers
 
                          })
 
-                         select x).ToList();
+                         select x).OrderBy(x => x.priceText).ToList();
 
 
                 response = l;
@@ -134,6 +134,155 @@ namespace GG.Controllers
 
             using (var db = new GG.Models.GGModelContainer())
             {
+             
+
+                var l = (from x in db.Types
+                         .Select(b => new TypeDTO
+{
+
+    id = b.Id,
+    typeText = b.Text
+
+
+})
+                        
+
+                         select x).OrderBy(x => x.typeText).ToList();
+
+
+                response = l;
+
+
+            }
+
+            return response;
+
+
+        }
+
+
+        //mixer
+
+        [HttpGet]
+        [Route("API/allTimes_Mixer")]
+        [System.Web.Http.ActionName("allTimes_Mixer")]
+
+        public List<TimeDTO> allTimes_Mixer()
+        {
+
+            List<TimeDTO> response = new List<TimeDTO>();
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                var l = (from x in db.Times
+                         .Select(b => new TimeDTO
+                         {
+
+                             id = b.Id,
+                             timeText = b.Text
+
+
+                         })
+
+                         select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+
+
+                response = l;
+
+
+            }
+
+            return response;
+
+
+        }
+
+        [HttpGet]
+        [Route("API/allTags_Mixer")]
+        [System.Web.Http.ActionName("allTags_Mixer")]
+
+        public List<TagDTO> allTags_Mixer()
+        {
+
+            List<TagDTO> response = new List<TagDTO>();
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                var l = (from x in db.Tags
+                         .Select(b => new TagDTO
+                         {
+
+                             id = b.Id,
+                             tagText = b.Text
+
+
+                         })
+
+                         select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+
+
+                response = l;
+
+
+            }
+
+            return response;
+
+
+        }
+
+
+        [HttpGet]
+        [Route("API/allPrices_Mixer")]
+        [System.Web.Http.ActionName("allPrices_Mixer")]
+
+        public List<PriceDTO> allPrices_Mixer()
+        {
+
+            List<PriceDTO> response = new List<PriceDTO>();
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                var l = (from x in db.Prices1
+                         .Select(b => new PriceDTO
+                         {
+
+                             id = b.Id,
+                             priceText = b.Text
+
+
+                         })
+
+                         select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+
+
+                response = l;
+
+
+            }
+
+            return response;
+
+
+        }
+
+        [HttpGet]
+        [Route("API/allTypes_Mixer")]
+        [System.Web.Http.ActionName("allTypes_Mixer")]
+
+        public List<TypeDTO> allTypes_Mixer()
+        {
+
+            List<TypeDTO> response = new List<TypeDTO>();
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
 
 
                 var l = (from x in db.Types
@@ -145,6 +294,7 @@ namespace GG.Controllers
 
 
                          })
+
 
                          select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
 
@@ -362,7 +512,700 @@ namespace GG.Controllers
 
             }
 
-            return response;
+          
+
+        }
+
+        [HttpPut]
+        [Route("API/addPrice")]
+        [System.Web.Http.ActionName("addPrice")]
+
+        public List<PriceDTO> addPrice(VenueDTO v)
+        {
+
+            PriceDTO p = new PriceDTO();
+
+            p = v.prices.Last();
+
+            
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+                
+                if (p.id == null)
+                {
+
+                    Price PriceTbl = new Price();
+
+                    PriceDTO newPrice = new PriceDTO();
+
+                    PriceTbl = new Price
+                    {
+
+                      Text = p.priceText
+                      
+                    };
+
+                    db.Prices1.Add(PriceTbl);
+                    
+                    db.SaveChanges();
+
+                    newPrice = p;
+                    newPrice.id = PriceTbl.Id;
+
+                    var existingPrice = (from x in db.Prices1 where x.Id == newPrice.id select x).FirstOrDefault();
+
+
+                    var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+                    existingVenue.Prices.Add(existingPrice);
+
+                    db.SaveChanges();
+
+                    var l = (from x in existingVenue.Prices
+                                         .Select(b => new PriceDTO
+                                         {
+
+                                             id = b.Id,
+                                             priceText = b.Text
+
+
+                                         })
+
+                             select x).ToList();
+
+
+                    return l;
+
+                }
+                else
+                {
+                    Venue VenueTbl = new Venue();
+
+                    var existingPrice = (from x in db.Prices1 where x.Id == p.id select x).FirstOrDefault();
+
+
+                    var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+
+
+
+                    existingVenue.Prices.Add(existingPrice);
+
+
+                    db.SaveChanges();
+
+                    var l = (from x in existingVenue.Prices
+                                         .Select(b => new PriceDTO
+                                         {
+
+                                             id = b.Id,
+                                             priceText = b.Text
+
+
+                                         })
+
+                             select x).ToList();
+
+
+                    return l;
+                }
+
+
+
+
+
+            }
+
+         
+        }
+
+
+        [HttpPut]
+        [Route("API/removePrice")]
+        [System.Web.Http.ActionName("removePrice")]
+
+        public List<PriceDTO> removePrice(VenueDTO v)
+        {
+
+            PriceDTO p = new PriceDTO();
+
+            p = v.prices.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+                
+                    Venue VenueTbl = new Venue();
+
+                    var existingPrice = (from x in db.Prices1 where x.Id == p.id select x).FirstOrDefault();
+
+
+                    var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+
+
+
+                    existingVenue.Prices.Remove(existingPrice);
+
+
+                    db.SaveChanges();
+
+                    var l = (from x in existingVenue.Prices
+                                         .Select(b => new PriceDTO
+                                         {
+
+                                             id = b.Id,
+                                             priceText = b.Text
+
+
+                                         })
+
+                             select x).ToList();
+
+
+                    return l;
+                
+
+            }
+
+
+        }
+
+        [HttpPut]
+        [Route("API/deleteVenue")]
+        [System.Web.Http.ActionName("deleteVenue")]
+
+        public Boolean deleteVenue(VenueDTO v)
+        {
+
+           
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+                Venue VenueTbl = new Venue();
+
+             
+                var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+
+
+                foreach (var x in db.Types.ToList())
+                {
+                    x.Venues.Remove(existingVenue);
+                }
+
+                foreach (var x in db.Tags.ToList())
+                {
+                    x.Venues.Remove(existingVenue);
+                }
+
+                foreach (var x in db.Times.ToList())
+                {
+                    x.Venues.Remove(existingVenue);
+                }
+
+                foreach (var x in db.Prices1.ToList())
+                {
+                    x.Venues.Remove(existingVenue);
+                }
+
+
+                db.Venues.Remove(existingVenue);
+
+
+                db.SaveChanges();
+
+                return true;
+
+
+
+            }
+
+
+        }
+
+
+
+        //type
+
+        [HttpPut]
+        [Route("API/addType")]
+        [System.Web.Http.ActionName("addType")]
+
+        public List<TypeDTO> addType(VenueDTO v)
+        {
+
+            TypeDTO t = new TypeDTO();
+
+            t = v.types.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                if (t.id == null)
+                {
+
+                    Models.Type TypeTbl = new Models.Type();
+
+                    TypeDTO newType = new TypeDTO();
+
+                    TypeTbl = new Models.Type
+                    {
+
+                        Text = t.typeText
+
+                    };
+
+                    db.Types.Add(TypeTbl);
+
+                    db.SaveChanges();
+
+                    newType = t;
+                    newType.id = TypeTbl.Id;
+
+                    var existingType = (from x in db.Types where x.Id == newType.id select x).FirstOrDefault();
+
+
+                    var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+                    existingVenue.Types.Add(existingType);
+
+                    db.SaveChanges();
+
+                    var l = (from x in existingVenue.Types
+                                         .Select(b => new TypeDTO
+                                         {
+
+                                             id = b.Id,
+                                             typeText = b.Text
+
+
+                                         })
+
+                             select x).ToList();
+
+
+                    return l;
+
+                }
+                else
+                {
+                    Venue VenueTbl = new Venue();
+
+                    var existingType = (from x in db.Types where x.Id == t.id select x).FirstOrDefault();
+
+
+                    var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+
+
+
+                    existingVenue.Types.Add(existingType);
+
+
+                    db.SaveChanges();
+
+                    var l = (from x in existingVenue.Types
+                                         .Select(b => new TypeDTO
+                                         {
+
+                                             id = b.Id,
+                                             typeText = b.Text
+
+
+                                         })
+
+                             select x).ToList();
+
+
+                    return l;
+                }
+
+
+
+
+
+            }
+
+
+        }
+
+
+        [HttpPut]
+        [Route("API/removeType")]
+        [System.Web.Http.ActionName("removeType")]
+
+        public List<TypeDTO> removeType(VenueDTO v)
+        {
+
+            TypeDTO t = new TypeDTO();
+
+            t = v.types.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+                Venue VenueTbl = new Venue();
+
+                var existingType = (from x in db.Types where x.Id == t.id select x).FirstOrDefault();
+
+
+                var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+
+
+
+                existingVenue.Types.Remove(existingType);
+
+
+                db.SaveChanges();
+
+                var l = (from x in existingVenue.Types
+                                     .Select(b => new TypeDTO
+                                     {
+
+                                         id = b.Id,
+                                         typeText = b.Text
+
+
+                                     })
+
+                         select x).ToList();
+
+
+                return l;
+
+
+            }
+
+
+        }
+
+        //tag
+
+        [HttpPut]
+        [Route("API/addTag")]
+        [System.Web.Http.ActionName("addTag")]
+
+        public List<TagDTO> addTag(VenueDTO v)
+        {
+
+            TagDTO t = new TagDTO();
+
+            t = v.tags.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                if (t.id == null)
+                {
+
+                    Models.Tag TagTbl = new Models.Tag();
+
+                    TagDTO newTag = new TagDTO();
+
+                    TagTbl = new Models.Tag
+                    {
+
+                        Text = t.tagText
+
+                    };
+
+                    db.Tags.Add(TagTbl);
+
+                    db.SaveChanges();
+
+                    newTag = t;
+                    newTag.id = TagTbl.Id;
+
+                    var existingTag = (from x in db.Tags where x.Id == newTag.id select x).FirstOrDefault();
+
+
+                    var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+                    existingVenue.Tags.Add(existingTag);
+
+                    db.SaveChanges();
+
+                    var l = (from x in existingVenue.Tags
+                                         .Select(b => new TagDTO
+                                         {
+
+                                             id = b.Id,
+                                             tagText = b.Text
+
+
+                                         })
+
+                             select x).ToList();
+
+
+                    return l;
+
+                }
+                else
+                {
+                    Venue VenueTbl = new Venue();
+
+                    var existingTag = (from x in db.Tags where x.Id == t.id select x).FirstOrDefault();
+
+
+                    var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+
+
+
+                    existingVenue.Tags.Add(existingTag);
+
+
+                    db.SaveChanges();
+
+                    var l = (from x in existingVenue.Tags
+                                         .Select(b => new TagDTO
+                                         {
+
+                                             id = b.Id,
+                                             tagText = b.Text
+
+
+                                         })
+
+                             select x).ToList();
+
+
+                    return l;
+                }
+
+
+
+
+
+            }
+
+
+        }
+
+
+        [HttpPut]
+        [Route("API/removeTag")]
+        [System.Web.Http.ActionName("removeTag")]
+
+        public List<TagDTO> removeTag(VenueDTO v)
+        {
+
+            TagDTO t = new TagDTO();
+
+            t = v.tags.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+                Venue VenueTbl = new Venue();
+
+                var existingTag = (from x in db.Tags where x.Id == t.id select x).FirstOrDefault();
+
+
+                var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+
+
+
+                existingVenue.Tags.Remove(existingTag);
+
+
+                db.SaveChanges();
+
+                var l = (from x in existingVenue.Tags
+                                     .Select(b => new TagDTO
+                                     {
+
+                                         id = b.Id,
+                                         tagText = b.Text
+
+
+                                     })
+
+                         select x).ToList();
+
+
+                return l;
+
+
+            }
+
+
+        }
+
+        //time
+
+        [HttpPut]
+        [Route("API/addTime")]
+        [System.Web.Http.ActionName("addTime")]
+
+        public List<TimeDTO> addTime(VenueDTO v)
+        {
+
+            TimeDTO t = new TimeDTO();
+
+            t = v.times.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                if (t.id == null)
+                {
+
+                    Models.Time TimeTbl = new Models.Time();
+
+                    TimeDTO newTime = new TimeDTO();
+
+                    TimeTbl = new Models.Time
+                    {
+
+                        Text = t.timeText
+
+                    };
+
+                    db.Times.Add(TimeTbl);
+
+                    db.SaveChanges();
+
+                    newTime = t;
+                    newTime.id = TimeTbl.Id;
+
+                    var existingTime = (from x in db.Times where x.Id == newTime.id select x).FirstOrDefault();
+
+
+                    var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+                    existingVenue.Times.Add(existingTime);
+
+                    db.SaveChanges();
+
+                    var l = (from x in existingVenue.Times
+                                         .Select(b => new TimeDTO
+                                         {
+
+                                             id = b.Id,
+                                             timeText = b.Text
+
+
+                                         })
+
+                             select x).ToList();
+
+
+                    return l;
+
+                }
+                else
+                {
+                    Venue VenueTbl = new Venue();
+
+                    var existingTime = (from x in db.Times where x.Id == t.id select x).FirstOrDefault();
+
+
+                    var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+
+
+
+                    existingVenue.Times.Add(existingTime);
+
+
+                    db.SaveChanges();
+
+                    var l = (from x in existingVenue.Times
+                                         .Select(b => new TimeDTO
+                                         {
+
+                                             id = b.Id,
+                                             timeText = b.Text
+
+
+                                         })
+
+                             select x).ToList();
+
+
+                    return l;
+                }
+
+
+
+
+
+            }
+
+
+        }
+
+
+        [HttpPut]
+        [Route("API/removeTime")]
+        [System.Web.Http.ActionName("removeTime")]
+
+        public List<TimeDTO> removeTime(VenueDTO v)
+        {
+
+            TimeDTO t = new TimeDTO();
+
+            t = v.times.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+                Venue VenueTbl = new Venue();
+
+                var existingTime = (from x in db.Times where x.Id == t.id select x).FirstOrDefault();
+
+
+                var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+
+
+
+                existingVenue.Times.Remove(existingTime);
+
+
+                db.SaveChanges();
+
+                var l = (from x in existingVenue.Times
+                                     .Select(b => new TimeDTO
+                                     {
+
+                                         id = b.Id,
+                                         timeText = b.Text
+
+
+                                     })
+
+                         select x).ToList();
+
+
+                return l;
+
+
+            }
 
 
         }

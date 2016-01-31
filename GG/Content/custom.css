@@ -322,3 +322,6 @@ input:focus::-ms-input-placeholder {
     padding: 15px; 
     margin: 0;
 }
+
+
+.black-back{ background-color:#222}

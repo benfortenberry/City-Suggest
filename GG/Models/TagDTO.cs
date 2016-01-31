@@ -7,7 +7,7 @@ namespace GG.Models
 {
     public class TagDTO
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public string tagText { get; set; }
       
     }

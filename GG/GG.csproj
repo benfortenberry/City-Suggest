@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="admin.html" />
+    <Content Include="Content\ngToast.css" />
     <Content Include="ComingSoon.html" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -108,6 +109,8 @@
     <Content Include="Content\loading-bar.min.css" />
     <Content Include="Content\material-fullpalette.min.css" />
     <Content Include="Content\material.min.css" />
+    <Content Include="Content\ngToast-animations.min.css" />
+    <Content Include="Content\ngToast.min.css" />
     <Content Include="Content\normalize.css" />
     <Content Include="Content\ripples.min.css" />
     <Content Include="Content\roboto.min.css" />
@@ -143,6 +146,7 @@
     <Content Include="hrgf.html" />
     <Content Include="Scripts\angular-masonry.min.js" />
     <Content Include="Scripts\masonry.pkgd.min.js" />
+    <Content Include="Scripts\ngToast.min.js" />
     <Content Include="wert.html" />
     <Content Include="index.html" />
     <Content Include="Models\GGModel.Context.tt">
@@ -309,6 +313,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="bin\" />
     <Folder Include="Module\" />
   </ItemGroup>
   <ItemGroup>

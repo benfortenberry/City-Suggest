@@ -22,7 +22,7 @@ app.run(function ($rootScope, $location, ggService) {
 
 app.controller('ggController', function ($scope, $location, ggService, $filter) {
 
-  
+
     $scope.appMode = 'mixer';
 
     var adminValue = $location.search().admin;
@@ -42,39 +42,51 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
     });
 
     console.log(adminValue);
-   
 
-    ggService.getAllTimes().then(function (result) {
+
+    ggService.getAllTimes(true).then(function (result) {
         //  alert(result.data);
         //  alert(JSON.stringify(result.data));
         $scope.times = result.data;
 
     });
 
-    ggService.getAllPrices().then(function (result) {
+    ggService.getAllPrices(true).then(function (result) {
         //  alert(result.data);
         //  alert(JSON.stringify(result.data));
         $scope.prices = result.data;
 
     });
 
-    ggService.getAllTypes().then(function (result) {
+    ggService.getAllTypes(true).then(function (result) {
         //  alert(result.data);
         //  alert(JSON.stringify(result.data));
         $scope.types = result.data;
 
     });
 
-    ggService.getAllTags().then(function (result) {
+    ggService.getAllTags(true).then(function (result) {
         //  alert(result.data);
         //  alert(JSON.stringify(result.data));
         $scope.tags = result.data;
 
     });
 
+    $scope.getMoreType = function () {
+
+        ggService.getAllTypes(true).then(function (result) {
+            //  alert(result.data);
+            //  alert(JSON.stringify(result.data));
+            $scope.types = result.data;
+
+        });
+
+    }
+
+
     $scope.getMoreTags = function () {
 
-        ggService.getAllTags().then(function (result) {
+        ggService.getAllTags(true).then(function (result) {
             //  alert(result.data);
             //  alert(JSON.stringify(result.data));
             $scope.tags = result.data;
@@ -84,12 +96,24 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
     }
 
 
-    $scope.getMoreTimess = function () {
+    $scope.getMoreTimes = function () {
 
-        ggService.getAllTimes().then(function (result) {
+        ggService.getAllTimes(true).then(function (result) {
             //  alert(result.data);
             //  alert(JSON.stringify(result.data));
             $scope.times = result.data;
+
+        });
+
+    }
+
+
+    $scope.getMorePrices = function () {
+
+        ggService.getAllPrices().then(function (result) {
+            //  alert(result.data);
+            //  alert(JSON.stringify(result.data));
+            $scope.prices = result.data;
 
         });
 
@@ -116,7 +140,7 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
             //  alert(result.data);
             //     alert(JSON.stringify(result.data));
 
-            $scope.appMode= "results";
+            $scope.appMode = "results";
             $scope.venues = result.data;
 
         });
@@ -147,11 +171,10 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
     };
 
 
-    $scope.tryAgain = function()
-    {
+    $scope.tryAgain = function () {
 
         $scope.results = 0;
-        $scope.appMode= 'mixer';
+        $scope.appMode = 'mixer';
         $scope.currentTime = 'anytime';
         $scope.currentPrice = 'whatever';
         $scope.currentTag = 'anything';
@@ -160,7 +183,7 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
     }
 
 
-  
+
 
 
     $scope.nlPriceOpen = false;
@@ -171,7 +194,7 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
 
             $scope.currentPrice = $filter('getById')($scope.prices, index).priceText;
         }
-        else 
+        else
             $scope.currentPrice = 'whatever';
 
         $scope.nlPriceOpen = !$scope.nlPriceOpen;
@@ -185,7 +208,7 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
 
             $scope.currentType = $filter('getById')($scope.types, index).typeText;
         }
-        else 
+        else
             $scope.currentType = 'random place';
 
         $scope.nlTypeOpen = !$scope.nlTypeOpen;
@@ -197,7 +220,7 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
          function (value) {
              if (ggService.appMode != undefined)
                  $scope.appMode = ggService.appMode;
-            
+
 
          }
      );
@@ -216,220 +239,7 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
 
         $scope.nlTagOpen = !$scope.nlTagOpen;
     };
-    //$scope.changeView = function (view) {
 
-    //}
+}
 
-    //$scope.$watch(function () {
-    //    return ggService.joinOrgID;
-    //},
-    //    function (value) {
-    //        if (ggService.joinOrgID != null) {
-    //            ggService.appMode = 'sign-up';
-    //        }
-    //    }
-    //)
-
-
-
-
-    //if (ggService.debugAdmin == true) {
-    //    $scope.inputEmail = "admin@sororityrecommendations.com";
-    //    $scope.inputPassword = "rushrecs2015!";
-
-
-    //}
-
-    //if (ggService.debugREC == true) {
-    //    $scope.inputEmail = "ben@benfortenberry.com";
-    //    $scope.inputPassword = "purplefink";
-
-    //}
-
-    //if (ggService.debugAlumna == true) {
-    //    $scope.inputEmail = "benfortenberry@outlook.com";
-    //    $scope.inputPassword = "purplefink";
-
-    //}
-
-
-    //$scope.$watch(function () {
-    //    return $location.path();
-    //}, function (value) {
-
-    //    // value = value.replace("/", "");
-    //    //// console.log(value);
-    //    // if (value == "#" || value == "" || value == "/" || value == "home")
-
-    //    //   //  $scope.updateAppMode('#');
-
-    //    // else {
-    //    //     if (value != '~') {
-
-    //    //         $scope.updateAppMode(value);
-    //    //     }
-    //    // }
-
-
-    //}
-    //);
-
-
-
-
-
-
-    //$location.path('');
-
-
-
-
-
-    //$scope.IsLoggedIn = false;
-
-
-    //$scope.Logout = function () {
-    //    ggService.user = 0;
-    //    $scope.isLoggedIn = false;
-    //    $scope.user = null;
-    //    $scope.updateAppMode('#');
-    //    ggService.appMode = '#';
-    //    ggService.user = null;
-
-    //    var modalInstance = $modal.open({
-    //        templateUrl: 'LogoutModal.html',
-    //        controller: 'LogoutInstanceCtrl',
-
-    //        backdrop: 'static',
-    //        resolve: {
-
-
-    //            //selectedFormType: function () {
-    //            //    return $scope.selectedFormType;
-    //            //}
-    //        }
-    //    });
-
-
-    //}
-
-
-    //$scope.contactus = function () {
-    //    ggService.emailType = 'c';
-
-    //}
-
-    //$scope.Login = function (inputEmail, inputPassword) {
-
-
-    //    //  alert(inputEmail + ' ' + inputPassword);
-
-    //    if ($scope.loginForm.$valid) {
-
-    //        var user = {
-
-    //            EmailAddress: inputEmail,
-
-    //            Password: inputPassword
-
-    //        };
-
-    //        var result = ggService.login(user)
-    //            .then(function (result) {
-
-    //                // alert(result.data);
-
-    //                if (result.data.UserID == 0) {
-    //                    $scope.loginError = true;
-    //                    $scope.inputEmail = "";
-    //                    $scope.inputPassword = "";
-
-    //                }
-    //                else {
-    //                    $scope.inputEmail = "";
-    //                    $scope.inputPassword = "";
-
-    //                    $scope.isLoggedIn = true;
-    //                    $scope.loginError = false;
-
-    //                    $scope.user = result.data;
-    //                    ggService.user = result.data;
-
-
-
-    //                }
-
-
-
-
-    //            }
-
-    //    )
-    //    }
-
-    //};
-
-    //$scope.$watch('location.url()', function (url) {
-
-    //    if (url.substring(1) == "#")
-
-    //        updateAppMode('home')
-
-    //else
-    //    updateAppMode(url.substring(1))
-
-    //});
-
-
-
-    //$scope.appMode = '#';
-    //ggService.appMode = '#';
-
-    //$scope.$watch(function () {
-    //    return ggService.user;
-    //}, function (newVal, oldVal) {
-    //    $scope.user = ggService.user;
-    //    if ($scope.user != null) {
-    //        $scope.isLoggedIn = true;
-    //        $scope.loginError = false;
-    //    }
-
-    //});
-
-
-    //$scope.$watch(function () {
-    //    return ggService.appMode;
-    //}, function (newVal, oldVal) {
-    //    $scope.appMode = ggService.appMode;
-
-    //});
-
-
-    //$scope.updateAppMode = function (mode) {
-
-    //    $location.path(mode); // path not hash
-    //    ggService.appMode = mode;
-
-    //    // Set Mode
-    //    $scope.appMode = mode;
-
-
-    //}
-
-
-});
-
-
-
-//app.controller('LogoutInstanceCtrl', ['$scope', '$modalInstance', function ($scope, $modalInstance) {
-
-
-//    $scope.ok = function () {
-//        $modalInstance.close();
-//    };
-
-
-//    $scope.Cancel = function () {
-//        $modalInstance.dismiss();
-//    };
-//}]);
+  );

@@ -3,7 +3,7 @@
 
 app.service('ggService', function ($http) {
 
-   
+
     //this.debugAdmin = true;
     //this.debugREC = false;
     //this.debugAlumna = false;
@@ -19,19 +19,11 @@ app.service('ggService', function ($http) {
         this.appMode = mode.mode;
     }
 
-   // Get All bidders
-    this.getAllTimes = function () {
-        return $http.get("api/allTimes");
-    }
-
-    // Get All bidders
-    this.getAllVenues = function () {
-        return $http.get("api/allVenues");
-    }
+  
 
 
     this.searchVenue = function (searchVenue) {
-       //  console.log(JSON.stringify(searchVenue));
+        //  console.log(JSON.stringify(searchVenue));
         var request = $http({
             method: "post",
             url: "API/searchVenue",
@@ -40,16 +32,39 @@ app.service('ggService', function ($http) {
         return request;
     };
 
-    this.getAllTags = function () {
-        return $http.get("api/allTags");
+    // Get All bidders
+    this.getAllTimes = function (mixer) {
+
+        if(mixer)
+            return $http.get("api/allTimes_Mixer");
+        else
+            return $http.get("api/allTimes_Mixer");
     }
 
-    this.getAllPrices = function () {
-        return $http.get("api/allPrices");
+    // Get All bidders
+    this.getAllVenues = function () {
+        return $http.get("api/allVenues");
     }
 
-    this.getAllTypes = function () {
-        return $http.get("api/allTypes");
+    this.getAllTags = function (mixer) {
+        if (mixer)
+            return $http.get("api/allTags_Mixer");
+        else
+            return $http.get("api/allTags_Mixer");
+    }
+
+    this.getAllPrices = function (mixer) {
+        if (mixer)
+            return $http.get("api/allPrices_Mixer");
+        else
+            return $http.get("api/allPrices_Mixer");
+    }
+
+    this.getAllTypes = function (mixer) {
+        if (mixer)
+            return $http.get("api/allTypes_Mixer");
+        else
+            return $http.get("api/allTypes_Mixer");
     }
 
     //Get All content
@@ -109,11 +124,169 @@ app.service('ggService', function ($http) {
         var request = $http({
             method: "put",
             url: "API/updateVenue",
-            data:venue
+            data: venue
         });
         return request;
     };
 
+    this.deleteVenue = function (venue) {
+
+        //  console.log(price);
+
+
+        var request = $http({
+            method: "put",
+            url: "API/deleteVenue",
+            data: venue
+        });
+        return request;
+    };
+
+    this.addPrice = function (venue, price) {
+
+      //  console.log(price);
+
+        venue.prices = [];
+
+        if (price.id)
+            venue.prices.push(price);
+        else
+            venue.prices.push({ id: null, priceText: price });
+
+        var request = $http({
+            method: "put",
+            url: "API/addPrice",
+            data: venue
+        });
+        return request;
+    };
+
+    this.removePrice = function (venue, price) {
+
+      //  console.log(price);
+
+        venue.prices = [];
+
+       
+            venue.prices.push(price);
+       
+        var request = $http({
+            method: "put",
+            url: "API/removePrice",
+            data: venue
+        });
+        return request;
+    };
+
+
+    this.addType = function (venue, type) {
+
+        //  console.log(price);
+
+        venue.types = [];
+
+        if (type.id)
+            venue.types.push(type);
+        else
+            venue.types.push({ id: null, typeText: type });
+
+        var request = $http({
+            method: "put",
+            url: "API/addType",
+            data: venue
+        });
+        return request;
+    };
+
+    this.removeType = function (venue, type) {
+
+        //  console.log(price);
+
+        venue.types = [];
+
+
+        venue.types.push(type);
+
+        var request = $http({
+            method: "put",
+            url: "API/removeType",
+            data: venue
+        });
+        return request;
+    };
+
+
+    this.addTag = function (venue, tag) {
+
+        //  console.log(tag);
+
+        venue.tags = [];
+
+        if (tag.id)
+            venue.tags.push(tag);
+        else
+            venue.tags.push({ id: null, tagText: tag });
+
+        var request = $http({
+            method: "put",
+            url: "API/addTag",
+            data: venue
+        });
+        return request;
+    };
+
+    this.removeTag = function (venue, tag) {
+
+        //  console.log(tag);
+
+        venue.tags = [];
+
+
+        venue.tags.push(tag);
+
+        var request = $http({
+            method: "put",
+            url: "API/removeTag",
+            data: venue
+        });
+        return request;
+    };
+
+    this.addTime = function (venue, time) {
+
+        //  console.log(time);
+
+        venue.times = [];
+
+        if (time.id)
+            venue.times.push(time);
+        else
+            venue.times.push({ id: null, timeText: time });
+
+        var request = $http({
+            method: "put",
+            url: "API/addTime",
+            data: venue
+        });
+        return request;
+    };
+
+    this.removeTime = function (venue, time) {
+
+        //  console.log(time);
+
+        venue.times = [];
+
+
+        venue.times.push(time);
+
+        var request = $http({
+            method: "put",
+            url: "API/removeTime",
+            data: venue
+        });
+        return request;
+    };
     //this.removeUser = function (user) {
     //    var request = $http({
     //        method: "put",

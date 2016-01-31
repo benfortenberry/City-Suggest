@@ -2,23 +2,28 @@
 
 <form id="addVenue">
 
-    <div class="row">
+    <!--<button class="btn btn-default " ng-click="toast()">
+        toast
+    </button>-->
+    <div class="row" style="background-color:#333; color:white" >
 
 
-        <div class="col-sm-9">
+        <div class="col-sm-9" >
+
+            <h3>VENUES</h3>
             <!--<h4>Add New Venue</h4>-->
         </div>
-        <div class="col-sm-3 text-right">
-            <button class="btn btn-default btn-sm" ng-show="!addVenue.add" ng-click="addVenue.add=true">
+        <div class="col-sm-3 text-right" >
+            <button class="btn btn-primary btn-sm" style="margin:5px; margin-top:15px" ng-show="!addVenue.add" ng-click="addVenue.add=true">
                 <span class="glyphicon glyphicon-plus">
 
                 </span>  &nbsp; Add
             </button>
 
-            <button class="btn btn-default btn-sm" ng-show="addVenue.add" ng-click="addVenue.add=false">
-                <span class="glyphicon glyphicon-remove-circle">
+            <button class="btn btn-primary btn-sm" style="margin:5px; margin-top:15px" ng-show="addVenue.add" ng-click="addVenue.add=false">
+                <span class="glyphicon glyphicon-remove">
 
-                </span>    &nbsp; Cancel
+                </span>    &nbsp; Close
             </button>
         </div>
     </div>
@@ -79,7 +84,7 @@
 
         </div>
 
-      
+
 
 
     </div>
@@ -89,7 +94,7 @@
 
 </form>
 
-<form ng-repeat="venue in venues">
+<form ng-repeat="venue in venues"  style=" padding:20px" ng-class="{'black-back' : venue.edit}">
 
     <div class="row">
 
@@ -98,21 +103,32 @@
             <h4>{{venue.name}}</h4>
         </div>
         <div class="col-sm-3 text-right">
-            <button class="btn btn-default btn-sm" ng-show="!venue.edit" ng-click="venue.edit=true">
+            <button class="btn btn-primary btn-sm" ng-show="!venue.edit" ng-click="venue.edit=true">
                 <span class="glyphicon glyphicon-pencil">
 
                 </span>  &nbsp; Edit
             </button>
 
-            <button class="btn btn-default btn-sm" ng-show="venue.edit" ng-click="venue.edit=false">
-                <span class="glyphicon glyphicon-remove-circle">
+            <div class="btn-group">
 
-                </span>    &nbsp; Cancel
-            </button>
+
+
+                <button class="btn btn-danger btn-sm" ng-show="venue.edit" style="margin-top:1px" ng-click="deleteVenue(venue)">
+                    <span class="glyphicon glyphicon-exclamation-sign">
+
+                    </span>  &nbsp; Delete
+                </button>
+
+                <button class="btn btn-primary btn-sm" ng-show="venue.edit" ng-click="venue.edit=false">
+                    <span class="glyphicon glyphicon-remove">
+
+                    </span>    &nbsp; Close
+                </button>
+            </div>
         </div>
     </div>
 
-    <div ng-show="venue.edit" style="background-color:#222; padding:20px">
+    <div ng-show="venue.edit" >
 
         <div class="row">
 
@@ -185,7 +201,7 @@
 
                         <p>
                             {{price.priceText}}
-                            <button class="btn btn-danger btn-sm" style="margin-top:5px">
+                            <button class="btn btn-danger btn-xs" ng-click="removePrice(venue,price)"  style="margin:5px">
                                 <span class="glyphicon glyphicon-minus"></span>
 
                             </button>
@@ -203,10 +219,11 @@
                 </div>
                 <div class="row">
 
+
                     <div class="col-sm-8">
 
 
-                        <input type="text" ng-model="selectedPrice"
+                        <input type="text" ng-model="venue.selectedPrice" 
                                uib-typeahead="e as e.priceText for e in  prices | filter:{priceText:$viewValue}" class="form-control">
 
 
@@ -214,7 +231,7 @@
 
                     <div class="col-sm-2">
 
-                        <button class="btn btn-success btn-sm" style="margin-top:5px">
+                        <button class="btn btn-primary btn-sm" ng-click="addPrice(venue, venue.selectedPrice)" style="margin-top:5px">
                             <span class="glyphicon glyphicon-plus"></span> Add
 
                         </button>
@@ -236,7 +253,7 @@
 
                         <p>
                             {{type.typeText}}
-                            <button class="btn btn-danger btn-sm" style="margin-top:5px">
+                            <button class="btn btn-danger btn-xs" ng-click="removeType(venue,type)" style="margin:5px">
                                 <span class="glyphicon glyphicon-minus"></span>
 
                             </button>
@@ -257,7 +274,7 @@
                     <div class="col-sm-8">
 
 
-                        <input type="text" ng-model="selectedType"
+                        <input type="text" ng-model="venue.selectedType"
                                uib-typeahead="e as e.typeText for e in  types | filter:{typeText:$viewValue}" class="form-control">
 
 
@@ -265,7 +282,7 @@
 
                     <div class="col-sm-2">
 
-                        <button class="btn btn-success btn-sm" style="margin-top:5px">
+                        <button class="btn btn-primary btn-sm" ng-click="addType(venue, venue.selectedType)" style="margin-top:5px">
                             <span class="glyphicon glyphicon-plus"></span> Add
 
                         </button>
@@ -295,7 +312,7 @@
                     <div class="col-sm-8">
 
                         <p>
-                            {{time.timeText}}<button class="btn btn-danger btn-sm" style="margin-top:5px">
+                            {{time.timeText}}<button ng-click="removeTime(venue,time)" class="btn btn-danger btn-xs" style="margin:5px">
                                 <span class="glyphicon glyphicon-minus"></span>
 
                             </button>
@@ -316,7 +333,7 @@
                     <div class="col-sm-8">
 
 
-                        <input type="text" ng-model="selectedTime"
+                        <input type="text" ng-model="venue.selectedTime"
                                uib-typeahead="e as e.timeText for e in  times | filter:{timeText:$viewValue}" class="form-control">
 
 
@@ -324,7 +341,7 @@
 
                     <div class="col-sm-2">
 
-                        <button class="btn btn-success btn-sm" style="margin-top:5px">
+                        <button class="btn btn-primary btn-sm" ng-click="addTime(venue, venue.selectedTime)" style="margin-top:5px">
                             <span class="glyphicon glyphicon-plus"></span> Add
 
                         </button>
@@ -349,10 +366,10 @@
                     <div class="col-sm-8">
 
                         <p>
-                            {{tag.tagText}}<button class="btn btn-danger btn-sm" style="margin-top:5px">
-    <span class="glyphicon glyphicon-minus"></span> 
+                            {{tag.tagText}}<button class="btn btn-danger btn-xs" ng-click="removeTag(venue, tag)" style="margin:5px">
+                                <span class="glyphicon glyphicon-minus"></span>
 
-</button>
+                            </button>
                         </p>
 
 
@@ -370,7 +387,7 @@
                     <div class="col-sm-8">
 
 
-                        <input type="text" ng-model="selectedTag"
+                        <input type="text" ng-model="venue.selectedTag"
                                uib-typeahead="e as e.tagText for e in  tags | filter:{tagText:$viewValue}" class="form-control">
 
 
@@ -378,7 +395,7 @@
 
                     <div class="col-sm-2">
 
-                        <button class="btn btn-success btn-sm" style="margin-top:5px">
+                        <button class="btn btn-primary btn-sm" ng-click="addTag(venue, venue.selectedTag)" style="margin-top:5px">
                             <span class="glyphicon glyphicon-plus"></span> Add
 
                         </button>

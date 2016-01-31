@@ -1,6 +1,6 @@
 ﻿var ggModule = angular.module('ggModule');
 
-ggModule.directive('ggAdmin', ['ggService', '$window', '$http', function (ggService, $window, $http) {
+ggModule.directive('ggAdmin', ['ggService', '$window', '$http', 'ngToast', function (ggService, $window, $http, ngToast) {
     // Link Function - DOM Manipulation
     link = function ($scope, $element, $attrs) {
 
@@ -18,7 +18,7 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', function (ggServ
             
         });
 
-        ggService.getAllPrices().then(function (result) {
+        ggService.getAllPrices(false).then(function (result) {
             //  alert(result.data);
             //  alert(JSON.stringify(result.data));
             $scope.prices = result.data;
@@ -26,7 +26,7 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', function (ggServ
 
         });
 
-        ggService.getAllTypes().then(function (result) {
+        ggService.getAllTypes(false).then(function (result) {
             //  alert(result.data);
             //  alert(JSON.stringify(result.data));
             $scope.types = result.data;
@@ -57,10 +57,7 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', function (ggServ
 
 
 
-
-
-                alert('venue added!');
-
+            
                 //  console.log($scope.prices);
 
             });
@@ -70,9 +67,188 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', function (ggServ
 
            
         }
+
+
+        $scope.toast = function () {
+            ngToast.create({
+                className: 'success',
+                content: 'Venue Saved!',
+                horizontalPosition: 'left'
+            });
+
+        }
+
+        $scope.addPrice = function (venue, price) {
+
+            if (price) {
+
+
+                ggService.addPrice(venue, price).then(function (result) {
+
+                    venue.selectedPrice = null;
+                    venue.prices = result.data;
+
+                });
+
+            }
+
+
+        };
+
+        $scope.removePrice = function (venue, price) {
+
+            if (price) {
+
+
+                ggService.removePrice(venue, price).then(function (result) {
+
+                 
+                    venue.prices = result.data;
+
+                });
+
+            }
+
+
+        };
+
+        $scope.deleteVenue = function (venue) {
+
+         
+
+
+                ggService.deleteVenue(venue).then(function (result) {
+
+
+                    if (result.data)
+                    {
+
+                        ngToast.create({
+                            className: 'danger',
+                            content: 'Venue Deleted!',
+                            horizontalPosition: 'left'
+                        });
+
+                        ggService.getAllVenues().then(function (result) {
+                            //  alert(result.data);
+                            //  alert(JSON.stringify(result.data));
+                            $scope.venues = result.data;
+
+                        });
+
+                    }
+                      
+
+                });
+
+
+        };
+
+
+        $scope.addType = function (venue, type) {
+
+            if (type) {
+
+
+                ggService.addType(venue, type).then(function (result) {
+
+                    venue.selectedType = null;
+                    venue.types = result.data;
+
+                });
+
+            }
+
+
+        };
+
+        $scope.removeType = function (venue, type) {
+
+            if (type) {
+
+
+                ggService.removeType(venue, type).then(function (result) {
+
+
+                    venue.types = result.data;
+
+                });
+
+            }
+
+
+        };
+
+        $scope.addTag = function (venue, tag) {
+
+            if (tag) {
+
+
+                ggService.addTag(venue, tag).then(function (result) {
+
+                    venue.selectedTag = null;
+                    venue.tags = result.data;
+
+                });
+
+            }
+
+
+        };
+
+        $scope.removeTag = function (venue, tag) {
+
+            if (tag) {
+
+
+                ggService.removeTag(venue, tag).then(function (result) {
+
+
+                    venue.tags = result.data;
+
+                });
+
+            }
+
+
+        };
+
+        $scope.addTime = function (venue, time) {
+
+            if (time) {
+
+
+                ggService.addTime(venue, time).then(function (result) {
+
+                    venue.selectedTime = null;
+                    venue.times = result.data;
+
+                });
+
+            }
+
+
+        };
+
+        $scope.removeTime = function (venue, time) {
+
+            if (time) {
+
+
+                ggService.removeTime(venue, time).then(function (result) {
+
+
+                    venue.times = result.data;
+
+                });
+
+            }
+
+
+        };
        
 
-        ggService.getAllTags().then(function (result) {
+        ggService.getAllTags(false).then(function (result) {
             //  alert(result.data);
             //  alert(JSON.stringify(result.data));
             $scope.tags = result.data;
@@ -80,7 +256,7 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', function (ggServ
 
         });
 
-        ggService.getAllTimes().then(function (result) {
+        ggService.getAllTimes(false).then(function (result) {
             //  alert(result.data);
             //  alert(JSON.stringify(result.data));
             $scope.times = result.data;

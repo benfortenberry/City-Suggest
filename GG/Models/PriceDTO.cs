@@ -7,7 +7,7 @@ namespace GG.Models
 {
     public class PriceDTO
     {
-        public int id { get; set; }
+        public int? id { get; set; }
         public string priceText { get; set; }
       
     }
