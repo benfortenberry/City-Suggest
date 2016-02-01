@@ -38,7 +38,7 @@ app.service('ggService', function ($http) {
         if(mixer)
             return $http.get("api/allTimes_Mixer");
         else
-            return $http.get("api/allTimes_Mixer");
+            return $http.get("api/allTimes");
     }
 
     // Get All bidders
@@ -50,21 +50,21 @@ app.service('ggService', function ($http) {
         if (mixer)
             return $http.get("api/allTags_Mixer");
         else
-            return $http.get("api/allTags_Mixer");
+            return $http.get("api/allTags");
     }
 
     this.getAllPrices = function (mixer) {
         if (mixer)
             return $http.get("api/allPrices_Mixer");
         else
-            return $http.get("api/allPrices_Mixer");
+            return $http.get("api/allPrices");
     }
 
     this.getAllTypes = function (mixer) {
         if (mixer)
             return $http.get("api/allTypes_Mixer");
         else
-            return $http.get("api/allTypes_Mixer");
+            return $http.get("api/allTypes");
     }
 
     //Get All content

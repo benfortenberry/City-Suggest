@@ -72,7 +72,7 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
 
     });
 
-    $scope.getMoreType = function () {
+    $scope.getMoreTypes = function () {
 
         ggService.getAllTypes(true).then(function (result) {
             //  alert(result.data);
@@ -110,7 +110,7 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
 
     $scope.getMorePrices = function () {
 
-        ggService.getAllPrices().then(function (result) {
+        ggService.getAllPrices(true).then(function (result) {
             //  alert(result.data);
             //  alert(JSON.stringify(result.data));
             $scope.prices = result.data;

@@ -98,7 +98,7 @@ namespace GG.Controllers
 
             using (var db = new GG.Models.GGModelContainer())
             {
-
+             
 
                 var l = (from x in db.Prices1
                          .Select(b => new PriceDTO
@@ -134,18 +134,18 @@ namespace GG.Controllers
 
             using (var db = new GG.Models.GGModelContainer())
             {
-             
+
 
                 var l = (from x in db.Types
                          .Select(b => new TypeDTO
-{
+                         {
 
-    id = b.Id,
-    typeText = b.Text
+                             id = b.Id,
+                             typeText = b.Text
 
 
-})
-                        
+                         })
+
 
                          select x).OrderBy(x => x.typeText).ToList();
 
@@ -176,7 +176,13 @@ namespace GG.Controllers
             {
 
 
-                var l = (from x in db.Times
+
+                var l = (from time in db.Times
+
+                         where time.Venues.Any(z => z.Times.Contains(time))
+                         select time);
+
+                var t = (from x in l
                          .Select(b => new TimeDTO
                          {
 
@@ -189,7 +195,7 @@ namespace GG.Controllers
                          select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
 
 
-                response = l;
+                response = t;
 
 
             }
@@ -211,8 +217,12 @@ namespace GG.Controllers
             using (var db = new GG.Models.GGModelContainer())
             {
 
+                var l = (from tag in db.Tags
 
-                var l = (from x in db.Tags
+                         where tag.Venues.Any(z => z.Tags.Contains(tag))
+                         select tag);
+
+                var t = (from x in l
                          .Select(b => new TagDTO
                          {
 
@@ -225,7 +235,7 @@ namespace GG.Controllers
                          select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
 
 
-                response = l;
+                response = t;
 
 
             }
@@ -248,21 +258,26 @@ namespace GG.Controllers
             using (var db = new GG.Models.GGModelContainer())
             {
 
-
-                var l = (from x in db.Prices1
-                         .Select(b => new PriceDTO
-                         {
-
-                             id = b.Id,
-                             priceText = b.Text
+         
 
 
-                         })
+                var l = (from price in db.Prices1
 
-                         select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+                         where price.Venues.Any(z => z.Prices.Contains(price))
+                         select price);
+
+                var t = (from x in l
+                  .Select(b => new PriceDTO
+                  {
+
+                      id = b.Id,
+                      priceText = b.Text
 
 
-                response = l;
+                  })
+                         select x).ToList().OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+
+                response = t;
 
 
             }
@@ -285,7 +300,12 @@ namespace GG.Controllers
             {
 
 
-                var l = (from x in db.Types
+                var l = (from type in db.Types
+
+                         where type.Venues.Any(z => z.Types.Contains(type))
+                         select type);
+
+                var t = (from x in l
                          .Select(b => new TypeDTO
                          {
 
@@ -299,7 +319,7 @@ namespace GG.Controllers
                          select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
 
 
-                response = l;
+                response = t;
 
 
             }
@@ -328,13 +348,13 @@ namespace GG.Controllers
                          {
 
                              id = b.Id,
-                             address= b.Address,
-                              city = b.City,
-                               hours = b.Hours,
-                                name = b.Name,
+                             address = b.Address,
+                             city = b.City,
+                             hours = b.Hours,
+                             name = b.Name,
                              prices = b.Prices.Select(m => new PriceDTO
                              {
-                                id = m.Id,
+                                 id = m.Id,
                                  priceText = m.Text
 
 
@@ -421,7 +441,7 @@ namespace GG.Controllers
                 response = l;
 
 
-   
+
 
 
 
@@ -445,11 +465,11 @@ namespace GG.Controllers
 
             using (var db = new GG.Models.GGModelContainer())
             {
-                 
 
-               
 
-                if(v.id == null)
+
+
+                if (v.id == null)
                 {
 
                     Venue VenueTbl = new Venue();
@@ -457,14 +477,14 @@ namespace GG.Controllers
 
                     VenueTbl = new Venue
                     {
-                        
-                        Address =  v.address,
+
+                        Address = v.address,
                         City = v.city,
                         Hours = v.hours,
                         Name = v.name,
                         State = v.state,
                         Website = v.website
-                         
+
 
                     };
 
@@ -500,9 +520,9 @@ namespace GG.Controllers
                 }
 
 
-             
 
-                
+
+
 
 
 
@@ -512,7 +532,7 @@ namespace GG.Controllers
 
             }
 
-          
+
 
         }
 
@@ -527,12 +547,12 @@ namespace GG.Controllers
 
             p = v.prices.Last();
 
-            
+
 
             using (var db = new GG.Models.GGModelContainer())
             {
 
-                
+
                 if (p.id == null)
                 {
 
@@ -543,12 +563,12 @@ namespace GG.Controllers
                     PriceTbl = new Price
                     {
 
-                      Text = p.priceText
-                      
+                        Text = p.priceText
+
                     };
 
                     db.Prices1.Add(PriceTbl);
-                    
+
                     db.SaveChanges();
 
                     newPrice = p;
@@ -618,7 +638,7 @@ namespace GG.Controllers
 
             }
 
-         
+
         }
 
 
@@ -637,37 +657,37 @@ namespace GG.Controllers
 
             using (var db = new GG.Models.GGModelContainer())
             {
-                
-                    Venue VenueTbl = new Venue();
 
-                    var existingPrice = (from x in db.Prices1 where x.Id == p.id select x).FirstOrDefault();
+                Venue VenueTbl = new Venue();
 
-
-                    var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+                var existingPrice = (from x in db.Prices1 where x.Id == p.id select x).FirstOrDefault();
 
 
+                var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
 
 
-                    existingVenue.Prices.Remove(existingPrice);
 
 
-                    db.SaveChanges();
-
-                    var l = (from x in existingVenue.Prices
-                                         .Select(b => new PriceDTO
-                                         {
-
-                                             id = b.Id,
-                                             priceText = b.Text
+                existingVenue.Prices.Remove(existingPrice);
 
 
-                                         })
+                db.SaveChanges();
 
-                             select x).ToList();
+                var l = (from x in existingVenue.Prices
+                                     .Select(b => new PriceDTO
+                                     {
+
+                                         id = b.Id,
+                                         priceText = b.Text
 
 
-                    return l;
-                
+                                     })
+
+                         select x).ToList();
+
+
+                return l;
+
 
             }
 
@@ -681,14 +701,14 @@ namespace GG.Controllers
         public Boolean deleteVenue(VenueDTO v)
         {
 
-           
+
 
             using (var db = new GG.Models.GGModelContainer())
             {
 
                 Venue VenueTbl = new Venue();
 
-             
+
                 var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
 
 
