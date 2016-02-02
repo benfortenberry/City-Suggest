@@ -37,31 +37,32 @@
                 <input class="form-control" ng-model="addVenue.name" />
             </div>
 
+            <div class="col-sm-4">
+                <label>Address</label>
+                <input class="form-control" ng-model="addVenue.address" />
+            </div>
+
 
             <div class="col-sm-3">
                 <label>City</label>
                 <input class="form-control" ng-model="addVenue.city" />
             </div>
 
-            <div class="col-sm-2">
+            <div class="col-sm-1">
                 <label>State</label>
                 <input class="form-control" ng-model="addVenue.state" />
             </div>
 
-            <div class="col-sm-3">
-                <label>Address</label>
-                <input class="form-control" ng-model="addVenue.address" />
-            </div>
+           
 
 
         </div>
 
-
         <div class="row">
 
-            <div class="col-sm-6">
-                <label>Website</label>
-                <input class="form-control" ng-model="addVenue.website" />
+            <div class="col-sm-2">
+                <label>Zip</label>
+                <input class="form-control" ng-model="addVenue.zip" />
             </div>
 
 
@@ -70,9 +71,72 @@
                 <input class="form-control" ng-model="addVenue.hours" />
             </div>
 
-            <div class="col-sm-2">
+            <div class="col-sm-6">
+                <label>Website</label>
+                <input class="form-control" ng-model="addVenue.website" />
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <label>Twitter</label>
+                <input class="form-control" ng-model="addVenue.twitter" />
+            </div>
+
+
+            <div class="col-sm-4">
+                <label>Instagram</label>
+                <input class="form-control" ng-model="addVenue.instagram" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Facebook</label>
+                <input class="form-control" ng-model="addVenue.facebook" />
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <label>Email</label>
+                <input class="form-control" ng-model="addVenue.email" />
+            </div>
+
+
+            <div class="col-sm-4">
+                <label>Contact</label>
+                <input class="form-control" ng-model="addVenue.contact" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Parking</label>
+                <input class="form-control" ng-model="addVenue.parking" />
+            </div>
+
+
+
+
+        </div>
+
+
+        <div class="row">
+
+          
+
+
+
+            <div class="col-sm-12">
                 <br />
-                <button class="btn btn-success btn-sm" ng-click="updateVenue(addVenue)" style="margin-top:5px">
+                <button class="btn btn-success btn-block btn-sm" ng-click="updateVenue(addVenue)" style="margin-top:5px">
                     Save Venue
 
 
@@ -100,7 +164,16 @@
 
 
         <div class="col-sm-9">
-            <h4>{{venue.name}}</h4>
+            <h4>
+                {{venue.name}}
+                <button class="btn btn-danger btn-sm" ng-show="venue.edit" style="margin-top:1px; margin-left:5px" ng-click="deleteVenue(venue)">
+                    <span class="glyphicon glyphicon-exclamation-sign">
+
+                    </span>  &nbsp; Delete
+                </button>
+            </h4>
+
+           
         </div>
         <div class="col-sm-3 text-right">
             <button class="btn btn-primary btn-sm" ng-show="!venue.edit" ng-click="venue.edit=true">
@@ -113,11 +186,6 @@
 
 
 
-                <button class="btn btn-danger btn-sm" ng-show="venue.edit" style="margin-top:1px" ng-click="deleteVenue(venue)">
-                    <span class="glyphicon glyphicon-exclamation-sign">
-
-                    </span>  &nbsp; Delete
-                </button>
 
                 <button class="btn btn-primary btn-sm" ng-show="venue.edit" ng-click="venue.edit=false">
                     <span class="glyphicon glyphicon-remove">
@@ -130,11 +198,17 @@
 
     <div ng-show="venue.edit" >
 
+
         <div class="row">
 
             <div class="col-sm-4">
                 <label>Name</label>
                 <input class="form-control" ng-model="venue.name" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Address</label>
+                <input class="form-control" ng-model="venue.address" />
             </div>
 
 
@@ -143,25 +217,21 @@
                 <input class="form-control" ng-model="venue.city" />
             </div>
 
-            <div class="col-sm-2">
+            <div class="col-sm-1">
                 <label>State</label>
                 <input class="form-control" ng-model="venue.state" />
             </div>
 
-            <div class="col-sm-3">
-                <label>Address</label>
-                <input class="form-control" ng-model="venue.address" />
-            </div>
+
 
 
         </div>
 
-
         <div class="row">
 
-            <div class="col-sm-6">
-                <label>Website</label>
-                <input class="form-control" ng-model="venue.website" />
+            <div class="col-sm-2">
+                <label>Zip</label>
+                <input class="form-control" ng-model="venue.zip" />
             </div>
 
 
@@ -170,9 +240,73 @@
                 <input class="form-control" ng-model="venue.hours" />
             </div>
 
-            <div class="col-sm-2">
+            <div class="col-sm-6">
+                <label>Website</label>
+                <input class="form-control" ng-model="venue.website" />
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <label>Twitter</label>
+                <input class="form-control" ng-model="venue.twitter" />
+            </div>
+
+
+            <div class="col-sm-4">
+                <label>Instagram</label>
+                <input class="form-control" ng-model="venue.instagram" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Facebook</label>
+                <input class="form-control" ng-model="venue.facebook" />
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <label>Email</label>
+                <input class="form-control" ng-model="venue.email" />
+            </div>
+
+
+            <div class="col-sm-4">
+                <label>Contact</label>
+                <input class="form-control" ng-model="venue.contact" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Parking</label>
+                <input class="form-control" ng-model="venue.parking" />
+            </div>
+
+
+
+
+        </div>
+
+
+        <div class="row">
+
+
+
+
+        
+
+            <div class="col-sm-12">
                 <br />
-                <button class="btn btn-success btn-sm" ng-click="updateVenue(venue)" style="margin-top:5px">
+                <button class="btn btn-success btn-block btn-sm" ng-click="updateVenue(venue)" style="margin-top:5px">
                     Save Venue
 
 

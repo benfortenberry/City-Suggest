@@ -98,7 +98,7 @@ namespace GG.Controllers
 
             using (var db = new GG.Models.GGModelContainer())
             {
-             
+
 
                 var l = (from x in db.Prices1
                          .Select(b => new PriceDTO
@@ -134,18 +134,18 @@ namespace GG.Controllers
 
             using (var db = new GG.Models.GGModelContainer())
             {
-
+             
 
                 var l = (from x in db.Types
                          .Select(b => new TypeDTO
-                         {
+{
 
-                             id = b.Id,
-                             typeText = b.Text
+    id = b.Id,
+    typeText = b.Text
 
 
-                         })
-
+})
+                        
 
                          select x).OrderBy(x => x.typeText).ToList();
 
@@ -258,7 +258,7 @@ namespace GG.Controllers
             using (var db = new GG.Models.GGModelContainer())
             {
 
-         
+
 
 
                 var l = (from price in db.Prices1
@@ -267,14 +267,14 @@ namespace GG.Controllers
                          select price);
 
                 var t = (from x in l
-                  .Select(b => new PriceDTO
-                  {
+                         .Select(b => new PriceDTO
+                         {
 
-                      id = b.Id,
-                      priceText = b.Text
+                             id = b.Id,
+                             priceText = b.Text
 
 
-                  })
+                         })
                          select x).ToList().OrderBy(x => Guid.NewGuid()).Take(4).ToList();
 
                 response = t;
@@ -349,12 +349,22 @@ namespace GG.Controllers
 
                              id = b.Id,
                              address = b.Address,
-                             city = b.City,
-                             hours = b.Hours,
-                             name = b.Name,
+                              city = b.City,
+
+                               hours = b.Hours,
+                                name = b.Name,
+                                 contact = b.Contact,
+                                  email = b.Email,
+                                   facebook = b.Facebook,
+                                    instagram = b.Instagram,
+                                     neighborhood = b.Neighborhood,
+                                      parking = b.Parking,
+                                       twitter = b.Twitter,
+                                        zip = b.Zip,
+
                              prices = b.Prices.Select(m => new PriceDTO
                              {
-                                 id = m.Id,
+                                id = m.Id,
                                  priceText = m.Text
 
 
@@ -434,14 +444,22 @@ namespace GG.Controllers
                                         hours = b.Hours,
                                         name = b.Name,
                                         state = b.State,
-                                        website = b.Website
+                                        website = b.Website,
+                                         zip = b.Zip,
+                                          twitter = b.Twitter,
+                                           parking = b.Parking,
+                                            neighborhood = b.Neighborhood,
+                                             instagram = b.Instagram,
+                                              contact = b.Contact,
+                                               email = b.Email,
+                                                facebook = b.Facebook
                                     }).OrderBy(x => Guid.NewGuid())
                                     .Take(10).ToList();
 
                 response = l;
 
 
-
+   
 
 
 
@@ -454,7 +472,7 @@ namespace GG.Controllers
         }
 
 
-        [HttpPut]
+        [HttpPost]
         [Route("API/updateVenue")]
         [System.Web.Http.ActionName("searchVenue")]
 
@@ -465,9 +483,9 @@ namespace GG.Controllers
 
             using (var db = new GG.Models.GGModelContainer())
             {
+                 
 
-
-
+               
 
                 if (v.id == null)
                 {
@@ -477,14 +495,23 @@ namespace GG.Controllers
 
                     VenueTbl = new Venue
                     {
-
+                        
                         Address = v.address,
                         City = v.city,
                         Hours = v.hours,
                         Name = v.name,
                         State = v.state,
-                        Website = v.website
-
+                        Website = v.website,
+                         Contact = v.contact,
+                          Email = v.email,
+                           Facebook= v.facebook,
+                            Instagram = v.instagram,
+                             Neighborhood = v.neighborhood,
+                              Twitter = v.twitter,
+                               Zip = v.zip,
+                                Parking = v.parking
+                                
+                         
 
                     };
 
@@ -510,6 +537,15 @@ namespace GG.Controllers
                     existingVenue.Name = v.name;
                     existingVenue.State = v.state;
                     existingVenue.Website = v.website;
+                    existingVenue.Email = v.email;
+                    existingVenue.Zip = v.zip;
+                    existingVenue.Twitter = v.twitter;
+                    existingVenue.Parking = v.parking;
+                    existingVenue.Facebook = v.facebook;
+                    existingVenue.Instagram = v.instagram;
+                    existingVenue.Neighborhood = v.neighborhood;
+                    existingVenue.Contact = v.contact;
+                   
 
 
 
@@ -520,9 +556,9 @@ namespace GG.Controllers
                 }
 
 
+             
 
-
-
+                
 
 
 
@@ -532,11 +568,11 @@ namespace GG.Controllers
 
             }
 
-
+          
 
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("API/addPrice")]
         [System.Web.Http.ActionName("addPrice")]
 
@@ -547,12 +583,12 @@ namespace GG.Controllers
 
             p = v.prices.Last();
 
-
+            
 
             using (var db = new GG.Models.GGModelContainer())
             {
 
-
+                
                 if (p.id == null)
                 {
 
@@ -563,12 +599,12 @@ namespace GG.Controllers
                     PriceTbl = new Price
                     {
 
-                        Text = p.priceText
-
+                      Text = p.priceText
+                      
                     };
 
                     db.Prices1.Add(PriceTbl);
-
+                    
                     db.SaveChanges();
 
                     newPrice = p;
@@ -638,11 +674,11 @@ namespace GG.Controllers
 
             }
 
-
+         
         }
 
 
-        [HttpPut]
+        [HttpPost]
         [Route("API/removePrice")]
         [System.Web.Http.ActionName("removePrice")]
 
@@ -657,58 +693,58 @@ namespace GG.Controllers
 
             using (var db = new GG.Models.GGModelContainer())
             {
+                
+                    Venue VenueTbl = new Venue();
 
-                Venue VenueTbl = new Venue();
-
-                var existingPrice = (from x in db.Prices1 where x.Id == p.id select x).FirstOrDefault();
-
-
-                var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+                    var existingPrice = (from x in db.Prices1 where x.Id == p.id select x).FirstOrDefault();
 
 
+                    var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
 
 
-                existingVenue.Prices.Remove(existingPrice);
 
 
-                db.SaveChanges();
-
-                var l = (from x in existingVenue.Prices
-                                     .Select(b => new PriceDTO
-                                     {
-
-                                         id = b.Id,
-                                         priceText = b.Text
+                    existingVenue.Prices.Remove(existingPrice);
 
 
-                                     })
+                    db.SaveChanges();
 
-                         select x).ToList();
+                    var l = (from x in existingVenue.Prices
+                                         .Select(b => new PriceDTO
+                                         {
+
+                                             id = b.Id,
+                                             priceText = b.Text
 
 
-                return l;
+                                         })
 
+                             select x).ToList();
+
+
+                    return l;
+                
 
             }
 
 
         }
 
-        [HttpPut]
+        [HttpPost]
         [Route("API/deleteVenue")]
         [System.Web.Http.ActionName("deleteVenue")]
 
         public Boolean deleteVenue(VenueDTO v)
         {
 
-
+           
 
             using (var db = new GG.Models.GGModelContainer())
             {
 
                 Venue VenueTbl = new Venue();
 
-
+             
                 var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
 
 
@@ -752,7 +788,7 @@ namespace GG.Controllers
 
         //type
 
-        [HttpPut]
+        [HttpPost]
         [Route("API/addType")]
         [System.Web.Http.ActionName("addType")]
 
@@ -858,7 +894,7 @@ namespace GG.Controllers
         }
 
 
-        [HttpPut]
+        [HttpPost]
         [Route("API/removeType")]
         [System.Web.Http.ActionName("removeType")]
 
@@ -912,7 +948,7 @@ namespace GG.Controllers
 
         //tag
 
-        [HttpPut]
+        [HttpPost]
         [Route("API/addTag")]
         [System.Web.Http.ActionName("addTag")]
 
@@ -1018,7 +1054,7 @@ namespace GG.Controllers
         }
 
 
-        [HttpPut]
+        [HttpPost]
         [Route("API/removeTag")]
         [System.Web.Http.ActionName("removeTag")]
 
@@ -1072,7 +1108,7 @@ namespace GG.Controllers
 
         //time
 
-        [HttpPut]
+        [HttpPost]
         [Route("API/addTime")]
         [System.Web.Http.ActionName("addTime")]
 
@@ -1178,7 +1214,7 @@ namespace GG.Controllers
         }
 
 
-        [HttpPut]
+        [HttpPost]
         [Route("API/removeTime")]
         [System.Web.Http.ActionName("removeTime")]
 

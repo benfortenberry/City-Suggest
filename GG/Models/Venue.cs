@@ -31,6 +31,14 @@ namespace GG.Models
         public string Website { get; set; }
         public string Address { get; set; }
         public string Hours { get; set; }
+        public string Zip { get; set; }
+        public string Instagram { get; set; }
+        public string Facebook { get; set; }
+        public string Twitter { get; set; }
+        public string Contact { get; set; }
+        public string Email { get; set; }
+        public string Neighborhood { get; set; }
+        public string Parking { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tag> Tags { get; set; }

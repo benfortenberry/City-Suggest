@@ -124,8 +124,8 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', 'ngToast', funct
                     {
 
                         ngToast.create({
-                            className: 'danger',
-                            content: 'Venue Deleted!',
+                            className: 'success',
+                            content: 'Venue Deleted',
                             horizontalPosition: 'left'
                         });
 

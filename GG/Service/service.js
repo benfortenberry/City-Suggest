@@ -122,7 +122,7 @@ app.service('ggService', function ($http) {
 
     this.updateVenue = function (venue) {
         var request = $http({
-            method: "put",
+            method: "post",
             url: "API/updateVenue",
             data: venue
         });
@@ -135,7 +135,7 @@ app.service('ggService', function ($http) {
 
 
         var request = $http({
-            method: "put",
+            method: "post",
             url: "API/deleteVenue",
             data: venue
         });
@@ -154,7 +154,7 @@ app.service('ggService', function ($http) {
             venue.prices.push({ id: null, priceText: price });
 
         var request = $http({
-            method: "put",
+            method: "post",
             url: "API/addPrice",
             data: venue
         });
@@ -171,7 +171,7 @@ app.service('ggService', function ($http) {
             venue.prices.push(price);
        
         var request = $http({
-            method: "put",
+            method: "post",
             url: "API/removePrice",
             data: venue
         });
@@ -191,7 +191,7 @@ app.service('ggService', function ($http) {
             venue.types.push({ id: null, typeText: type });
 
         var request = $http({
-            method: "put",
+            method: "post",
             url: "API/addType",
             data: venue
         });
@@ -208,7 +208,7 @@ app.service('ggService', function ($http) {
         venue.types.push(type);
 
         var request = $http({
-            method: "put",
+            method: "post",
             url: "API/removeType",
             data: venue
         });
@@ -228,7 +228,7 @@ app.service('ggService', function ($http) {
             venue.tags.push({ id: null, tagText: tag });
 
         var request = $http({
-            method: "put",
+            method: "post",
             url: "API/addTag",
             data: venue
         });
@@ -245,7 +245,7 @@ app.service('ggService', function ($http) {
         venue.tags.push(tag);
 
         var request = $http({
-            method: "put",
+            method: "post",
             url: "API/removeTag",
             data: venue
         });
@@ -264,7 +264,7 @@ app.service('ggService', function ($http) {
             venue.times.push({ id: null, timeText: time });
 
         var request = $http({
-            method: "put",
+            method: "post",
             url: "API/addTime",
             data: venue
         });
@@ -281,7 +281,7 @@ app.service('ggService', function ($http) {
         venue.times.push(time);
 
         var request = $http({
-            method: "put",
+            method: "post",
             url: "API/removeTime",
             data: venue
         });
@@ -289,7 +289,7 @@ app.service('ggService', function ($http) {
     };
     //this.removeUser = function (user) {
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/removeUser",
     //        data: user
     //    });
@@ -298,7 +298,7 @@ app.service('ggService', function ($http) {
 
     //this.updateContent = function (content) {
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/updateContent",
     //        data: content
     //    });
@@ -307,7 +307,7 @@ app.service('ggService', function ($http) {
 
     //this.updateOrg = function (org) {
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/updateOrg",
     //        data: org
     //    });
@@ -316,7 +316,7 @@ app.service('ggService', function ($http) {
 
     //this.removeOrg = function (org) {
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/removeOrg",
     //        data: org
     //    });
@@ -325,7 +325,7 @@ app.service('ggService', function ($http) {
 
     //this.updateSor = function (sor) {
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/updateSorority",
     //        data: sor
     //    });
@@ -334,7 +334,7 @@ app.service('ggService', function ($http) {
 
     //this.removeSorority = function (sor) {
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/removeSorority",
     //        data: sor
     //    });
@@ -343,7 +343,7 @@ app.service('ggService', function ($http) {
 
     //this.updateSch = function (sch) {
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/updateSchool",
     //        data: sch
     //    });
@@ -352,7 +352,7 @@ app.service('ggService', function ($http) {
 
     //this.removeSchool = function (sch) {
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/removeSchool",
     //        data: sch
     //    });
@@ -500,7 +500,7 @@ app.service('ggService', function ($http) {
     //    // alert(email);
     //    // alert(JSON.stringify(email));
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/emailRecRequest",
     //        data: email
     //    });
@@ -516,7 +516,7 @@ app.service('ggService', function ($http) {
     //create new user
     //this.postUser = function (user) {
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/postUser",
     //        data: user
     //    });
@@ -535,7 +535,7 @@ app.service('ggService', function ($http) {
     //create new affiliate
     //this.postAffiliate = function (affiliate) {
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/postAffiliate",
     //        data: affiliate
     //    });
@@ -545,7 +545,7 @@ app.service('ggService', function ($http) {
     //create new school
     //this.postSchool = function (school) {
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/postSchool",
     //        data: affiliate
     //    });
@@ -555,7 +555,7 @@ app.service('ggService', function ($http) {
     //create new sorority
     //this.postSchool = function (sorority) {
     //    var request = $http({
-    //        method: "put",
+    //        method: "post",
     //        url: "API/postSorority",
     //        data: sorority
     //    });

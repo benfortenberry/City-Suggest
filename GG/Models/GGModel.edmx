@@ -60,6 +60,14 @@
           <Property Name="Website" Type="nvarchar(max)" />
           <Property Name="Address" Type="nvarchar(max)" />
           <Property Name="Hours" Type="nvarchar(max)" />
+          <Property Name="Zip" Type="varchar" MaxLength="50" />
+          <Property Name="Instagram" Type="varchar" MaxLength="250" />
+          <Property Name="Facebook" Type="varchar" MaxLength="250" />
+          <Property Name="Twitter" Type="varchar" MaxLength="250" />
+          <Property Name="Contact" Type="varchar" MaxLength="250" />
+          <Property Name="Email" Type="varchar" MaxLength="250" />
+          <Property Name="Neighborhood" Type="varchar" MaxLength="250" />
+          <Property Name="Parking" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="VenueTag">
           <Key>
@@ -289,6 +297,14 @@
           <NavigationProperty Name="Types" Relationship="GGModel.VenueType" FromRole="Venue" ToRole="Type" />
           <NavigationProperty Name="Prices" Relationship="GGModel.VenuePrice" FromRole="Venue" ToRole="Price" />
           <NavigationProperty Name="Images" Relationship="GGModel.VenueImage" FromRole="Venue" ToRole="Image" />
+          <Property Name="Zip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Instagram" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Facebook" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Twitter" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Contact" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Neighborhood" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Parking" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -368,7 +384,15 @@
     <EntitySetMapping Name="Venues">
       <EntityTypeMapping TypeName="IsTypeOf(GGModel.Venue)">
         <MappingFragment StoreEntitySet="Venues">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Parking" ColumnName="Parking" />
+                <ScalarProperty Name="Neighborhood" ColumnName="Neighborhood" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Contact" ColumnName="Contact" />
+                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="State" ColumnName="State" />

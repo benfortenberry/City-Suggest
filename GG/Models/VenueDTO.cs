@@ -19,6 +19,22 @@ namespace GG.Models
 
         public string hours { get; set; }
 
+        public string zip { get; set; }
+
+        public string instagram { get; set; }
+
+        public string twitter { get; set; }
+
+        public string facebook { get; set; }
+
+        public string parking { get; set; }
+
+        public string email { get; set; }
+
+        public string contact { get; set; }
+
+        public string neighborhood { get; set; }
+
         public List<TypeDTO> types {get; set;}
 
         public List<TimeDTO> times { get; set; }
