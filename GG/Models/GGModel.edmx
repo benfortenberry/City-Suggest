@@ -10,8 +10,9 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="ImageData" Type="varbinary(max)" Nullable="false" />
+          <Property Name="ImageData" Type="varbinary(max)" />
           <Property Name="VenueId" Type="int" Nullable="false" />
+          <Property Name="url" Type="varchar(max)" />
         </EntityType>
         <EntityType Name="Prices1">
           <Key>
@@ -92,6 +93,14 @@
           </Key>
           <Property Name="Venues_Id" Type="int" Nullable="false" />
           <Property Name="Types_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="VenueId" Type="int" Nullable="false" />
+          <Property Name="url" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK_VenueImage">
           <End Role="Venues" Type="Self.Venues" Multiplicity="1" />
@@ -201,6 +210,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_VenueVideo">
+          <End Role="Venues" Type="Self.Venues" Multiplicity="1" />
+          <End Role="Videos" Type="Self.Videos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venues">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Videos">
+              <PropertyRef Name="VenueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="GGModelStoreContainer">
           <EntitySet Name="Images" EntityType="Self.Images" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Prices1" EntityType="Self.Prices1" Schema="dbo" store:Type="Tables" />
@@ -212,6 +233,7 @@
           <EntitySet Name="VenueTag" EntityType="Self.VenueTag" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VenueTime" EntityType="Self.VenueTime" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VenueType" EntityType="Self.VenueType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Videos" EntityType="Self.Videos" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_VenueImage" Association="Self.FK_VenueImage">
             <End Role="Venues" EntitySet="Venues" />
             <End Role="Images" EntitySet="Images" />
@@ -248,6 +270,10 @@
             <End Role="Venues" EntitySet="Venues" />
             <End Role="VenueType" EntitySet="VenueType" />
           </AssociationSet>
+          <AssociationSet Name="FK_VenueVideo" Association="Self.FK_VenueVideo">
+            <End Role="Venues" EntitySet="Venues" />
+            <End Role="Videos" EntitySet="Videos" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -280,6 +306,11 @@
             <End Role="Venue" EntitySet="Venues" />
             <End Role="Image" EntitySet="Images" />
           </AssociationSet>
+          <EntitySet Name="Videos" EntityType="GGModel.Video" />
+          <AssociationSet Name="VenueVideo" Association="GGModel.VenueVideo">
+            <End Role="Venue" EntitySet="Venues" />
+            <End Role="Video" EntitySet="Videos" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Venue">
           <Key>
@@ -305,6 +336,7 @@
           <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Neighborhood" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Parking" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Videos" Relationship="GGModel.VenueVideo" FromRole="Venue" ToRole="Video" />
         </EntityType>
         <EntityType Name="Tag">
           <Key>
@@ -327,9 +359,10 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="ImageData" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="ImageData" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Venue" Relationship="GGModel.VenueImage" FromRole="Image" ToRole="Venue" />
           <Property Name="VenueId" Type="Int32" Nullable="false" />
+          <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Time">
           <Key>
@@ -375,6 +408,27 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Venue" Relationship="GGModel.VenueVideo" FromRole="Video" ToRole="Venue" />
+          <Property Name="VenueId" Type="Int32" Nullable="false" />
+          <Property Name="url" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="VenueVideo">
+          <End Type="GGModel.Venue" Role="Venue" Multiplicity="1" />
+          <End Type="GGModel.Video" Role="Video" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Venue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Video">
+              <PropertyRef Name="VenueId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -384,21 +438,21 @@
     <EntitySetMapping Name="Venues">
       <EntityTypeMapping TypeName="IsTypeOf(GGModel.Venue)">
         <MappingFragment StoreEntitySet="Venues">
-          <ScalarProperty Name="Parking" ColumnName="Parking" />
-                <ScalarProperty Name="Neighborhood" ColumnName="Neighborhood" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="Contact" ColumnName="Contact" />
-                <ScalarProperty Name="Twitter" ColumnName="Twitter" />
-                <ScalarProperty Name="Facebook" ColumnName="Facebook" />
-                <ScalarProperty Name="Instagram" ColumnName="Instagram" />
-                <ScalarProperty Name="Zip" ColumnName="Zip" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="City" ColumnName="City" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="State" ColumnName="State" />
           <ScalarProperty Name="Website" ColumnName="Website" />
           <ScalarProperty Name="Address" ColumnName="Address" />
           <ScalarProperty Name="Hours" ColumnName="Hours" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+          <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+          <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Neighborhood" ColumnName="Neighborhood" />
+          <ScalarProperty Name="Parking" ColumnName="Parking" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -421,7 +475,8 @@
     <EntitySetMapping Name="Images">
       <EntityTypeMapping TypeName="IsTypeOf(GGModel.Image)">
         <MappingFragment StoreEntitySet="Images">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="ImageData" ColumnName="ImageData" />
           <ScalarProperty Name="VenueId" ColumnName="VenueId" />
         </MappingFragment>
@@ -440,6 +495,15 @@
         <MappingFragment StoreEntitySet="Types">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Videos">
+      <EntityTypeMapping TypeName="IsTypeOf(GGModel.Video)">
+        <MappingFragment StoreEntitySet="Videos">
+          <ScalarProperty Name="url" ColumnName="url" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VenueId" ColumnName="VenueId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

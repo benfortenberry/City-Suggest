@@ -20,7 +20,7 @@ app.run(function ($rootScope, $location, ggService) {
 });
 
 
-app.controller('ggController', function ($scope, $location, ggService, $filter) {
+app.controller('ggController', function ($scope, $location, ggService, $filter, $uibModal, $log) {
 
 
     $scope.appMode = 'mixer';
@@ -41,8 +41,20 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
         }
     });
 
-    console.log(adminValue);
+   // console.log(adminValue);
 
+    $scope.myInterval = 5000;
+    $scope.noWrapSlides = false;
+    var slides = $scope.slides = [];
+    var currIndex = 0;
+
+
+    ggService.getCarouselImages().then(function (result) {
+        //  alert(result.data);
+        //  alert(JSON.stringify(result.data));
+        $scope.carouselImages = result.data;
+
+    });
 
     ggService.getAllTimes(true).then(function (result) {
         //  alert(result.data);
@@ -225,6 +237,29 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
          }
      );
 
+    $scope.animationsEnabled = true;
+
+    $scope.open = function (venue) {
+
+        var modalInstance = $uibModal.open({
+            animation: $scope.animationsEnabled,
+            templateUrl: 'directives/venueModal.html',
+            controller: 'ModalInstanceCtrl',
+            size: 'lg',
+            resolve: {
+                venue: function () {
+                   return venue;
+                }
+            }
+        });
+
+        modalInstance.result.then(function (selectedItem) {
+            $scope.selected = selectedItem;
+        }, function () {
+            $log.info('Modal dismissed at: ' + new Date());
+        });
+    };
+
     $scope.nlTagOpen = false;
     $scope.nlTagOpenToggle = function (index) {
 
@@ -243,3 +278,20 @@ app.controller('ggController', function ($scope, $location, ggService, $filter) 
 }
 
   );
+
+app.controller('ModalInstanceCtrl', function ($scope, $uibModalInstance, venue) {
+
+    //$scope.items = items;
+    //$scope.selected = {
+    //    item: $scope.items[0]
+    //};
+    $scope.venue = venue;
+
+    $scope.ok = function () {
+        $uibModalInstance.close();
+    };
+
+    $scope.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+});

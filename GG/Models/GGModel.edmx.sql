@@ -2,13 +2,13 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 11/07/2015 17:24:32
+-- Date Created: 02/09/2016 15:54:46
 -- Generated from EDMX file: C:\Users\Ben\Documents\Visual Studio 2015\Projects\GG\GG\Models\GGModel.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
 GO
-USE [GG];
+USE [DB_66141_finalwishes];
 GO
 IF SCHEMA_ID(N'dbo') IS NULL EXECUTE(N'CREATE SCHEMA [dbo]');
 GO
@@ -17,55 +17,58 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_VenueTag_Venue]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VenueTag] DROP CONSTRAINT [FK_VenueTag_Venue];
-GO
-IF OBJECT_ID(N'[dbo].[FK_VenueTag_Tag]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VenueTag] DROP CONSTRAINT [FK_VenueTag_Tag];
-GO
-IF OBJECT_ID(N'[dbo].[FK_VenueTime_Venue]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VenueTime] DROP CONSTRAINT [FK_VenueTime_Venue];
-GO
-IF OBJECT_ID(N'[dbo].[FK_VenueTime_Time]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VenueTime] DROP CONSTRAINT [FK_VenueTime_Time];
-GO
-IF OBJECT_ID(N'[dbo].[FK_VenueType_Venue]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VenueType] DROP CONSTRAINT [FK_VenueType_Venue];
-GO
-IF OBJECT_ID(N'[dbo].[FK_VenueType_Type]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VenueType] DROP CONSTRAINT [FK_VenueType_Type];
-GO
-IF OBJECT_ID(N'[dbo].[FK_VenuePrice_Venue]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VenuePrice] DROP CONSTRAINT [FK_VenuePrice_Venue];
+IF OBJECT_ID(N'[dbo].[FK_VenueImage]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Images] DROP CONSTRAINT [FK_VenueImage];
 GO
 IF OBJECT_ID(N'[dbo].[FK_VenuePrice_Price]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[VenuePrice] DROP CONSTRAINT [FK_VenuePrice_Price];
 GO
-IF OBJECT_ID(N'[dbo].[FK_VenueImage]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Images] DROP CONSTRAINT [FK_VenueImage];
+IF OBJECT_ID(N'[dbo].[FK_VenuePrice_Venue]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VenuePrice] DROP CONSTRAINT [FK_VenuePrice_Venue];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VenueTag_Tag]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VenueTag] DROP CONSTRAINT [FK_VenueTag_Tag];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VenueTag_Venue]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VenueTag] DROP CONSTRAINT [FK_VenueTag_Venue];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VenueTime_Time]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VenueTime] DROP CONSTRAINT [FK_VenueTime_Time];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VenueTime_Venue]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VenueTime] DROP CONSTRAINT [FK_VenueTime_Venue];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VenueType_Type]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VenueType] DROP CONSTRAINT [FK_VenueType_Type];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VenueType_Venue]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VenueType] DROP CONSTRAINT [FK_VenueType_Venue];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Venues]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Venues];
-GO
-IF OBJECT_ID(N'[dbo].[Tags]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Tags];
+IF OBJECT_ID(N'[dbo].[Images]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Images];
 GO
 IF OBJECT_ID(N'[dbo].[Prices1]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Prices1];
 GO
-IF OBJECT_ID(N'[dbo].[Images]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Images];
+IF OBJECT_ID(N'[dbo].[Tags]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tags];
 GO
 IF OBJECT_ID(N'[dbo].[Times]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Times];
 GO
 IF OBJECT_ID(N'[dbo].[Types]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Types];
+GO
+IF OBJECT_ID(N'[dbo].[VenuePrice]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[VenuePrice];
+GO
+IF OBJECT_ID(N'[dbo].[Venues]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Venues];
 GO
 IF OBJECT_ID(N'[dbo].[VenueTag]', 'U') IS NOT NULL
     DROP TABLE [dbo].[VenueTag];
@@ -76,9 +79,6 @@ GO
 IF OBJECT_ID(N'[dbo].[VenueType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[VenueType];
 GO
-IF OBJECT_ID(N'[dbo].[VenuePrice]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[VenuePrice];
-GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -87,12 +87,20 @@ GO
 -- Creating table 'Venues'
 CREATE TABLE [dbo].[Venues] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [City] nvarchar(max)  NOT NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [State] nvarchar(max)  NOT NULL,
-    [Website] nvarchar(max)  NOT NULL,
-    [Address] nvarchar(max)  NOT NULL,
-    [Hours] nvarchar(max)  NOT NULL
+    [City] nvarchar(max)  NULL,
+    [Name] nvarchar(max)  NULL,
+    [State] nvarchar(max)  NULL,
+    [Website] nvarchar(max)  NULL,
+    [Address] nvarchar(max)  NULL,
+    [Hours] nvarchar(max)  NULL,
+    [Zip] varchar(50)  NULL,
+    [Instagram] varchar(250)  NULL,
+    [Facebook] varchar(250)  NULL,
+    [Twitter] varchar(250)  NULL,
+    [Contact] varchar(250)  NULL,
+    [Email] varchar(250)  NULL,
+    [Neighborhood] varchar(250)  NULL,
+    [Parking] varchar(50)  NULL
 );
 GO
 
@@ -129,6 +137,13 @@ GO
 CREATE TABLE [dbo].[Types] (
     [Id] int IDENTITY(1,1) NOT NULL,
     [Text] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'Videos'
+CREATE TABLE [dbo].[Videos] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [VenueId] int  NOT NULL
 );
 GO
 
@@ -197,6 +212,12 @@ GO
 -- Creating primary key on [Id] in table 'Types'
 ALTER TABLE [dbo].[Types]
 ADD CONSTRAINT [PK_Types]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Videos'
+ALTER TABLE [dbo].[Videos]
+ADD CONSTRAINT [PK_Videos]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -336,6 +357,21 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_VenueImage'
 CREATE INDEX [IX_FK_VenueImage]
 ON [dbo].[Images]
+    ([VenueId]);
+GO
+
+-- Creating foreign key on [VenueId] in table 'Videos'
+ALTER TABLE [dbo].[Videos]
+ADD CONSTRAINT [FK_VenueVideo]
+    FOREIGN KEY ([VenueId])
+    REFERENCES [dbo].[Venues]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_VenueVideo'
+CREATE INDEX [IX_FK_VenueVideo]
+ON [dbo].[Videos]
     ([VenueId]);
 GO
 

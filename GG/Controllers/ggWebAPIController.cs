@@ -15,6 +15,41 @@ namespace GG.Controllers
     {
 
         [HttpGet]
+        [Route("API/carouselImages")]
+        [System.Web.Http.ActionName("carouselImages")]
+
+        public List<ImageDTO> carouselImages()
+        {
+
+            List<ImageDTO> response = new List<ImageDTO>();
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                var l = (from x in db.Images
+                         .Select(b => new ImageDTO
+                         {
+
+                             id = b.Id, url = b.url
+
+
+                         })
+
+                         select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+
+
+                response = l;
+
+
+            }
+
+            return response;
+
+
+        }
+
+        [HttpGet]
         [Route("API/allTimes")]
         [System.Web.Http.ActionName("allTimes")]
 
@@ -391,7 +426,17 @@ namespace GG.Controllers
 
 
                              }).ToList(),
-                             website = b.Website
+                             website = b.Website,
+                             images = b.Images.Select(m => new ImageDTO
+                             {
+                                 id =m.Id,
+                                 url = m.url
+                             }).ToList(),
+                             videos= b.Videos.Select(m => new VideoDTO
+                             {
+                                 id = m.Id,
+                                 url = m.url
+                             }).ToList()
 
 
 
@@ -453,6 +498,18 @@ namespace GG.Controllers
                                               contact = b.Contact,
                                                email = b.Email,
                                                 facebook = b.Facebook
+                                                ,
+                                        images = b.Images.Select(m => new ImageDTO
+                                        {
+                                            id = m.Id,
+                                            url = m.url
+                                        }).ToList(),
+                                        videos = b.Videos.Select(m => new VideoDTO
+                                        {
+                                            id = m.Id,
+                                            url = m.url
+                                        }).ToList()
+
                                     }).OrderBy(x => Guid.NewGuid())
                                     .Take(10).ToList();
 
@@ -569,6 +626,245 @@ namespace GG.Controllers
             }
 
           
+
+        }
+
+        [HttpPost]
+        [Route("API/addImage")]
+        [System.Web.Http.ActionName("addImage")]
+
+        public List<ImageDTO> addImage(VenueDTO v)
+        {
+
+            ImageDTO i = new ImageDTO();
+
+            i = v.images.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                Image ImageTbl = new Image();
+
+                ImageDTO newImage = new ImageDTO();
+
+               ImageTbl = new Image
+                {
+
+                    url = i.url,
+                    VenueId = (int)v.id
+
+                };
+
+                db.Images.Add(ImageTbl);
+
+                db.SaveChanges();
+
+                newImage = i;
+                newImage.id = ImageTbl.Id;
+
+                var existingImage = (from x in db.Images where x.Id == newImage.id select x).FirstOrDefault();
+
+
+                var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+                existingVenue.Images.Add(existingImage);
+
+                db.SaveChanges();
+
+                var l = (from x in existingVenue.Images
+                                     .Select(b => new ImageDTO
+                                     {
+
+                                         id = b.Id,
+                                         url = b.url
+
+
+                                     })
+
+                         select x).ToList();
+
+
+                return l;
+
+            }
+
+
+        }
+
+
+        [HttpPost]
+        [Route("API/removeImage")]
+        [System.Web.Http.ActionName("removeImage")]
+
+        public List<ImageDTO> removeImage(VenueDTO v)
+        {
+
+            ImageDTO i = new ImageDTO();
+
+            i = v.images.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+                Venue VenueTbl = new Venue();
+
+                var existingImage = (from x in db.Images where x.Id == i.id select x).FirstOrDefault();
+
+
+                var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+
+                db.Images.Remove(existingImage);
+
+
+                existingVenue.Images.Remove(existingImage);
+
+
+                db.SaveChanges();
+
+                var l = (from x in existingVenue.Images
+                                     .Select(b => new ImageDTO
+                                     {
+
+                                         id = b.Id,
+                                         url = b.url
+
+
+                                     })
+
+                         select x).ToList();
+
+
+                return l;
+
+
+            }
+
+
+        }
+
+
+        [HttpPost]
+        [Route("API/addVideo")]
+        [System.Web.Http.ActionName("addVideo")]
+
+        public List<VideoDTO> addVideo(VenueDTO v)
+        {
+
+            VideoDTO i = new VideoDTO();
+
+            i = v.videos.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                Video VideoTbl = new Video();
+
+                VideoDTO newVideo = new VideoDTO();
+
+                VideoTbl = new Video
+                {
+                    
+                    url = i.url,
+                    VenueId = (int)v.id
+
+                };
+
+                db.Videos.Add(VideoTbl);
+
+                db.SaveChanges();
+
+                newVideo = i;
+                newVideo.id = VideoTbl.Id;
+
+                var existingVideo = (from x in db.Videos where x.Id == newVideo.id select x).FirstOrDefault();
+
+
+                var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+                existingVenue.Videos.Add(existingVideo);
+
+                db.SaveChanges();
+
+                var l = (from x in existingVenue.Videos
+                                     .Select(b => new VideoDTO
+                                     {
+
+                                         id = b.Id,
+                                         url = b.url
+
+
+                                     })
+
+                         select x).ToList();
+
+
+                return l;
+
+            }
+
+
+        }
+
+
+        [HttpPost]
+        [Route("API/removeVideo")]
+        [System.Web.Http.ActionName("removeVideo")]
+
+        public List<VideoDTO> removeVideo(VenueDTO v)
+        {
+
+            VideoDTO i = new VideoDTO();
+
+            i = v.videos.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+                Venue VenueTbl = new Venue();
+
+                var existingVideo = (from x in db.Videos where x.Id == i.id select x).FirstOrDefault();
+
+
+                var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+
+                db.Videos.Remove(existingVideo);
+
+
+                existingVenue.Videos.Remove(existingVideo);
+
+
+                db.SaveChanges();
+
+                var l = (from x in existingVenue.Videos
+                                     .Select(b => new VideoDTO
+                                     {
+
+                                         id = b.Id,
+                                         url = b.url
+
+
+                                     })
+
+                         select x).ToList();
+
+
+                return l;
+
+
+            }
+
 
         }
 

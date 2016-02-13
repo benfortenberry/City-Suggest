@@ -16,6 +16,8 @@
         <AssociationConnector Association="GGModel.VenueType" />
         <AssociationConnector Association="GGModel.VenuePrice" />
         <AssociationConnector Association="GGModel.VenueImage" />
+        <EntityTypeShape EntityType="GGModel.Video" Width="1.5" PointX="8.875" PointY="0.5" FillColor="255, 128, 0" />
+        <AssociationConnector Association="GGModel.VenueVideo" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

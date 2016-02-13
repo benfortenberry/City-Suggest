@@ -127,6 +127,7 @@
     <Content Include="Directives\Menu\menu.js" />
     <Content Include="Directives\mixer\mixer.html" />
     <Content Include="Directives\mixer\mixer.js" />
+    <Content Include="Directives\venueModal.html" />
     <Content Include="fonts\codropsicons\codropsicons.svg" />
     <Content Include="fonts\codropsicons\license.txt" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -144,6 +145,39 @@
     <Content Include="img\placeholder.png" />
     <Content Include="img\values-bg.jpg" />
     <Content Include="hrgf.html" />
+    <Content Include="node_modules\angular-video\.idea\encodings.xml" />
+    <Content Include="node_modules\angular-video\.idea\inspectionProfiles\.xml" />
+    <Content Include="node_modules\angular-video\.idea\inspectionProfiles\profiles_settings.xml" />
+    <Content Include="node_modules\angular-video\.idea\inspectionProfiles\Project_Default.xml" />
+    <Content Include="node_modules\angular-video\.idea\jsLinters\jshint.xml" />
+    <Content Include="node_modules\angular-video\.idea\jsLinters\jslint.xml" />
+    <Content Include="node_modules\angular-video\.idea\modules.xml" />
+    <Content Include="node_modules\angular-video\.idea\scopes\scope_settings.xml" />
+    <Content Include="node_modules\angular-video\index.html" />
+    <Content Include="node_modules\angular-video\js\anguvideo.js" />
+    <Content Include="node_modules\angular-video\js\controller.js" />
+    <Content Include="node_modules\ng-toast\dist\ngToast-animations.css" />
+    <Content Include="node_modules\ng-toast\dist\ngToast-animations.min.css" />
+    <Content Include="node_modules\ng-toast\dist\ngToast.css" />
+    <Content Include="node_modules\ng-toast\dist\ngToast.js" />
+    <Content Include="node_modules\ng-toast\dist\ngToast.min.css" />
+    <Content Include="node_modules\ng-toast\dist\ngToast.min.js" />
+    <Content Include="node_modules\ng-toast\Gruntfile.js" />
+    <Content Include="node_modules\ng-toast\index.html" />
+    <Content Include="node_modules\ng-toast\src\scripts\directives.js" />
+    <Content Include="node_modules\ng-toast\src\scripts\module.js" />
+    <Content Include="node_modules\ng-toast\src\scripts\provider.js" />
+    <Content Include="node_modules\ng-toast\test\karma.conf.js" />
+    <Content Include="node_modules\ng-toast\test\runner.html" />
+    <Content Include="node_modules\ng-toast\test\spec\directive.js" />
+    <Content Include="node_modules\ng-toast\test\spec\service.js" />
+    <Content Include="node_modules\ng-toast\test\vendor\angular-mocks.js" />
+    <Content Include="node_modules\ng-toast\test\vendor\angular-sanitize.js" />
+    <Content Include="node_modules\ng-toast\test\vendor\angular.js" />
+    <Content Include="node_modules\videogular\Gruntfile.js" />
+    <Content Include="node_modules\videogular\index.js" />
+    <Content Include="node_modules\videogular\videogular.js" />
+    <Content Include="node_modules\videogular\videogular.min.js" />
     <Content Include="Scripts\angular-masonry.min.js" />
     <Content Include="Scripts\masonry.pkgd.min.js" />
     <Content Include="Scripts\ngToast.min.js" />
@@ -164,10 +198,10 @@
     <Content Include="Scripts\angular-ui\ui-bootstrap-tpls.min.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.js" />
     <Content Include="Scripts\angular-ui\ui-bootstrap.min.js" />
-    <Content Include="Scripts\controller.js" />
+    <Content Include="Controllers\controller.js" />
     <Content Include="Scripts\loading-bar.js" />
     <Content Include="Scripts\loading-bar.min.js" />
-    <Content Include="Scripts\module.js" />
+    <Content Include="Module\module.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -219,6 +253,33 @@
     <Content Include="fonts\RobotoDraftMedium.woff2" />
     <Content Include="fonts\RobotoDraftRegular.woff" />
     <Content Include="fonts\RobotoDraftRegular.woff2" />
+    <Content Include="node_modules\ng-toast\.editorconfig" />
+    <Content Include="node_modules\ng-toast\.gitattributes" />
+    <Content Include="node_modules\ng-toast\.jshintrc" />
+    <Content Include="node_modules\ng-toast\.npmignore" />
+    <Content Include="node_modules\ng-toast\.travis.yml" />
+    <Content Include="node_modules\ng-toast\bower.json" />
+    <Content Include="node_modules\ng-toast\package.json" />
+    <Content Include="node_modules\ng-toast\README.md" />
+    <Content Include="node_modules\ng-toast\src\styles\less\ngToast-animations.less" />
+    <Content Include="node_modules\ng-toast\src\styles\less\ngToast.less" />
+    <Content Include="node_modules\ng-toast\src\styles\less\variables.less" />
+    <Content Include="node_modules\ng-toast\src\styles\sass\ngtoast-animations.scss" />
+    <Content Include="node_modules\ng-toast\src\styles\sass\ngToast.scss" />
+    <Content Include="node_modules\ng-toast\src\styles\sass\variables.scss" />
+    <Content Include="node_modules\ng-toast\test\.jshintrc" />
+    <Content Include="node_modules\videogular\.npmignore" />
+    <Content Include="node_modules\videogular\bower.json" />
+    <Content Include="node_modules\videogular\LICENSE" />
+    <Content Include="node_modules\videogular\package.json" />
+    <Content Include="node_modules\videogular\README.md" />
+    <Content Include="node_modules\angular-video\.idea\.name" />
+    <Content Include="node_modules\angular-video\.idea\anguvideo.iml" />
+    <Content Include="node_modules\angular-video\.npmignore" />
+    <Content Include="node_modules\angular-video\bower.json" />
+    <Content Include="node_modules\angular-video\LICENSE" />
+    <Content Include="node_modules\angular-video\package.json" />
+    <Content Include="node_modules\angular-video\README.md" />
     <None Include="Properties\PublishProfiles\GG.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
@@ -258,9 +319,11 @@
     <Compile Include="Models\Image.cs">
       <DependentUpon>GGModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VideoDTO.cs" />
     <Compile Include="Models\Price.cs">
       <DependentUpon>GGModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ImageDTO.cs" />
     <Compile Include="Models\Tag.cs">
       <DependentUpon>GGModel.tt</DependentUpon>
     </Compile>
@@ -277,6 +340,9 @@
       <DependentUpon>GGModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Venue.cs">
+      <DependentUpon>GGModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Video.cs">
       <DependentUpon>GGModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -314,7 +380,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="bin\" />
-    <Folder Include="Module\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

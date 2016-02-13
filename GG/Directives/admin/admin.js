@@ -95,6 +95,77 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', 'ngToast', funct
 
         };
 
+
+        $scope.addImage = function (venue, url) {
+
+            if (url) {
+
+
+                ggService.addImage(venue, url).then(function (result) {
+
+                    venue.selectedImage = null;
+                    venue.images = result.data;
+
+                });
+
+            }
+
+
+        };
+
+        $scope.removeImage = function (venue, image) {
+            console.log(image);
+
+            if (image) {
+
+
+                ggService.removeImage(venue, image).then(function (result) {
+
+
+                    venue.images = result.data;
+
+                });
+
+            }
+
+
+        };
+
+        $scope.addVideo = function (venue, url) {
+
+            if (url) {
+
+
+                ggService.addVideo(venue, url).then(function (result) {
+
+                    venue.selectedVideo = null;
+                    venue.videos = result.data;
+
+                });
+
+            }
+
+
+        };
+
+        $scope.removeVideo= function (venue, video) {
+           // console.log(image);
+
+            if (video) {
+
+
+                ggService.removeVideo(venue, video).then(function (result) {
+
+
+                    venue.videos = result.data;
+
+                });
+
+            }
+
+
+        };
+
         $scope.removePrice = function (venue, price) {
 
             if (price) {

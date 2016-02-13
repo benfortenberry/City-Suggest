@@ -41,6 +41,13 @@ app.service('ggService', function ($http) {
             return $http.get("api/allTimes");
     }
 
+    this.getCarouselImages = function () {
+
+      
+            return $http.get("api/carouselImages");
+       
+    }
+
     // Get All bidders
     this.getAllVenues = function () {
         return $http.get("api/allVenues");
@@ -137,6 +144,74 @@ app.service('ggService', function ($http) {
         var request = $http({
             method: "post",
             url: "API/deleteVenue",
+            data: venue
+        });
+        return request;
+    };
+
+    this.addVideo = function (venue, url) {
+
+        //  console.log(price);
+
+        venue.videos = [];
+
+
+        venue.videos.push({ id: null, url: url });
+
+        var request = $http({
+            method: "post",
+            url: "API/addVideo",
+            data: venue
+        });
+        return request;
+    };
+
+    this.removeVideo = function (venue, video) {
+      //  console.log('image');
+        //  console.log(price);
+
+        venue.videos = [];
+
+
+        venue.videos.push(video);
+
+        var request = $http({
+            method: "post",
+            url: "API/removeVideo",
+            data: venue
+        });
+        return request;
+    };
+
+    this.addImage = function (venue, url) {
+
+        //  console.log(price);
+
+        venue.images = [];
+
+    
+            venue.images.push({ id: null, url: url });
+
+        var request = $http({
+            method: "post",
+            url: "API/addImage",
+            data: venue
+        });
+        return request;
+    };
+
+    this.removeImage = function (venue, image) {
+        console.log('image');
+        //  console.log(price);
+
+        venue.images = [];
+
+
+        venue.images.push(image);
+
+        var request = $http({
+            method: "post",
+            url: "API/removeImage",
             data: venue
         });
         return request;

@@ -325,3 +325,15 @@ input:focus::-ms-input-placeholder {
 
 
 .black-back{ background-color:#222}
+
+.navbar-collapse.collapse.in { background-color:#222}
+
+.btn-link, .btn-link:hover, .btn-link:active, .btn-link:focus, .btn-link:visited{color:white}
+
+.venue:hover{background-color:#555}
+
+.venue{cursor:pointer}
+
+
+
+.modal-dialog, .modal-body, .modal-header, .modal-footer { background-color:#111!important; border:none}

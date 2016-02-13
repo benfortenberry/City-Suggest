@@ -43,5 +43,9 @@ namespace GG.Models
 
         public List<TagDTO> tags { get; set; }
 
+        public List<ImageDTO> images { get; set; }
+
+        public List<VideoDTO> videos { get; set; }
+
     }
 }

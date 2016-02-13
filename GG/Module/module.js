@@ -1,7 +1,7 @@
 ﻿/// <reference path="../angular.js" />
 var app;
 (function () {
-    app = angular.module("ggModule", [ 'angular-loading-bar', 'wu.masonry', 'ui.bootstrap','ngToast']);
+    app = angular.module("ggModule", [ 'angular-loading-bar', 'wu.masonry', 'ui.bootstrap','ngToast', 'anguvideo']);
 
     app.filter('getById', function() {
         return function(input, id) {
@@ -23,6 +23,16 @@ var app;
 
 })();
 
+app.directive('disableAnimation', function ($animate) {
+    return {
+        restrict: 'A',
+        link: function ($scope, $element, $attrs) {
+            $attrs.$observe('disableAnimation', function (value) {
+                $animate.enabled(!value, $element);
+            });
+        }
+    }
+});
 
 //app.run(function ($rootScope, $templateCache) {
 //    $rootScope.$on('$viewContentLoaded', function () {

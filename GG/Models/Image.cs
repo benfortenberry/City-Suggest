@@ -17,6 +17,7 @@ namespace GG.Models
         public int Id { get; set; }
         public byte[] ImageData { get; set; }
         public int VenueId { get; set; }
+        public string url { get; set; }
     
         public virtual Venue Venue { get; set; }
     }
