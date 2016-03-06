@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, 2012 and Azure
 -- --------------------------------------------------
--- Date Created: 02/09/2016 15:54:46
+-- Date Created: 03/05/2016 18:30:57
 -- Generated from EDMX file: C:\Users\Ben\Documents\Visual Studio 2015\Projects\GG\GG\Models\GGModel.edmx
 -- --------------------------------------------------
 
@@ -17,46 +17,55 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_VenueImage]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[Images] DROP CONSTRAINT [FK_VenueImage];
-GO
-IF OBJECT_ID(N'[dbo].[FK_VenuePrice_Price]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VenuePrice] DROP CONSTRAINT [FK_VenuePrice_Price];
-GO
-IF OBJECT_ID(N'[dbo].[FK_VenuePrice_Venue]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VenuePrice] DROP CONSTRAINT [FK_VenuePrice_Venue];
+IF OBJECT_ID(N'[dbo].[FK_VenueTag_Venue]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VenueTag] DROP CONSTRAINT [FK_VenueTag_Venue];
 GO
 IF OBJECT_ID(N'[dbo].[FK_VenueTag_Tag]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[VenueTag] DROP CONSTRAINT [FK_VenueTag_Tag];
 GO
-IF OBJECT_ID(N'[dbo].[FK_VenueTag_Venue]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VenueTag] DROP CONSTRAINT [FK_VenueTag_Venue];
+IF OBJECT_ID(N'[dbo].[FK_VenueTime_Venue]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VenueTime] DROP CONSTRAINT [FK_VenueTime_Venue];
 GO
 IF OBJECT_ID(N'[dbo].[FK_VenueTime_Time]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[VenueTime] DROP CONSTRAINT [FK_VenueTime_Time];
 GO
-IF OBJECT_ID(N'[dbo].[FK_VenueTime_Venue]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VenueTime] DROP CONSTRAINT [FK_VenueTime_Venue];
+IF OBJECT_ID(N'[dbo].[FK_VenueType_Venue]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VenueType] DROP CONSTRAINT [FK_VenueType_Venue];
 GO
 IF OBJECT_ID(N'[dbo].[FK_VenueType_Type]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[VenueType] DROP CONSTRAINT [FK_VenueType_Type];
 GO
-IF OBJECT_ID(N'[dbo].[FK_VenueType_Venue]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[VenueType] DROP CONSTRAINT [FK_VenueType_Venue];
+IF OBJECT_ID(N'[dbo].[FK_VenuePrice_Venue]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VenuePrice] DROP CONSTRAINT [FK_VenuePrice_Venue];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VenuePrice_Price]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[VenuePrice] DROP CONSTRAINT [FK_VenuePrice_Price];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VenueImage]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Images] DROP CONSTRAINT [FK_VenueImage];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VenueVideo]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Videos] DROP CONSTRAINT [FK_VenueVideo];
+GO
+IF OBJECT_ID(N'[dbo].[FK_VenueHours]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[Hours] DROP CONSTRAINT [FK_VenueHours];
 GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[Images]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Images];
+IF OBJECT_ID(N'[dbo].[Venues]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Venues];
+GO
+IF OBJECT_ID(N'[dbo].[Tags]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Tags];
 GO
 IF OBJECT_ID(N'[dbo].[Prices1]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Prices1];
 GO
-IF OBJECT_ID(N'[dbo].[Tags]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Tags];
+IF OBJECT_ID(N'[dbo].[Images]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Images];
 GO
 IF OBJECT_ID(N'[dbo].[Times]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Times];
@@ -64,11 +73,14 @@ GO
 IF OBJECT_ID(N'[dbo].[Types]', 'U') IS NOT NULL
     DROP TABLE [dbo].[Types];
 GO
-IF OBJECT_ID(N'[dbo].[VenuePrice]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[VenuePrice];
+IF OBJECT_ID(N'[dbo].[Videos]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Videos];
 GO
-IF OBJECT_ID(N'[dbo].[Venues]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[Venues];
+IF OBJECT_ID(N'[dbo].[Hours]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[Hours];
+GO
+IF OBJECT_ID(N'[dbo].[FeatureImages]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[FeatureImages];
 GO
 IF OBJECT_ID(N'[dbo].[VenueTag]', 'U') IS NOT NULL
     DROP TABLE [dbo].[VenueTag];
@@ -78,6 +90,9 @@ IF OBJECT_ID(N'[dbo].[VenueTime]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[dbo].[VenueType]', 'U') IS NOT NULL
     DROP TABLE [dbo].[VenueType];
+GO
+IF OBJECT_ID(N'[dbo].[VenuePrice]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[VenuePrice];
 GO
 
 -- --------------------------------------------------
@@ -92,7 +107,6 @@ CREATE TABLE [dbo].[Venues] (
     [State] nvarchar(max)  NULL,
     [Website] nvarchar(max)  NULL,
     [Address] nvarchar(max)  NULL,
-    [Hours] nvarchar(max)  NULL,
     [Zip] varchar(50)  NULL,
     [Instagram] varchar(250)  NULL,
     [Facebook] varchar(250)  NULL,
@@ -100,7 +114,9 @@ CREATE TABLE [dbo].[Venues] (
     [Contact] varchar(250)  NULL,
     [Email] varchar(250)  NULL,
     [Neighborhood] varchar(250)  NULL,
-    [Parking] varchar(50)  NULL
+    [Parking] varchar(50)  NULL,
+    [Phone] varchar(50)  NULL,
+    [Notes] varchar(max)  NULL
 );
 GO
 
@@ -121,8 +137,9 @@ GO
 -- Creating table 'Images'
 CREATE TABLE [dbo].[Images] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [ImageData] varbinary(max)  NOT NULL,
-    [VenueId] int  NOT NULL
+    [ImageData] varbinary(max)  NULL,
+    [VenueId] int  NOT NULL,
+    [url] varchar(max)  NULL
 );
 GO
 
@@ -143,7 +160,23 @@ GO
 -- Creating table 'Videos'
 CREATE TABLE [dbo].[Videos] (
     [Id] int IDENTITY(1,1) NOT NULL,
-    [VenueId] int  NOT NULL
+    [VenueId] int  NOT NULL,
+    [url] varchar(max)  NULL
+);
+GO
+
+-- Creating table 'Hours'
+CREATE TABLE [dbo].[Hours] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [VenueId] int  NOT NULL,
+    [Text] nvarchar(max)  NOT NULL
+);
+GO
+
+-- Creating table 'FeatureImages'
+CREATE TABLE [dbo].[FeatureImages] (
+    [Id] int IDENTITY(1,1) NOT NULL,
+    [Url] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -218,6 +251,18 @@ GO
 -- Creating primary key on [Id] in table 'Videos'
 ALTER TABLE [dbo].[Videos]
 ADD CONSTRAINT [PK_Videos]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'Hours'
+ALTER TABLE [dbo].[Hours]
+ADD CONSTRAINT [PK_Hours]
+    PRIMARY KEY CLUSTERED ([Id] ASC);
+GO
+
+-- Creating primary key on [Id] in table 'FeatureImages'
+ALTER TABLE [dbo].[FeatureImages]
+ADD CONSTRAINT [PK_FeatureImages]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
@@ -372,6 +417,21 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_VenueVideo'
 CREATE INDEX [IX_FK_VenueVideo]
 ON [dbo].[Videos]
+    ([VenueId]);
+GO
+
+-- Creating foreign key on [VenueId] in table 'Hours'
+ALTER TABLE [dbo].[Hours]
+ADD CONSTRAINT [FK_VenueHours]
+    FOREIGN KEY ([VenueId])
+    REFERENCES [dbo].[Venues]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_VenueHours'
+CREATE INDEX [IX_FK_VenueHours]
+ON [dbo].[Hours]
     ([VenueId]);
 GO
 

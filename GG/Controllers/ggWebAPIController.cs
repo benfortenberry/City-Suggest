@@ -18,25 +18,61 @@ namespace GG.Controllers
         [Route("API/carouselImages")]
         [System.Web.Http.ActionName("carouselImages")]
 
-        public List<ImageDTO> carouselImages()
+        public List<FeatureImageDTO> carouselImages()
         {
 
-            List<ImageDTO> response = new List<ImageDTO>();
+            List<FeatureImageDTO> response = new List<FeatureImageDTO>();
 
             using (var db = new GG.Models.GGModelContainer())
             {
 
 
-                var l = (from x in db.Images
-                         .Select(b => new ImageDTO
+                var l = (from x in db.FeatureImages
+                         .Select(b => new FeatureImageDTO
                          {
 
-                             id = b.Id, url = b.url
+                             id = b.Id, url = b.Url
 
 
                          })
 
                          select x).OrderBy(x => Guid.NewGuid()).Take(4).ToList();
+
+
+                response = l;
+
+
+            }
+
+            return response;
+
+
+        }
+
+        [HttpGet]
+        [Route("API/allFeaturedImages")]
+        [System.Web.Http.ActionName("allFeaturedImageImages")]
+
+        public List<FeatureImageDTO> allFeaturedImages()
+        {
+
+            List<FeatureImageDTO> response = new List<FeatureImageDTO>();
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                var l = (from x in db.FeatureImages
+                         .Select(b => new FeatureImageDTO
+                         {
+
+                             id = b.Id,
+                             url = b.Url
+
+
+                         })
+
+                         select x).OrderBy(x => x.id).ToList();
 
 
                 response = l;
@@ -386,7 +422,7 @@ namespace GG.Controllers
                              address = b.Address,
                               city = b.City,
 
-                               hours = b.Hours,
+                             //  hours = b.Hours,
                                 name = b.Name,
                                  contact = b.Contact,
                                   email = b.Email,
@@ -394,8 +430,12 @@ namespace GG.Controllers
                                     instagram = b.Instagram,
                                      neighborhood = b.Neighborhood,
                                       parking = b.Parking,
+                                       
                                        twitter = b.Twitter,
                                         zip = b.Zip,
+                                        phone = b.Phone,
+                                        notes = b.Notes,
+
 
                              prices = b.Prices.Select(m => new PriceDTO
                              {
@@ -404,6 +444,13 @@ namespace GG.Controllers
 
 
                              }).ToList(),
+                             hours = b.Hours.Select(m => new HourDTO
+                             {
+                                 id = m.Id,
+                                 hourText = m.Text
+
+
+                             }).OrderBy(g => g.id).ToList(),
                              state = b.State,
                              tags = b.Tags.Select(m => new TagDTO
                              {
@@ -429,10 +476,10 @@ namespace GG.Controllers
                              website = b.Website,
                              images = b.Images.Select(m => new ImageDTO
                              {
-                                 id =m.Id,
+                                 id = m.Id,
                                  url = m.url
                              }).ToList(),
-                             videos= b.Videos.Select(m => new VideoDTO
+                             videos = b.Videos.Select(m => new VideoDTO
                              {
                                  id = m.Id,
                                  url = m.url
@@ -486,13 +533,15 @@ namespace GG.Controllers
                                         id = b.Id,
                                         city = b.City,
                                         address = b.Address,
-                                        hours = b.Hours,
+                                      //  hours = b.Hours,
                                         name = b.Name,
                                         state = b.State,
                                         website = b.Website,
                                          zip = b.Zip,
                                           twitter = b.Twitter,
                                            parking = b.Parking,
+                                           phone = b.Phone,
+                                           notes = b.Notes,
                                             neighborhood = b.Neighborhood,
                                              instagram = b.Instagram,
                                               contact = b.Contact,
@@ -504,6 +553,11 @@ namespace GG.Controllers
                                             id = m.Id,
                                             url = m.url
                                         }).ToList(),
+                                        hours = b.Hours.Select(m => new HourDTO
+                                        {
+                                            id = m.Id, 
+                                            hourText = m.Text
+                                        }).ToList(),
                                         videos = b.Videos.Select(m => new VideoDTO
                                         {
                                             id = m.Id,
@@ -511,7 +565,7 @@ namespace GG.Controllers
                                         }).ToList()
 
                                     }).OrderBy(x => Guid.NewGuid())
-                                    .Take(10).ToList();
+                                    .Take(6).ToList();
 
                 response = l;
 
@@ -531,7 +585,7 @@ namespace GG.Controllers
 
         [HttpPost]
         [Route("API/updateVenue")]
-        [System.Web.Http.ActionName("searchVenue")]
+        [System.Web.Http.ActionName("updateVenue")]
 
         public Boolean updateVenue(VenueDTO v)
         {
@@ -555,7 +609,7 @@ namespace GG.Controllers
                         
                         Address = v.address,
                         City = v.city,
-                        Hours = v.hours,
+                      //  Hours = v.hours,
                         Name = v.name,
                         State = v.state,
                         Website = v.website,
@@ -566,7 +620,9 @@ namespace GG.Controllers
                              Neighborhood = v.neighborhood,
                               Twitter = v.twitter,
                                Zip = v.zip,
-                                Parking = v.parking
+                                Parking = v.parking,
+                                Phone = v.phone,
+                                Notes = v.notes
                                 
                          
 
@@ -590,7 +646,7 @@ namespace GG.Controllers
 
                     existingVenue.Address = v.address;
                     existingVenue.City = v.city;
-                    existingVenue.Hours = v.hours;
+                   // existingVenue.Hours = v.hours;
                     existingVenue.Name = v.name;
                     existingVenue.State = v.state;
                     existingVenue.Website = v.website;
@@ -598,6 +654,8 @@ namespace GG.Controllers
                     existingVenue.Zip = v.zip;
                     existingVenue.Twitter = v.twitter;
                     existingVenue.Parking = v.parking;
+                    existingVenue.Phone = v.phone;
+                    existingVenue.Notes = v.notes;
                     existingVenue.Facebook = v.facebook;
                     existingVenue.Instagram = v.instagram;
                     existingVenue.Neighborhood = v.neighborhood;
@@ -626,6 +684,103 @@ namespace GG.Controllers
             }
 
           
+
+        }
+
+
+        [HttpPost]
+        [Route("API/addFeaturedImage")]
+        [System.Web.Http.ActionName("addFeaturedImage")]
+
+        public List<FeatureImageDTO> addFeaturedImage(FeatureImageDTO f)
+        {
+
+           
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                FeatureImage FeatureImageTbl = new FeatureImage();
+
+                FeatureImageDTO newFeatureImage = new FeatureImageDTO();
+
+                FeatureImageTbl = new FeatureImage
+                {
+
+                   Url=f.url
+
+                };
+
+                db.FeatureImages.Add(FeatureImageTbl);
+
+                db.SaveChanges();
+
+               
+
+                var l = (from x in db.FeatureImages
+                                     .Select(b => new FeatureImageDTO
+                                     {
+
+                                         id = b.Id,
+                                         url = b.Url
+
+
+                                     })
+
+                         select x).ToList();
+
+
+                return l;
+
+            }
+
+
+        }
+
+
+        [HttpPost]
+        [Route("API/removeFeatureImage")]
+        [System.Web.Http.ActionName("removeFeatureImage")]
+
+        public List<FeatureImageDTO> removeFeatureImage(FeatureImageDTO f)
+        {
+
+          
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+              
+
+                var existingFeatureImage = (from x in db.FeatureImages where x.Id == f.id select x).FirstOrDefault();
+
+
+                db.FeatureImages.Remove(existingFeatureImage);
+
+                
+
+                db.SaveChanges();
+
+                var l = (from x in db.FeatureImages
+                                     .Select(b => new FeatureImageDTO
+                                     {
+
+                                         id = b.Id,
+                                         url = b.Url
+
+
+                                     })
+
+                         select x).ToList();
+
+
+                return l;
+
+
+            }
+
 
         }
 
@@ -748,6 +903,126 @@ namespace GG.Controllers
 
         }
 
+
+        [HttpPost]
+        [Route("API/addHour")]
+        [System.Web.Http.ActionName("addHour")]
+
+        public List<HourDTO> addHour(VenueDTO v)
+        {
+
+            HourDTO h = new HourDTO();
+
+            h = v.hours.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+
+                Hours HourTbl = new Hours();
+
+                HourDTO newHour = new HourDTO();
+
+                HourTbl = new Hours
+                {
+
+                 Text = h.hourText,
+                    VenueId = (int)v.id
+
+                };
+
+                db.Hours.Add(HourTbl);
+
+                db.SaveChanges();
+
+                newHour = h;
+                newHour.id = HourTbl.Id;
+
+                var existingHour = (from x in db.Hours where x.Id == newHour.id select x).FirstOrDefault();
+
+
+                var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+                existingVenue.Hours.Add(existingHour);
+
+                db.SaveChanges();
+
+                var l = (from x in existingVenue.Hours
+                                     .Select(b => new HourDTO
+                                     {
+
+                                         id = b.Id,
+                                          hourText = b.Text
+
+
+
+                                     })
+
+                         select x).ToList();
+
+
+                return l;
+
+            }
+
+
+        }
+
+
+        [HttpPost]
+        [Route("API/removeHour")]
+        [System.Web.Http.ActionName("removeHour")]
+
+        public List<HourDTO> removeHour(VenueDTO v)
+        {
+
+            HourDTO h = new HourDTO();
+
+            h = v.hours.Last();
+
+
+
+            using (var db = new GG.Models.GGModelContainer())
+            {
+
+                Venue VenueTbl = new Venue();
+
+                var existingHour = (from x in db.Hours where x.Id == h.id select x).FirstOrDefault();
+
+
+                var existingVenue = (from x in db.Venues where x.Id == v.id select x).FirstOrDefault();
+
+
+                db.Hours.Remove(existingHour);
+
+
+                existingVenue.Hours.Remove(existingHour);
+
+
+                db.SaveChanges();
+
+                var l = (from x in existingVenue.Hours
+                                     .Select(b => new HourDTO
+                                     {
+
+                                         id = b.Id, 
+                                          hourText = b.Text
+
+
+                                     })
+
+                         select x).ToList();
+
+
+                return l;
+
+
+            }
+
+
+        }
 
         [HttpPost]
         [Route("API/addVideo")]

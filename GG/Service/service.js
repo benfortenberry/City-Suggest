@@ -48,6 +48,13 @@ app.service('ggService', function ($http) {
        
     }
 
+    this.getAllFeaturedImages = function () {
+
+
+        return $http.get("api/allFeaturedImages");
+
+    }
+
     // Get All bidders
     this.getAllVenues = function () {
         return $http.get("api/allVenues");
@@ -149,6 +156,36 @@ app.service('ggService', function ($http) {
         return request;
     };
 
+
+    this.addFeaturedImage = function (url) {
+
+        //  console.log(price);
+        var featureImage = {};
+
+        featureImage.url = url;
+   
+        var request = $http({
+            method: "post",
+            url: "API/addFeaturedImage",
+            data: featureImage
+        });
+        return request;
+    };
+
+    this.removeFeaturedImage = function (featureImage) {
+
+      
+
+      
+
+        var request = $http({
+            method: "post",
+            url: "API/removeFeatureImage",
+            data: featureImage
+        });
+        return request;
+    };
+
     this.addVideo = function (venue, url) {
 
         //  console.log(price);
@@ -212,6 +249,39 @@ app.service('ggService', function ($http) {
         var request = $http({
             method: "post",
             url: "API/removeImage",
+            data: venue
+        });
+        return request;
+    };
+
+
+    this.addHour = function (venue, text) {
+
+        //  console.log(price);
+
+        venue.hours = [];
+
+
+        venue.hours.push({ id: null, hourText: text });
+
+        var request = $http({
+            method: "post",
+            url: "API/addHour",
+            data: venue
+        });
+        return request;
+    };
+
+    this.removeHour = function (venue, hour) {
+    
+        venue.hours = [];
+
+
+        venue.hours.push(hour);
+
+        var request = $http({
+            method: "post",
+            url: "API/removeHour",
             data: venue
         });
         return request;

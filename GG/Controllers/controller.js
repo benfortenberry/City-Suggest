@@ -241,23 +241,25 @@ app.controller('ggController', function ($scope, $location, ggService, $filter, 
 
     $scope.open = function (venue) {
 
-        var modalInstance = $uibModal.open({
-            animation: $scope.animationsEnabled,
-            templateUrl: 'directives/venueModal.html',
-            controller: 'ModalInstanceCtrl',
-            size: 'lg',
-            resolve: {
-                venue: function () {
-                   return venue;
-                }
-            }
-        });
+        $scope.venue = venue;
 
-        modalInstance.result.then(function (selectedItem) {
-            $scope.selected = selectedItem;
-        }, function () {
-            $log.info('Modal dismissed at: ' + new Date());
-        });
+        //var modalInstance = $uibModal.open({
+        //    animation: $scope.animationsEnabled,
+        //    templateUrl: 'directives/venueModal.html?v=1',
+        //    controller: 'ModalInstanceCtrl',
+        //    size: 'lg',
+        //    resolve: {
+        //        venue: function () {
+        //           return venue;
+        //        }
+        //    }
+        //});
+
+        //modalInstance.result.then(function (selectedItem) {
+        //    $scope.selected = selectedItem;
+        //}, function () {
+        //    $log.info('Modal dismissed at: ' + new Date());
+        //});
     };
 
     $scope.nlTagOpen = false;

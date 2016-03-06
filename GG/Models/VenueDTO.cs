@@ -17,7 +17,7 @@ namespace GG.Models
         public string website { get; set; }
         public string address { get; set; }
 
-        public string hours { get; set; }
+        public List<HourDTO> hours { get; set; }
 
         public string zip { get; set; }
 
@@ -46,6 +46,9 @@ namespace GG.Models
         public List<ImageDTO> images { get; set; }
 
         public List<VideoDTO> videos { get; set; }
+
+        public string phone { get; set; }
+        public string notes { get; set; }
 
     }
 }

@@ -23,6 +23,7 @@ namespace GG.Models
             this.Prices = new HashSet<Price>();
             this.Images = new HashSet<Image>();
             this.Videos = new HashSet<Video>();
+            this.Hours = new HashSet<Hours>();
         }
     
         public int Id { get; set; }
@@ -31,7 +32,6 @@ namespace GG.Models
         public string State { get; set; }
         public string Website { get; set; }
         public string Address { get; set; }
-        public string Hours { get; set; }
         public string Zip { get; set; }
         public string Instagram { get; set; }
         public string Facebook { get; set; }
@@ -40,6 +40,8 @@ namespace GG.Models
         public string Email { get; set; }
         public string Neighborhood { get; set; }
         public string Parking { get; set; }
+        public string Phone { get; set; }
+        public string Notes { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tag> Tags { get; set; }
@@ -53,5 +55,7 @@ namespace GG.Models
         public virtual ICollection<Image> Images { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Video> Videos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Hours> Hours { get; set; }
     }
 }

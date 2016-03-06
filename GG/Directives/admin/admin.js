@@ -18,11 +18,19 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', 'ngToast', funct
             
         });
 
+        ggService.getAllFeaturedImages(false).then(function (result) {
+            //  alert(result.data);
+            //  alert(JSON.stringify(result.data));
+            $scope.featuredImages = result.data;
+          //  console.log($scope.prices);
+
+        });
+
         ggService.getAllPrices(false).then(function (result) {
             //  alert(result.data);
             //  alert(JSON.stringify(result.data));
             $scope.prices = result.data;
-          //  console.log($scope.prices);
+            //  console.log($scope.prices);
 
         });
 
@@ -165,6 +173,79 @@ ggModule.directive('ggAdmin', ['ggService', '$window', '$http', 'ngToast', funct
 
 
         };
+
+
+        $scope.addHour = function (venue, text) {
+
+            if (text) {
+
+
+                ggService.addHour(venue, text).then(function (result) {
+
+                    venue.selectedHour = null;
+                    venue.hours = result.data;
+
+                });
+
+            }
+
+
+        };
+
+        $scope.removeHour = function (venue, hour) {
+            // console.log(image);
+
+            if (hour) {
+
+
+                ggService.removeHour(venue, hour).then(function (result) {
+
+
+                    venue.hours = result.data;
+
+                });
+
+            }
+
+
+        };
+
+
+        $scope.addFeaturedImage = function (featuredImageUrl) {
+
+            if (featuredImageUrl) {
+
+
+                ggService.addFeaturedImage(featuredImageUrl).then(function (result) {
+
+                    $scope.featuredImageAddUrl = null;
+                   $scope.featuredImages = result.data;
+
+                });
+
+            }
+
+
+        };
+
+        $scope.removeFeaturedImage = function (featuredImage) {
+            // console.log(image);
+
+            if (featuredImage) {
+
+
+                ggService.removeFeaturedImage(featuredImage).then(function (result) {
+
+
+                    $scope.featuredImages = result.data;
+
+                });
+
+            }
+
+
+        };
+
 
         $scope.removePrice = function (venue, price) {
 

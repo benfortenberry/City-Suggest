@@ -32,5 +32,7 @@ namespace GG.Models
         public virtual DbSet<Time> Times { get; set; }
         public virtual DbSet<Type> Types { get; set; }
         public virtual DbSet<Video> Videos { get; set; }
+        public virtual DbSet<Hours> Hours { get; set; }
+        public virtual DbSet<FeatureImage> FeatureImages { get; set; }
     }
 }
