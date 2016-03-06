@@ -73,6 +73,11 @@
 
                                 <p ng-if="venue.website"><strong>Website: </strong><a target="_blank" href="{{venue.website}}">{{venue.website}}</a></p>
 
+                                <p ng-if="venue.hours.length > 0"><strong>Hours</strong></p>
+                               
+                                    <p ng-repeat="hour in venue.hours">{{hour.hourText}}</p>
+
+
                                 <p>
                                     <a ng-if="venue.twitter" target="_blank" class="btn btn-link" href="{{venue.twitter}}">
 
