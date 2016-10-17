@@ -36,7 +36,7 @@
   -o-transition: width 350ms;
   transition: width 350ms;
 
-  background: #F75B68;
+  background: #B64926;
   position: fixed;
   z-index: 10002;
   top: 0;
@@ -55,10 +55,10 @@
   top: 0;
   height: 2px;
   opacity: .45;
-  -moz-box-shadow: #F75B68 1px 0 6px 1px;
-  -ms-box-shadow: #F75B68 1px 0 6px 1px;
-  -webkit-box-shadow: #F75B68 1px 0 6px 1px;
-  box-shadow: #F75B68 1px 0 6px 1px;
+  -moz-box-shadow: #B64926 1px 0 6px 1px;
+  -ms-box-shadow: #B64926 1px 0 6px 1px;
+  -webkit-box-shadow: #B64926 1px 0 6px 1px;
+  box-shadow: #B64926 1px 0 6px 1px;
   -moz-border-radius: 100%;
   -webkit-border-radius: 100%;
   border-radius: 100%;

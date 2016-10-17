@@ -1,7 +1,7 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <title>Girls' Guide New Orleans</title>
+    <title>City Suggest New Orleans</title>
     <meta charset="utf-8" />
     <link href="Content/bootstrap.css" rel="stylesheet" />
 
@@ -25,12 +25,14 @@
             <div ng-controller="ggController as gg" ng-cloak>
                 <toast></toast>
 
+                <br /><br /><br />
+              
                 <!--{{appMode}}-->
-                <gg-menu></gg-menu>
+                <!--<gg-menu></gg-menu>
 
                 <gg-about ng-if="appMode=='about'"></gg-about>
 
-                <gg-contact ng-if="appMode=='contact'"></gg-contact>
+                <gg-contact ng-if="appMode=='contact'"></gg-contact>-->
                 <!--admin-->
                 <gg-admin ng-if="appMode=='admin'"></gg-admin>
 
@@ -155,7 +157,7 @@
 
                         <div class="nl-submit-wra- text-center">
                             <button class=" btn  btn-default btn-lg" ng-click="tryAgain()"
-                                    style="border-radius:0; background-color:#F75B68; color:white; font-size:x-large; border:none" type="submit">
+                                    style="border-radius:0; background-color:#B64926; color:white; font-size:x-large; border:none" type="submit">
                                 <span class="glyphicon glyphicon-refresh"></span>
                                 &nbsp; Try Again
                             </button>
@@ -169,15 +171,15 @@
                 <!--mixer-->
                 <div class="row" ng-show="appMode=='mixer'">
 
-                    <div class=" col-sm-6 hidden-xs " style="padding:10px">
+                    <!--<div class=" col-sm-6 hidden-xs " style="padding:10px">
 
                         <div>
                             <uib-carousel interval="myInterval" disable-animation="true" no-wrap="noWrapSlides">
                                 <uib-slide ng-repeat="slide in carouselImages" active="slide.active" index="slide.$index">
                                     <img ng-src="{{slide.url}}" style="width:100%; max-height:350px; margin:0 auto;">
                                     <div class="carousel-caption">
-                                        <!--<h4>Slide {{slide.id}}</h4>
-                                        <p>{{slide.text}}</p>-->
+                                        <h4>Slide {{slide.id}}</h4>
+                                        <p>{{slide.text}}</p>
                                     </div>
 
 
@@ -187,15 +189,15 @@
                             </uib-carousel>
 
                         </div>
-                    </div>
+                    </div>-->
 
-                    <div class="col-sm-6">
-
+                    <div class="col-sm-12 text-center">
+                        <h1>City Suggest</h1>
                         <form ng-submit="findVenue()">
                             <br />
 
 
-                            <div class="presentation">
+                            <div class="presentation text-left">
 
 
                                 I'm looking for a
@@ -266,7 +268,7 @@
 
                                 <div class="nl-submit-wrap">
                                     <button class="nl-submit btn  btn-default btn-lg"
-                                             style="border-radius:0; background-color:#F75B68; color:white; 
+                                             style="border-radius:0; background-color:#B64926; color:white; 
 font-size:x-large; border:none" type="submit" ng-click="venue=null">Find a venue</button>
                                 </div>
                             </div>
@@ -305,7 +307,7 @@ font-size:x-large; border:none" type="submit" ng-click="venue=null">Find a venue
     </div>
 
 
-    <!--<nav class="navbar-fixed-bottom" style="background-color:#F75B68">
+    <!--<nav class="navbar-fixed-bottom" style="background-color:#B64926">
         <div class="container">
             <div class="row">
                 <div class="col-xs-3">

@@ -70,7 +70,7 @@
 .nl-field ul {
 	position: absolute;
 	visibility: hidden;
-	background: #F75B68;
+	background: #B64926;
 	left: -0.5em;
 	top: 50%;
 	font-size: 80%;
@@ -114,7 +114,7 @@
 }
 
 .no-touch .nl-dd ul li:hover:active {
-	color: #DB9E36;
+	color: #FFF0A5;
 }
 
 /* icons for some elements */
@@ -222,7 +222,7 @@ input:focus::-ms-input-placeholder {
 	text-transform: uppercase;
 	cursor: pointer;
 	position: relative;
-	background: #F75B68;
+	background: #B64926;
 	color: #fff;
 	padding: 0 1em 0 0;
 	font-size: 40%;
@@ -236,7 +236,7 @@ input:focus::-ms-input-placeholder {
 	float: left;
 	padding: 0 0.7em;
 	margin: 0 0.8em 0 0;
-	background: #F75B68;
+	background: #B64926;
 }
 
 .no-touch .nl-form .nl-submit:hover,
