@@ -1,0 +1,90 @@
+﻿body {
+  padding-top:100px;
+  font-family: 'Lato', sans-serif;
+  background: #468966;
+  color: #fff;
+  height: 100%;
+}
+.presentation {
+  font-size: 2.4rem;
+  font-weight: 300;
+  position: relative;
+  margin: 0 auto;
+  max-width: 14em;
+}
+.fa-coffee {
+  color: #e3c383;
+}
+.nl-field {
+  position: relative;
+  display: inline-block;
+  font: 1em;
+  line-height: 1.8;
+}
+.nl-field .nl-field-toggle {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+  border-bottom: 1px dashed #fff;
+  cursor: pointer;
+}
+.nl-field.nl-field-open {
+  z-index: 10000;
+}
+.nl-field ul {
+  font-size: 1em;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+  list-style: none;
+  position: absolute;
+  visibility: hidden;
+  background: #574c3f;
+  left: 0;
+  top: 50%;
+  opacity: 0;
+  -webkit-transform: translateY(-40%) scale(0.9);
+  -moz-transform: translateY(-40%) scale(0.9);
+  transform: translateY(-40%) scale(0.9);
+  -webkit-transition: visibility 0s 0.3s, opacity 0.3s, -webkit-transform 0.3s;
+  -moz-transition: visibility 0s 0.3s, opacity 0.3s, -moz-transform 0.3s;
+  transition: visibility 0s 0.3s, opacity 0.3s, transform 0.3s;
+}
+.nl-field ul li {
+  cursor: pointer;
+  padding: 0 0.5em;
+  font-size: 0.8em;
+  white-space: nowrap;
+}
+.nl-field ul li.checked {
+  color: rgba(255, 255, 255, 0.5);
+}
+.nl-field ul li:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+.nl-field.nl-field-open ul,
+.nl-field.nl-field-open ~ .nl-overlay {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transition: visibility 0s 0s, opacity 0.3s, -webkit-transform 0.3s;
+  -moz-transition: visibility 0s 0s, opacity 0.3s, -moz-transform 0.3s;
+  transition: visibility 0s 0s, opacity 0.3s, transform 0.3s;
+}
+.nl-field.nl-field-open ul {
+  -webkit-transform: translateY(-50%) scale(1);
+  -moz-transform: translateY(-50%) scale(1);
+  transform: translateY(-50%) scale(1);
+}
+.nl-overlay {
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+}
+.nl-field.nl-field-open ~ .nl-overlay {
+  z-index: 9999;
+}

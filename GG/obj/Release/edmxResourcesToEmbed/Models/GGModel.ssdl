@@ -1,0 +1,307 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="GGModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="GGModelStoreContainer">
+    <EntitySet Name="Venues" EntityType="GGModel.Store.Venues" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Tags" EntityType="GGModel.Store.Tags" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Prices1" EntityType="GGModel.Store.Prices1" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Images" EntityType="GGModel.Store.Images" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Times" EntityType="GGModel.Store.Times" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Types" EntityType="GGModel.Store.Types" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Videos" EntityType="GGModel.Store.Videos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Hours" EntityType="GGModel.Store.Hours" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="FeatureImages" EntityType="GGModel.Store.FeatureImages" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VenueTag" EntityType="GGModel.Store.VenueTag" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VenueTime" EntityType="GGModel.Store.VenueTime" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VenueType" EntityType="GGModel.Store.VenueType" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="VenuePrice" EntityType="GGModel.Store.VenuePrice" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_VenueTag_Venue" Association="GGModel.Store.FK_VenueTag_Venue">
+      <End Role="Venue" EntitySet="Venues" />
+      <End Role="VenueTag" EntitySet="VenueTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VenueTag_Tag" Association="GGModel.Store.FK_VenueTag_Tag">
+      <End Role="Tag" EntitySet="Tags" />
+      <End Role="VenueTag" EntitySet="VenueTag" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VenueTime_Venue" Association="GGModel.Store.FK_VenueTime_Venue">
+      <End Role="Venue" EntitySet="Venues" />
+      <End Role="VenueTime" EntitySet="VenueTime" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VenueTime_Time" Association="GGModel.Store.FK_VenueTime_Time">
+      <End Role="Time" EntitySet="Times" />
+      <End Role="VenueTime" EntitySet="VenueTime" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VenueType_Venue" Association="GGModel.Store.FK_VenueType_Venue">
+      <End Role="Venue" EntitySet="Venues" />
+      <End Role="VenueType" EntitySet="VenueType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VenueType_Type" Association="GGModel.Store.FK_VenueType_Type">
+      <End Role="Type" EntitySet="Types" />
+      <End Role="VenueType" EntitySet="VenueType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VenuePrice_Venue" Association="GGModel.Store.FK_VenuePrice_Venue">
+      <End Role="Venue" EntitySet="Venues" />
+      <End Role="VenuePrice" EntitySet="VenuePrice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_VenuePrice_Price" Association="GGModel.Store.FK_VenuePrice_Price">
+      <End Role="Price" EntitySet="Prices1" />
+      <End Role="VenuePrice" EntitySet="VenuePrice" />
+    </AssociationSet>
+    <AssociationSet Name="VenueImage" Association="GGModel.Store.VenueImage">
+      <End Role="Venue" EntitySet="Venues" />
+      <End Role="Image" EntitySet="Images" />
+    </AssociationSet>
+    <AssociationSet Name="VenueVideo" Association="GGModel.Store.VenueVideo">
+      <End Role="Venue" EntitySet="Venues" />
+      <End Role="Video" EntitySet="Videos" />
+    </AssociationSet>
+    <AssociationSet Name="VenueHours" Association="GGModel.Store.VenueHours">
+      <End Role="Venue" EntitySet="Venues" />
+      <End Role="Hours" EntitySet="Hours" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Venues">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="State" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Website" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Zip" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Instagram" Type="varchar" Nullable="true" MaxLength="250" />
+    <Property Name="Facebook" Type="varchar" Nullable="true" MaxLength="250" />
+    <Property Name="Twitter" Type="varchar" Nullable="true" MaxLength="250" />
+    <Property Name="Contact" Type="varchar" Nullable="true" MaxLength="250" />
+    <Property Name="Email" Type="varchar" Nullable="true" MaxLength="250" />
+    <Property Name="Neighborhood" Type="varchar" Nullable="true" MaxLength="250" />
+    <Property Name="Parking" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Phone" Type="varchar" Nullable="true" MaxLength="50" />
+    <Property Name="Notes" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Tags">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Prices1">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Images">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ImageData" Type="varbinary(max)" Nullable="true" />
+    <Property Name="VenueId" Type="int" Nullable="false" />
+    <Property Name="url" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Times">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Types">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Videos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VenueId" Type="int" Nullable="false" />
+    <Property Name="url" Type="varchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Hours">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="VenueId" Type="int" Nullable="false" />
+    <Property Name="Text" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FeatureImages">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Url" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VenueTag">
+    <Key>
+      <PropertyRef Name="Venues_Id" />
+      <PropertyRef Name="Tags_Id" />
+    </Key>
+    <Property Name="Venues_Id" Type="int" Nullable="false" />
+    <Property Name="Tags_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VenueTime">
+    <Key>
+      <PropertyRef Name="Venues_Id" />
+      <PropertyRef Name="Times_Id" />
+    </Key>
+    <Property Name="Venues_Id" Type="int" Nullable="false" />
+    <Property Name="Times_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VenueType">
+    <Key>
+      <PropertyRef Name="Venues_Id" />
+      <PropertyRef Name="Types_Id" />
+    </Key>
+    <Property Name="Venues_Id" Type="int" Nullable="false" />
+    <Property Name="Types_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="VenuePrice">
+    <Key>
+      <PropertyRef Name="Venues_Id" />
+      <PropertyRef Name="Prices_Id" />
+    </Key>
+    <Property Name="Venues_Id" Type="int" Nullable="false" />
+    <Property Name="Prices_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="VenueImage">
+    <End Role="Venue" Type="GGModel.Store.Venues" Multiplicity="1" />
+    <End Role="Image" Type="GGModel.Store.Images" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Image">
+        <PropertyRef Name="VenueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VenueVideo">
+    <End Role="Venue" Type="GGModel.Store.Venues" Multiplicity="1" />
+    <End Role="Video" Type="GGModel.Store.Videos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Video">
+        <PropertyRef Name="VenueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="VenueHours">
+    <End Role="Venue" Type="GGModel.Store.Venues" Multiplicity="1" />
+    <End Role="Hours" Type="GGModel.Store.Hours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Hours">
+        <PropertyRef Name="VenueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VenueTag_Venue">
+    <End Role="Venue" Type="GGModel.Store.Venues" Multiplicity="1" />
+    <End Role="VenueTag" Type="GGModel.Store.VenueTag" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VenueTag">
+        <PropertyRef Name="Venues_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VenueTag_Tag">
+    <End Role="VenueTag" Type="GGModel.Store.VenueTag" Multiplicity="*" />
+    <End Role="Tag" Type="GGModel.Store.Tags" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Tag">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VenueTag">
+        <PropertyRef Name="Tags_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VenueTime_Venue">
+    <End Role="Venue" Type="GGModel.Store.Venues" Multiplicity="1" />
+    <End Role="VenueTime" Type="GGModel.Store.VenueTime" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VenueTime">
+        <PropertyRef Name="Venues_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VenueTime_Time">
+    <End Role="VenueTime" Type="GGModel.Store.VenueTime" Multiplicity="*" />
+    <End Role="Time" Type="GGModel.Store.Times" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Time">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VenueTime">
+        <PropertyRef Name="Times_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VenueType_Venue">
+    <End Role="Venue" Type="GGModel.Store.Venues" Multiplicity="1" />
+    <End Role="VenueType" Type="GGModel.Store.VenueType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VenueType">
+        <PropertyRef Name="Venues_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VenueType_Type">
+    <End Role="VenueType" Type="GGModel.Store.VenueType" Multiplicity="*" />
+    <End Role="Type" Type="GGModel.Store.Types" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Type">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VenueType">
+        <PropertyRef Name="Types_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VenuePrice_Venue">
+    <End Role="Venue" Type="GGModel.Store.Venues" Multiplicity="1" />
+    <End Role="VenuePrice" Type="GGModel.Store.VenuePrice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Venue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VenuePrice">
+        <PropertyRef Name="Venues_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_VenuePrice_Price">
+    <End Role="VenuePrice" Type="GGModel.Store.VenuePrice" Multiplicity="*" />
+    <End Role="Price" Type="GGModel.Store.Prices1" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Price">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="VenuePrice">
+        <PropertyRef Name="Prices_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

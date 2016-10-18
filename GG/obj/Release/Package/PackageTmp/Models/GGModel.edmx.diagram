@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e233ba7f33bd4027be62429d90770114" Name="Diagram1" ZoomLevel="90" >
+        <EntityTypeShape EntityType="GGModel.Venue" Width="1.5" PointX="3.125" PointY="0.5" FillColor="Fuchsia" />
+        <EntityTypeShape EntityType="GGModel.Tag" Width="1.5" PointX="5.75" PointY="0.5" FillColor="Lime" />
+        <EntityTypeShape EntityType="GGModel.Price" Width="1.5" PointX="5" PointY="3.75" FillColor="Yellow" />
+        <EntityTypeShape EntityType="GGModel.Image" Width="1.5" PointX="0.5" PointY="0.5" FillColor="Red" />
+        <EntityTypeShape EntityType="GGModel.Time" Width="1.5" PointX="0.625" PointY="3.375" FillColor="128, 128, 255" />
+        <EntityTypeShape EntityType="GGModel.Type" Width="1.5" PointX="7.125" PointY="2.75" FillColor="Silver" />
+        <AssociationConnector Association="GGModel.VenueTag" />
+        <AssociationConnector Association="GGModel.VenueTime" />
+        <AssociationConnector Association="GGModel.VenueType" />
+        <AssociationConnector Association="GGModel.VenuePrice" />
+        <AssociationConnector Association="GGModel.VenueImage" />
+        <EntityTypeShape EntityType="GGModel.Video" Width="1.5" PointX="8.875" PointY="0.5" FillColor="255, 128, 0" />
+        <AssociationConnector Association="GGModel.VenueVideo" />
+        <EntityTypeShape EntityType="GGModel.Hours" Width="1.5" PointX="7.25" PointY="4.75" FillColor="Black" />
+        <AssociationConnector Association="GGModel.VenueHours" />
+        <EntityTypeShape EntityType="GGModel.FeatureImage" Width="1.5" PointX="8.875" PointY="2.875" FillColor="0, 64, 64" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,127 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GGModelStoreContainer" CdmEntityContainer="GGModelContainer">
+    <EntitySetMapping Name="Venues">
+      <EntityTypeMapping TypeName="IsTypeOf(GGModel.Venue)">
+        <MappingFragment StoreEntitySet="Venues">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Instagram" ColumnName="Instagram" />
+          <ScalarProperty Name="Facebook" ColumnName="Facebook" />
+          <ScalarProperty Name="Twitter" ColumnName="Twitter" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Neighborhood" ColumnName="Neighborhood" />
+          <ScalarProperty Name="Parking" ColumnName="Parking" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="Notes" ColumnName="Notes" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tags">
+      <EntityTypeMapping TypeName="IsTypeOf(GGModel.Tag)">
+        <MappingFragment StoreEntitySet="Tags">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Prices1">
+      <EntityTypeMapping TypeName="IsTypeOf(GGModel.Price)">
+        <MappingFragment StoreEntitySet="Prices1">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Images">
+      <EntityTypeMapping TypeName="IsTypeOf(GGModel.Image)">
+        <MappingFragment StoreEntitySet="Images">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="VenueId" ColumnName="VenueId" />
+          <ScalarProperty Name="url" ColumnName="url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Times">
+      <EntityTypeMapping TypeName="IsTypeOf(GGModel.Time)">
+        <MappingFragment StoreEntitySet="Times">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Types">
+      <EntityTypeMapping TypeName="IsTypeOf(GGModel.Type)">
+        <MappingFragment StoreEntitySet="Types">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Videos">
+      <EntityTypeMapping TypeName="IsTypeOf(GGModel.Video)">
+        <MappingFragment StoreEntitySet="Videos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VenueId" ColumnName="VenueId" />
+          <ScalarProperty Name="url" ColumnName="url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Hours">
+      <EntityTypeMapping TypeName="IsTypeOf(GGModel.Hours)">
+        <MappingFragment StoreEntitySet="Hours">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="VenueId" ColumnName="VenueId" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FeatureImages">
+      <EntityTypeMapping TypeName="IsTypeOf(GGModel.FeatureImage)">
+        <MappingFragment StoreEntitySet="FeatureImages">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="VenueTag" TypeName="GGModel.VenueTag" StoreEntitySet="VenueTag">
+      <EndProperty Name="Venue">
+        <ScalarProperty Name="Id" ColumnName="Venues_Id" />
+      </EndProperty>
+      <EndProperty Name="Tag">
+        <ScalarProperty Name="Id" ColumnName="Tags_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="VenueTime" TypeName="GGModel.VenueTime" StoreEntitySet="VenueTime">
+      <EndProperty Name="Venue">
+        <ScalarProperty Name="Id" ColumnName="Venues_Id" />
+      </EndProperty>
+      <EndProperty Name="Time">
+        <ScalarProperty Name="Id" ColumnName="Times_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="VenueType" TypeName="GGModel.VenueType" StoreEntitySet="VenueType">
+      <EndProperty Name="Venue">
+        <ScalarProperty Name="Id" ColumnName="Venues_Id" />
+      </EndProperty>
+      <EndProperty Name="Type">
+        <ScalarProperty Name="Id" ColumnName="Types_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="VenuePrice" TypeName="GGModel.VenuePrice" StoreEntitySet="VenuePrice">
+      <EndProperty Name="Venue">
+        <ScalarProperty Name="Id" ColumnName="Venues_Id" />
+      </EndProperty>
+      <EndProperty Name="Price">
+        <ScalarProperty Name="Id" ColumnName="Prices_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>

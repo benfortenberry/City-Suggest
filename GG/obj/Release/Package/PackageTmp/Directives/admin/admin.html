@@ -1,0 +1,821 @@
+﻿<h1>Admin</h1>
+
+<form id="addVenue">
+
+    <!--<button class="btn btn-default " ng-click="toast()">
+        toast
+    </button>-->
+    <div class="row" style="background-color:#333; color:white" >
+
+
+        <div class="col-sm-9" >
+
+            <h3>VENUES</h3>
+            <!--<h4>Add New Venue</h4>-->
+        </div>
+        <div class="col-sm-3 text-right" >
+            <button class="btn btn-primary btn-sm" style="margin:5px; margin-top:15px" ng-show="!addVenue.add" ng-click="addVenue.add=true">
+                <span class="glyphicon glyphicon-plus">
+
+                </span>  &nbsp; Add
+            </button>
+
+            <button class="btn btn-primary btn-sm" style="margin:5px; margin-top:15px" ng-show="addVenue.add" ng-click="addVenue.add=false">
+                <span class="glyphicon glyphicon-remove">
+
+                </span>    &nbsp; Close
+            </button>
+        </div>
+    </div>
+
+    <div ng-show="addVenue.add" style="background-color:#222; padding:20px">
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <label>Name</label>
+                <input class="form-control" ng-model="addVenue.name" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Address</label>
+                <input class="form-control" ng-model="addVenue.address" />
+            </div>
+
+
+            <div class="col-sm-3">
+                <label>City</label>
+                <input class="form-control" ng-model="addVenue.city" />
+            </div>
+
+            <div class="col-sm-1">
+                <label>State</label>
+                <input class="form-control" ng-model="addVenue.state" />
+            </div>
+
+           
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-2">
+                <label>Zip</label>
+                <input class="form-control" ng-model="addVenue.zip" />
+            </div>
+
+
+            <!--<div class="col-sm-4">
+                <label>Hours</label>
+                <input class="form-control" ng-model="addVenue.hours" />
+            </div>-->
+
+            <div class="col-sm-6">
+                <label>Website</label>
+                <input class="form-control" ng-model="addVenue.website" />
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <label>Twitter</label>
+                <input class="form-control" ng-model="addVenue.twitter" />
+            </div>
+
+
+            <div class="col-sm-4">
+                <label>Instagram</label>
+                <input class="form-control" ng-model="addVenue.instagram" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Facebook</label>
+                <input class="form-control" ng-model="addVenue.facebook" />
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <label>Email</label>
+                <input class="form-control" ng-model="addVenue.email" />
+            </div>
+
+
+            <div class="col-sm-4">
+                <label>Contact</label>
+                <input class="form-control" ng-model="addVenue.contact" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Parking</label>
+                <input class="form-control" ng-model="addVenue.parking" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Phone</label>
+                <input class="form-control" ng-model="addVenue.phone" />
+            </div>
+
+
+
+        </div>
+
+        <div class="row">
+
+
+
+
+
+            <div class="col-sm-12">
+                <label>Notes</label>
+              <textarea class="form-control" ng-model="addVenue.notes"></textarea>
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row">
+
+          
+
+
+
+            <div class="col-sm-12">
+                <br />
+                <button class="btn btn-success btn-block btn-sm" ng-click="updateVenue(addVenue)" style="margin-top:5px">
+                    Save Venue
+
+
+                </button>
+            </div>
+
+
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+    <hr />
+
+</form>
+
+<form ng-repeat="venue in venues"  style=" padding:20px" ng-class="{'black-back' : venue.edit}">
+
+    <div class="row">
+
+
+        <div class="col-sm-9">
+            <h4>
+                {{venue.name}}
+                <button class="btn btn-danger btn-sm" ng-show="venue.edit" style="margin-top:1px; margin-left:5px" ng-click="deleteVenue(venue)">
+                    <span class="glyphicon glyphicon-exclamation-sign">
+
+                    </span>  &nbsp; Delete
+                </button>
+            </h4>
+
+           
+        </div>
+        <div class="col-sm-3 text-right">
+            <button class="btn btn-primary btn-sm" ng-show="!venue.edit" ng-click="venue.edit=true">
+                <span class="glyphicon glyphicon-pencil">
+
+                </span>  &nbsp; Edit
+            </button>
+
+            <div class="btn-group">
+
+
+
+
+                <button class="btn btn-primary btn-sm" ng-show="venue.edit" ng-click="venue.edit=false">
+                    <span class="glyphicon glyphicon-remove">
+
+                    </span>    &nbsp; Close
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="venue.edit" >
+
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <label>Name</label>
+                <input class="form-control" ng-model="venue.name" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Address</label>
+                <input class="form-control" ng-model="venue.address" />
+            </div>
+
+
+            <div class="col-sm-3">
+                <label>City</label>
+                <input class="form-control" ng-model="venue.city" />
+            </div>
+
+            <div class="col-sm-1">
+                <label>State</label>
+                <input class="form-control" ng-model="venue.state" />
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-2">
+                <label>Zip</label>
+                <input class="form-control" ng-model="venue.zip" />
+            </div>
+
+
+            <!--<div class="col-sm-4">
+                <label>Hours</label>
+                <input class="form-control" ng-model="venue.hours" />
+            </div>-->
+
+            <div class="col-sm-6">
+                <label>Website</label>
+                <input class="form-control" ng-model="venue.website" />
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <label>Twitter</label>
+                <input class="form-control" ng-model="venue.twitter" />
+            </div>
+
+
+            <div class="col-sm-4">
+                <label>Instagram</label>
+                <input class="form-control" ng-model="venue.instagram" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Facebook</label>
+                <input class="form-control" ng-model="venue.facebook" />
+            </div>
+
+
+
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm-4">
+                <label>Email</label>
+                <input class="form-control" ng-model="venue.email" />
+            </div>
+
+
+            <div class="col-sm-4">
+                <label>Contact</label>
+                <input class="form-control" ng-model="venue.contact" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Parking</label>
+                <input class="form-control" ng-model="venue.parking" />
+            </div>
+
+            <div class="col-sm-4">
+                <label>Phone</label>
+                <input class="form-control" ng-model="venue.phone" />
+            </div>
+
+
+
+
+        </div>
+
+       <div class="row">
+
+           <div class="col-sm-12">
+
+               <label>Notes</label>
+               <textarea class="form-control" ng-model="venue.notes"></textarea>
+           </div>
+       </div>
+
+
+
+
+        <div class="row">
+
+
+
+            <div class="col-sm-12">
+                <br />
+                <button class="btn btn-success btn-block btn-sm" ng-click="updateVenue(venue)" style="margin-top:5px">
+                    Save Venue
+
+
+                </button>
+            </div>
+
+
+
+
+        </div>
+        <br />
+        <h3>Images</h3>
+
+
+        <div class="row">
+
+            <div class="col-sm-6" ng-if="venue.images.length==0">
+                <p >No Images yet</p>
+            </div>
+
+            <div class="col-sm-4" ng-repeat="img in venue.images">
+              
+                           
+                           <img ng-src="{{img.url}}" class="img-responsive img-thumbnail img-bordered" style="max-width:200px; max-height:200px" />
+                            <button class="btn btn-danger btn-xs pull-right" ng-click="removeImage(venue,img)" style="margin:5px">
+                                <span class="glyphicon glyphicon-minus"></span>
+
+                            </button>
+                       
+
+
+            </div>
+
+
+
+        </div>
+
+        <div class="row" style="padding-top:10px">
+
+
+            <div class="col-sm-10">
+
+
+                <input type="text" ng-model="venue.selectedImage"
+                       placeholder="Image URL" class="form-control">
+
+
+            </div>
+
+            <div class="col-sm-2">
+
+                <button class="btn btn-primary btn-sm" ng-click="addImage(venue, venue.selectedImage)" style="margin-top:5px">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+
+                </button>
+
+            </div>
+        </div>
+
+        <br />
+        <h3>Videos</h3>
+
+
+        <div class="row">
+
+            <div class="col-sm-6" ng-if="venue.videos.length==0">
+                <p>No Videos yet</p>
+            </div>
+
+            <div class="col-sm-4" ng-repeat="vid in venue.videos">
+
+
+                <anguvideo ng-model="vid.url" width="100%" height="200"></anguvideo>
+
+              
+                <button class="btn btn-danger btn-xs pull-right" ng-click="removeVideo(venue,vid)" style="margin:5px">
+                    <span class="glyphicon glyphicon-minus"></span>
+
+                </button>
+
+
+
+            </div>
+
+
+
+        </div>
+
+        <div class="row" style="padding-top:10px">
+
+
+            <div class="col-sm-10">
+
+
+                <input type="text" ng-model="venue.selectedVideo"
+                       placeholder="Video URL" class="form-control">
+
+
+            </div>
+
+            <div class="col-sm-2">
+
+                <button class="btn btn-primary btn-sm" ng-click="addVideo(venue, venue.selectedVideo)" style="margin-top:5px">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+
+                </button>
+
+            </div>
+        </div>
+
+        <br />
+        <h3>Search Information</h3>
+
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <label>Prices</label>
+
+
+                <p ng-if="venue.prices.length==0">No Prices yet</p>
+                <div class="row" ng-repeat="price in venue.prices">
+
+                    <div class="col-sm-8">
+
+                        <p>
+                            {{price.priceText}}
+                            <button class="btn btn-danger btn-xs" ng-click="removePrice(venue,price)"  style="margin:5px">
+                                <span class="glyphicon glyphicon-minus"></span>
+
+                            </button>
+                        </p>
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+
+                    <div class="col-sm-8">
+
+
+                        <input type="text" ng-model="venue.selectedPrice" 
+                               uib-typeahead="e as e.priceText for e in  prices | filter:{priceText:$viewValue}" class="form-control">
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+                        <button class="btn btn-primary btn-sm" ng-click="addPrice(venue, venue.selectedPrice)" style="margin-top:5px">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+
+                        </button>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="col-sm-6">
+                <label>Types</label>
+
+                <p ng-if="venue.types.length==0">No Types yet</p>
+                <div class="row" ng-repeat="type in venue.types">
+
+                    <div class="col-sm-8">
+
+                        <p>
+                            {{type.typeText}}
+                            <button class="btn btn-danger btn-xs" ng-click="removeType(venue,type)" style="margin:5px">
+                                <span class="glyphicon glyphicon-minus"></span>
+
+                            </button>
+                        </p>
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+
+
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-8">
+
+
+                        <input type="text" ng-model="venue.selectedType"
+                               uib-typeahead="e as e.typeText for e in  types | filter:{typeText:$viewValue}" class="form-control">
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+                        <button class="btn btn-primary btn-sm" ng-click="addType(venue, venue.selectedType)" style="margin-top:5px">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+
+                        </button>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+        </div>
+
+        <br />
+
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <label>Times</label>
+
+                <p ng-if="venue.times.length==0">No Times yet</p>
+                <div class="row" ng-repeat="time in venue.times">
+
+                    <div class="col-sm-8">
+
+                        <p>
+                            {{time.timeText}}<button ng-click="removeTime(venue,time)" class="btn btn-danger btn-xs" style="margin:5px">
+                                <span class="glyphicon glyphicon-minus"></span>
+
+                            </button>
+                        </p>
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+
+
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-8">
+
+
+                        <input type="text" ng-model="venue.selectedTime"
+                               uib-typeahead="e as e.timeText for e in  times | filter:{timeText:$viewValue}" class="form-control">
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+                        <button class="btn btn-primary btn-sm" ng-click="addTime(venue, venue.selectedTime)" style="margin-top:5px">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+
+                        </button>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+            <div class="col-sm-6">
+                <label>Tags</label>
+
+                <p ng-if="venue.tags.length==0">No Tags yet</p>
+                <div class="row" ng-repeat="tag in venue.tags">
+
+                    <div class="col-sm-8">
+
+                        <p>
+                            {{tag.tagText}}<button class="btn btn-danger btn-xs" ng-click="removeTag(venue, tag)" style="margin:5px">
+                                <span class="glyphicon glyphicon-minus"></span>
+
+                            </button>
+                        </p>
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+
+
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-8">
+
+
+                        <input type="text" ng-model="venue.selectedTag"
+                               uib-typeahead="e as e.tagText for e in  tags | filter:{tagText:$viewValue}" class="form-control">
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+                        <button class="btn btn-primary btn-sm" ng-click="addTag(venue, venue.selectedTag)" style="margin-top:5px">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+
+                        </button>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+        </div>
+
+
+        <div class="row">
+
+            <div class="col-sm-6">
+                <label>Hours</label>
+
+                <p ng-if="venue.hours.length==0">No Hours yet</p>
+                <div class="row" ng-repeat="hour in venue.hours">
+
+                    <div class="col-sm-8">
+
+                        <p>
+                            {{hour.hourText}}<button ng-click="removeHour(venue,hour)" 
+                                                     class="btn btn-danger btn-xs" style="margin:5px">
+                                <span class="glyphicon glyphicon-minus"></span>
+
+                            </button>
+                        </p>
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+
+
+                    </div>
+
+                </div>
+                <div class="row">
+
+                    <div class="col-sm-8">
+
+
+                        <input type="text" ng-model="venue.selectedHour"
+                                class="form-control">
+
+
+                    </div>
+
+                    <div class="col-sm-2">
+
+                        <button class="btn btn-primary btn-sm" ng-click="addHour(venue, venue.selectedHour)" style="margin-top:5px">
+                            <span class="glyphicon glyphicon-plus"></span> Add
+
+                        </button>
+
+                    </div>
+                </div>
+
+
+            </div>
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+
+    <hr />
+
+</form>
+
+
+
+<div class="row">
+
+    <div class="col-xs-12">
+
+        <h2>Featured Images</h2>
+
+    </div>
+
+
+</div>
+
+
+
+<div class="row">
+
+    <div class="col-sm-12">
+      
+        <p ng-if="featuredImages.length==0">No Featured Images yet</p>
+        <div class="row" ng-repeat="featuredImage in featuredImages">
+
+            <div class="col-sm-8">
+
+                <p>
+                    {{featuredImage.url}}<button ng-click="removeFeaturedImage(featuredImage)"
+                                             class="btn btn-danger btn-xs" style="margin:5px">
+                        <span class="glyphicon glyphicon-minus"></span>
+
+                    </button>
+                </p>
+
+
+            </div>
+
+            <div class="col-sm-2">
+
+
+
+            </div>
+
+        </div>
+        <div class="row">
+
+            <div class="col-sm-8">
+
+
+                <input type="text" ng-model="featuredImageAddUrl"
+                       class="form-control">
+
+
+            </div>
+
+            <div class="col-sm-2">
+
+                <button class="btn btn-primary btn-sm" ng-click="addFeaturedImage(featuredImageAddUrl)" style="margin-top:5px">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+
+                </button>
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+
+
+
+
+
+</div>
+
+<br /><br />
